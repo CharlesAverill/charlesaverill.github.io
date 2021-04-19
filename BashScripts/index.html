@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="A collection of some bash scripts I use from time to time">
+		<meta name="author" content="Charles Averill">
+		<title>Bash Scripts</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<h1>Most of my (somewhat) useful bash scripts</h1>
+		<details class="indent">
+			<summary>Oneko PID handler</summary>
+			<button class="copy-text" onclick="copyText('oneko_pid_handler')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				This one can really be expanded to any function you want to run in the background while keeping note of its PID (who really wants to <code>ps -ef</code>?)
+			</p>
+			<pre class="indent"><code id="oneko_pid_handler">function oneko_bg() {
+       	if [[ $1 = "start" ]]; then
+               	if [ ! -s ~/oneko_pid.txt ]; then
+                       	(&>/dev/null nohup oneko &)
+                       	pgrep -f oneko > ~/oneko_pid.txt
+                else
+                        echo "~/oneko_pid.txt isn't empty, you might have an instance running already"
+                fi
+        elif [[ $1 = "end" ]]; then
+                if [ -s ~/oneko_pid.txt ]; then
+                        kill -9 $(cat ~/oneko_pid.txt) > /dev/null 2>&1
+                        cp /dev/null ~/oneko_pid.txt
+                else
+                        echo "~/oneko_pid.txt is empty, doesn't look like you have an oneko instance running"
+                fi
+        else
+                echo "Argument $1 not recognized"       
+        fi
+}</code></pre>
+		</details>
+		<script src="js/main.js"></script>
+	</body>
+</html>
