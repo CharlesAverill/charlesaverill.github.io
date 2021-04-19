@@ -4,7 +4,7 @@ title: Home
 description: Homepage of Charles Averill
 ---
 
-{% analytics.html %}
+{% include analytics.html %}
 
 ## Some of my cool stuff
 
