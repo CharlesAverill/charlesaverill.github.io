@@ -1,4 +1,38 @@
+body {
+    background: #4293c0;
+}
+
+h1 {
+    font-family: Forest;
+    color: #ff8000;
+    -webkit-text-stroke: 1px black;
+}
+
+li {
+    list-style-image: url(../images/list.png);
+}
+
+a, i {
+    color: #ff9800;
+    font-weight: bold;
+}
+
+a:hover, a:visited, i:hover, i:visited {
+    color: #ED7337;
+}
+
 @font-face {
     font-family: Forest;
-    src: url(fonts/ForestRegular.woff);
+    src: url(../fonts/ForestRegular.woff);
+}
+
+.banner-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.gradient {
+    background-image: linear-gradient(to bottom, #82c4e7, #4293c0);
 }
