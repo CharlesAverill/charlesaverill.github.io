@@ -61,6 +61,20 @@
 }</code></pre>
 		</details>
 
+		<details class="indent">
+			<summary>Netcat payload</summary>
+			<button class="copy-text" onclick="copyText('#netcat_payload')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				I keep this one around for any CTFs that I do, I always forget how to deposit payloads through netcat
+			</p>
+			<p>
+				Usage: <code>nc_payload &lt;payload&gt; &lt;address&gt; &lt;port&gt;</code>
+			</p>
+			<pre class="indent"><code id="netcat_payload">cat $1 | nc $2 $3 -N</code></pre>
+		</details>
+
 		<script src="js/main.js"></script>
 	</body>
 </html>
