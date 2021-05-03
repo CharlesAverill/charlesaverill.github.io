@@ -29,3 +29,7 @@ summary {
 .fa-clipboard {
 	color: white;
 }
+
+a:visited {
+	color: #00FF41;
+}
