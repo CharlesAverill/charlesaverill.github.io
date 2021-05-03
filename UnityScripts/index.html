@@ -1,0 +1,272 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="A collection of some Unity scripts I use from time to time">
+		<meta name="author" content="Charles Averill">
+
+		{% include analytics.html %}
+
+		<title>Unity Scripts</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link href="css/sticky-footer.css" rel="stylesheet">
+	</head>
+	<body>
+		<h1><a href="https://charlesaverill.github.io/"><i class="fa fa-home" style="font-size:36px; margin-left: 1em;"></i></a>
+			(Somewhat) useful Unity Editor scripts</h1>
+
+		<details class="indent">
+			<summary>PlatformerUtils (WIP)</summary>
+			<button class="copy-text" onclick="copyText('#PlatformerUtils')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				This is a script I actively use in the development of <a href="https://charlesaverill.github.io/DinosaurIsland/">Dinosaur Island</a>
+			</p>
+						<pre class="indent"><code id="PlatformerUtils">﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+public class PlatformerUtils : EditorWindow
+{
+
+    int layerOffsetLayer;
+    Vector3 layerOffsetVector;
+    bool layerOffsetGroundCheck;
+
+    [MenuItem("Tools/PlatformerUtils")]
+    private static void OpenUtils() {
+        new PlatformerUtils().Show();
+    }
+
+    void OnGUI() {
+        LoadPrefs();
+
+        EditorGUILayout.LabelField("Offset Objects in Layer");
+        layerOffsetLayer = EditorGUILayout.LayerField("Layer for Offsetting:", layerOffsetLayer);
+        layerOffsetVector = EditorGUILayout.Vector3Field("Offset Vector", layerOffsetVector);
+        layerOffsetGroundCheck = EditorGUILayout.Toggle("Check for Ground", layerOffsetGroundCheck);
+
+        if (GUILayout.Button("Offset")) {
+            GameObject[] toOffset = FindObjectsByLayer(layerOffsetLayer);
+            foreach(GameObject obj in toOffset){
+                if(layerOffsetGroundCheck){
+                    RaycastHit hit;
+                    if(Physics.Raycast(obj.transform.position,
+                                       -obj.transform.up,
+                                       out hit,
+                                       Mathf.Infinity,
+                                       CONSTANTS.GROUND_MASK)){
+                        obj.transform.position = obj.transform.position + layerOffsetVector;
+                        obj.transform.position = new Vector3(obj.transform.position.x,
+                                                             obj.transform.position.y - hit.distance,
+                                                             obj.transform.position.z);
+                        Debug.Log("Moved object " + obj.name);
+                    } else {
+                        Debug.Log("No ground detected underneath " + obj.name);
+                    }
+                } else {
+                    obj.transform.position += layerOffsetVector;
+                    Debug.Log("Moved object " + obj.name + " without checking for ground");
+                }
+            }
+        }
+
+        SavePrefs();
+    }
+
+    GameObject[] FindObjectsByLayer(int layer)
+    {
+        List<GameObject> validTransforms = new List<GameObject>();
+        Transform[] objs = Resources.FindObjectsOfTypeAll<Transform>() as Transform[];
+        for (int i = 0; i < objs.Length; i++)
+        {
+            if (objs[i].hideFlags == HideFlags.None)
+            {
+                if (objs[i].gameObject.layer == layer)
+                {
+                    validTransforms.Add(objs[i].gameObject);
+                }
+            }
+        }
+        return validTransforms.ToArray();
+    }
+
+    void LoadPrefs(){
+        layerOffsetLayer = EditorPrefs.GetInt("PlatformerUtils_layerOffsetLayer");
+        layerOffsetVector = new Vector3(EditorPrefs.GetFloat("PlatformerUtils_layerOffsetVectorX"),
+                                        EditorPrefs.GetFloat("PlatformerUtils_layerOffsetVectorY"),
+                                        EditorPrefs.GetFloat("PlatformerUtils_layerOffsetVectorZ"));
+    }
+
+    void SavePrefs(){
+        EditorPrefs.SetInt("PlatformerUtils_layerOffsetLayer", layerOffsetLayer);
+
+        EditorPrefs.SetFloat("PlatformerUtils_layerOffsetVectorX", layerOffsetVector.x);
+        EditorPrefs.SetFloat("PlatformerUtils_layerOffsetVectorY", layerOffsetVector.y);
+        EditorPrefs.SetFloat("PlatformerUtils_layerOffsetVectorZ", layerOffsetVector.z);
+    }
+}
+</code></pre>
+		</details>
+
+		<details class="indent">
+			<summary>BuildPlayer</summary>
+			<button class="copy-text" onclick="copyText('#BuildPlayer')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				I really hate the Unity build menu. It's got too many options and it isn't easily navigatable via keyboard. This is a script I wrote to build multiple platform builds in quick succession, and I use it all the time
+			</p>
+						<pre class="indent"><code id="BuildPlayer">using UnityEngine;
+using UnityEditor;
+#if (UNITY_EDITOR)
+using UnityEditor.Build.Reporting;
+using System.Collections.Generic;
+
+public class BuildPlayer : EditorWindow {
+
+    enum BuildVersion{
+        Windows,
+        OSX,
+        Linux
+    }
+
+    int nScenes;
+    static string[] sceneNames;
+
+    bool showScenes;
+
+    bool buildWin;
+    bool buildMac;
+    bool buildLin;
+
+    static string buildPath;
+
+    [MenuItem("Tools/BuildPlayer")]
+    private static void OpenBuilder() {
+        buildPath = Application.dataPath.Substring(0, Application.dataPath.Length - 6) + "/";
+        new BuildPlayer().Show();
+    }
+
+    BuildPlayerOptions getBuildOptions(BuildVersion bv){
+        BuildPlayerOptions options = new BuildPlayerOptions();
+
+        string[] formattedSceneNames = new string[nScenes];
+        for(int i = 0; i < nScenes; i++){
+            formattedSceneNames[i] = "Assets/Scenes/" + sceneNames[i] + ".unity";
+        }
+
+        options.scenes = formattedSceneNames;
+        options.options = BuildOptions.None;
+        switch(bv){
+            case BuildVersion.Windows:
+                options.locationPathName = buildPath + "Builds/Windows/DinosaurIsland.exe";
+                options.target = BuildTarget.StandaloneWindows64;
+                break;
+            case BuildVersion.OSX:
+                options.locationPathName = buildPath + "Builds/Mac/DinosaurIsland.app";
+                options.target = BuildTarget.StandaloneOSX;
+                break;
+            case BuildVersion.Linux:
+                options.locationPathName = buildPath + "Builds/Linux/DinosaurIsland.x86_64";
+                options.target = BuildTarget.StandaloneLinux64;
+                break;
+            default:
+                Debug.Log("BuildVersion " + bv + " not recognized");
+                break;
+        }
+
+        return options;
+    }
+
+    void OnGUI() {
+        LoadPrefs();
+
+        EditorGUILayout.BeginHorizontal();
+
+        nScenes = EditorGUILayout.DelayedIntField("Number of scenes in build:", nScenes);
+        showScenes = EditorGUILayout.Toggle("Show scenes:", showScenes);
+
+        EditorGUILayout.EndHorizontal();
+
+        if(sceneNames != null){
+            List<string> sceneNamesList = new List<string>(sceneNames);
+            int difference = nScenes - sceneNames.Length;
+
+            if(difference > 0){
+                sceneNamesList.AddRange(new string[difference]);
+            } else if(difference < 0){
+                sceneNamesList.RemoveRange(sceneNamesList.Count + difference, -difference);
+            }
+
+            sceneNames = sceneNamesList.ToArray();
+        }
+
+        for(int i = 0; showScenes && i < nScenes; i++){
+            sceneNames[i] = EditorGUILayout.TextField("Scene " + i + ":", sceneNames[i]);
+        }
+
+        buildWin = EditorGUILayout.Toggle("Build Windows", buildWin);
+        buildMac = EditorGUILayout.Toggle("Build OSX", buildMac);
+        buildLin = EditorGUILayout.Toggle("Build Linux", buildLin);
+
+        if (GUILayout.Button("Build")) {
+            if(buildWin){
+                BuildReport winReport = BuildPipeline.BuildPlayer(getBuildOptions(BuildVersion.Windows));
+                BuildSummary winSummary = winReport.summary;
+            }
+            if(buildMac){
+                BuildReport macReport = BuildPipeline.BuildPlayer(getBuildOptions(BuildVersion.OSX));
+                BuildSummary macSummary = macReport.summary;
+            }
+            if(buildLin){
+                BuildReport linReport = BuildPipeline.BuildPlayer(getBuildOptions(BuildVersion.Linux));
+                BuildSummary linSummary = linReport.summary;
+            }
+        }
+
+        SavePrefs();
+    }
+
+    void LoadPrefs(){
+        nScenes = EditorPrefs.GetInt("BuildPlayer_nScenes");
+        sceneNames = new string[nScenes];
+
+        for(int i = 0; i < nScenes; i++){
+            sceneNames[i] = EditorPrefs.GetString("BuildPlayer_Scene" + (i + 1));
+        }
+
+        showScenes = EditorPrefs.GetBool("BuildPlayer_showScenes");
+
+        buildWin = EditorPrefs.GetBool("BuildPlayer_buildWin");
+        buildMac = EditorPrefs.GetBool("BuildPlayer_buildMac");
+        buildLin = EditorPrefs.GetBool("BuildPlayer_buildLin");
+    }
+
+    void SavePrefs(){
+        EditorPrefs.SetInt("BuildPlayer_nScenes", nScenes);
+
+        for(int i = 0; i < nScenes; i++){
+            EditorPrefs.SetString("BuildPlayer_Scene" + (i + 1), sceneNames[i]);
+        }
+
+        EditorPrefs.SetBool("BuildPlayer_showScenes", showScenes);
+
+        EditorPrefs.SetBool("BuildPlayer_buildWin", buildWin);
+        EditorPrefs.SetBool("BuildPlayer_buildMac", buildMac);
+        EditorPrefs.SetBool("BuildPlayer_buildLin", buildLin);
+    }
+}
+#endif
+</code></pre>
+		</details>
+
+		<script src="js/main.js"></script>
+	</body>
+</html>

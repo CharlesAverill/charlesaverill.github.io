@@ -1,0 +1,26 @@
+body {
+	background-color: black;
+	color: white;
+}
+
+code {
+	color: #00FF41;
+}
+
+summary {
+	width: fit-content;
+	cursor: pointer;
+}
+
+.indent, details {
+	margin-left: 3em;
+}
+
+.copy-text {
+	background-color: black;
+	margin-top: 1em;
+}
+
+.fa-clipboard {
+	color: white;
+}
