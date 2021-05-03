@@ -1,5 +1,5 @@
 function copyText(id){
-	var toCopy = document.querySelectorAll(id)[0].outerText;
+	var toCopy = document.querySelectorAll(id)[0].textContent;
 
 	const el = document.createElement('textarea');
 	el.value = toCopy;
