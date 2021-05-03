@@ -31,5 +31,6 @@ summary {
 }
 
 a:visited {
-	color: #00FF41;
+	color: #008F11;
+	text-decoration: none;
 }
