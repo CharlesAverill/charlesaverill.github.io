@@ -35,9 +35,9 @@
 				<i class="fa fa-clipboard"></i>
 			</button>
 			<p>
-				This is a script I actively use in the development of <a href="../DinosaurIsland/">Dinosaur Island</a>
+				This is a script I actively use in the development of <a href="../DinosaurIsland/">Dinosaur Island</a>. For example, I use it to make sure all of my pickup objects start at the same height from the ground without having to calculate that at runtime.
 			</p>
-						<pre class="indent"><code id="PlatformerUtils">﻿using System.Collections;
+						<pre class="indent"><code id="PlatformerUtils">﻿﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -49,6 +49,10 @@ public class PlatformerUtils : EditorWindow
     Vector3 layerOffsetVector;
     bool layerOffsetGroundCheck;
 
+    string tagOffsetTag;
+    Vector3 tagOffsetVector;
+    bool tagOffsetGroundCheck;
+
     [MenuItem("Tools/PlatformerUtils")]
     private static void OpenUtils() {
         new PlatformerUtils().Show();
@@ -57,33 +61,29 @@ public class PlatformerUtils : EditorWindow
     void OnGUI() {
         LoadPrefs();
 
-        EditorGUILayout.LabelField("Offset Objects in Layer");
+        EditorGUILayout.LabelField("Offset Objects in Layer", EditorStyles.boldLabel);
         layerOffsetLayer = EditorGUILayout.LayerField("Layer for Offsetting:", layerOffsetLayer);
         layerOffsetVector = EditorGUILayout.Vector3Field("Offset Vector", layerOffsetVector);
         layerOffsetGroundCheck = EditorGUILayout.Toggle("Check for Ground", layerOffsetGroundCheck);
 
-        if (GUILayout.Button("Offset")) {
+        if (GUILayout.Button("Offset by Layer")) {
             GameObject[] toOffset = FindObjectsByLayer(layerOffsetLayer);
             foreach(GameObject obj in toOffset){
-                if(layerOffsetGroundCheck){
-                    RaycastHit hit;
-                    if(Physics.Raycast(obj.transform.position,
-                                       -obj.transform.up,
-                                       out hit,
-                                       Mathf.Infinity,
-                                       CONSTANTS.GROUND_MASK)){
-                        obj.transform.position = obj.transform.position + layerOffsetVector;
-                        obj.transform.position = new Vector3(obj.transform.position.x,
-                                                             obj.transform.position.y - hit.distance,
-                                                             obj.transform.position.z);
-                        Debug.Log("Moved object " + obj.name);
-                    } else {
-                        Debug.Log("No ground detected underneath " + obj.name);
-                    }
-                } else {
-                    obj.transform.position += layerOffsetVector;
-                    Debug.Log("Moved object " + obj.name + " without checking for ground");
-                }
+                OffsetObject(obj, layerOffsetVector, layerOffsetGroundCheck);
+            }
+        }
+
+        EditorGUILayout.Space();
+
+        EditorGUILayout.LabelField("Offset Objects with Tag", EditorStyles.boldLabel);
+        tagOffsetTag = EditorGUILayout.TagField("Tag for Offsetting:", tagOffsetTag);
+        tagOffsetVector = EditorGUILayout.Vector3Field("Offset Vector", tagOffsetVector);
+        tagOffsetGroundCheck = EditorGUILayout.Toggle("Check for Ground", tagOffsetGroundCheck);
+
+        if (GUILayout.Button("Offset by Tag")) {
+            GameObject[] toOffset = GameObject.FindGameObjectsWithTag(tagOffsetTag);
+            foreach(GameObject obj in toOffset){
+                OffsetObject(obj, tagOffsetVector, tagOffsetGroundCheck);
             }
         }
 
@@ -105,6 +105,28 @@ public class PlatformerUtils : EditorWindow
             }
         }
         return validTransforms.ToArray();
+    }
+
+    void OffsetObject(GameObject obj, Vector3 offsetVector, bool checkGround){
+        if(checkGround){
+            RaycastHit hit;
+            if(Physics.Raycast(obj.transform.position,
+                               -obj.transform.up,
+                               out hit,
+                               Mathf.Infinity,
+                               CONSTANTS.GROUND_MASK)){
+                obj.transform.position = obj.transform.position + offsetVector;
+                obj.transform.position = new Vector3(obj.transform.position.x,
+                                                     obj.transform.position.y - hit.distance,
+                                                     obj.transform.position.z);
+                Debug.Log("Moved object " + obj.name);
+            } else {
+                Debug.Log("No ground detected underneath " + obj.name);
+            }
+        } else {
+            obj.transform.position += offsetVector;
+            Debug.Log("Moved object " + obj.name + " without checking for ground");
+        }
     }
 
     void LoadPrefs(){
