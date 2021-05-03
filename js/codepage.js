@@ -3,6 +3,7 @@ function copyText(id){
 
 	const el = document.createElement('textarea');
 	el.value = toCopy;
+	el.textContent = toCopy;
 	document.body.appendChild(el);
 	el.select();
 
