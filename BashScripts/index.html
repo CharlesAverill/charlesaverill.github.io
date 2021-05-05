@@ -45,7 +45,7 @@
 		</details>
 
 		<details class="indent">
-			<summary>Oneko PID handler</summary>
+			<summary>Oneko PID Handler</summary>
 			<button class="copy-text" onclick="copyText('#oneko_pid_handler')">
 				<i class="fa fa-clipboard"></i>
 			</button>
@@ -77,7 +77,7 @@
 		</details>
 
 		<details class="indent">
-			<summary>Netcat payload</summary>
+			<summary>Netcat Payload</summary>
 			<button class="copy-text" onclick="copyText('#netcat_payload')">
 				<i class="fa fa-clipboard"></i>
 			</button>
@@ -88,6 +88,18 @@
 				Usage: <code>nc_payload &lt;payload&gt; &lt;address&gt; &lt;port&gt;</code>
 			</p>
 			<pre class="indent"><code id="netcat_payload">cat $1 | nc $2 $3 -N</code></pre>
+		</details>
+
+		<details class="indent">
+			<summary>Steampipe Upload</summary>
+			<button class="copy-text" onclick="copyText('#steampipe_upload')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				I use this for pushing builds for my steam releases
+			</p>
+			<pre class="indent"><code id="steampipe_upload">steamcmd +login &lt;username&gt; &lt;password&gt; +run_app_build \
+	~/steamworksSDK/tools/ContentBuilder/scripts/app_build_&lt;ApplicationID&gt;.vdf +quit</code></pre>
 		</details>
 
 		{% include codepage_footer.html %}
