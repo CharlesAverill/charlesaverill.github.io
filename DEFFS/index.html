@@ -1,0 +1,84 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+
+        <meta name="description" content="A simple explanation of DEFFS">
+        <meta name="author" content="Charles Averill">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="DEFFS">
+        <meta name="twitter:description" content="A simple explanation of DEFFS">
+        <meta name="twitter:site" content="@caverill_">
+
+        {% include analytics.html %}
+
+        <title>DEFFS</title>
+
+        <link href="../css/codepage.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<h1 style="margin-left: 2%;">
+			<a href="../index.html">
+				<i class="fa fa-home" style="font-size:36px; margin-left: 1em;"></i>
+			</a>
+			<a href="https://github.com/CharlesAverill/DEFFS">
+				<i class="fa fa-github" style="font-size: 36px;"></i>
+			</a>
+			This is DEFFS
+		</h1>
+
+		<p class="indent">
+			DEFFS stands for "Distributed, Encrypted, Fractured File System". Its primary goal is to secure a group's files while also allowing said files to be accessible from multiple machines on a local network, and preserving the ability to keep files private from others.
+		</p>
+
+		<h2 class="small_indent">Example Use Case</h2>
+		
+		<p class="indent">
+			A small laboratory has 3 employees: a Chemist, a Biologist, and a Physicist. 
+			They're working on an experiment together, so they'd like to share files. 
+			Traditional solutions to this issue include git or Google Drive, however none of the 3 employees are programmers, and their files are large enough that they don't want to have to pay for extra storage from Google. 
+		</p>
+		
+		<p class="indent">
+			DEFFS provides a non-invasive, easy-to-use solution for their issue. On each of their machines, they create two folders, "storepoint" and "mountpoint", at any location they desire.
+			<br>
+			<code>$ mkdir storepoint mountpoint</code>
+			<br>
+			They execute the DEFFS binary, providing the paths to the two folders they created, and the number of machines that DEFFS will interact with (2, as the Chemist's machine will interact with the Biologist's and the Physicist's, and etc).
+			<br>
+			<code>$ DEFFS mountpoint storepoint -n 2</code>
+			<br>
+			Now, whenever they want to share files, all they have to do is copy the files into "mountpoint", or just work in that directory by default. 
+			Whenever files are written inside of the mountpoint, their contents are encrypted and split into shards which are distributed to the other machines via their shared local network.
+		</p>
+
+		<p class="indent">
+			For example, the Physicist would like to share his new star charts with his coworkers. 
+			He copies the chart files and pastes them into a new folder inside of "mountpoint". 
+			Each of the charts is split into 3 encrypted shards, 2 of them being sent to the Chemist's and Biologist's machines. 
+			When the Chemist opens her own "mountpoint" directory, she will see the new folder containing the star charts. 
+			Upon opening the chart, DEFFS will send a TCP request to the other 2 machines, asking for the corresponding file shards. 
+			The shards will be recombined, decrypted, and displayed to the Chemist.
+			No manual uploading or downloading required.
+			In this way, DEFFS treats a network of machines as a single machine, distributing its contents over each node.
+		</p>
+		
+		<h2 class="small_indent">Security</h2>
+		<p class="indent">
+			DEFFS currently encrypts file contents with the plain AES cipher provided by OpenSSL, but this will soon be replaced by AES GCM for improved security.
+			The symmetric encryption keys are passed through Shamir's Secret Sharing Scheme, providing a number of key chunks equal to the number of shards to be created and machines to interact with.
+			Shard files are stored in a hidden directory within the storepoint (the shardpoint) with an SHA256-generated filename, and contain the Shamir-encoded encryption key chunks.
+			"Header" files, or the normally-visible files that users will interact with, actually only contain the SHA256 hash that corresponds with the file's shards.
+			To access a file, <b>all</b> shards for the corresponding file must be retrieved to unlock the file's contents, due to the nature of Shamir's algorithm.
+		</p>
+
+		{% include codepage_footer.html %}
+
+		<script src="../js/codepage.js"></script>
+	</body>
+</html>

@@ -22,6 +22,10 @@ summary {
 	margin-left: 3em;
 }
 
+.small_indent {
+	margin-left: 2em;
+}
+
 .copy-text {
 	background-color: black;
 	margin-top: 1em;
