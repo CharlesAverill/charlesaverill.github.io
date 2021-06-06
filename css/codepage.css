@@ -18,12 +18,20 @@ summary {
 	cursor: pointer;
 }
 
+.light_green {
+	color: #00FF41;
+}
+
 .indent, details {
 	margin-left: 3em;
 }
 
 .small_indent {
 	margin-left: 2em;
+}
+
+.header_indent {
+	margin-left: 2%;
 }
 
 .copy-text {
@@ -33,6 +41,28 @@ summary {
 
 .fa-clipboard {
 	color: white;
+}
+
+.toc {
+	margin-left: 3em;
+	outline: 1px solid white;
+	display: inline-block;
+}
+
+.toc > h2, .toc_links {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.toc > a, .toc > h2, .toc_links > a{
+	display: block;
+	text-align: center;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+.center_text {
+	text-align: center;
 }
 
 a{

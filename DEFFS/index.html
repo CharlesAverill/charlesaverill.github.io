@@ -22,7 +22,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	</head>
 	<body>
-		<h1 style="margin-left: 2%;">
+		
+		<h1 class="header_indent">
 			<a href="../index.html">
 				<i class="fa fa-home" style="font-size:36px; margin-left: 1em;"></i>
 			</a>
@@ -36,48 +37,137 @@
 			DEFFS stands for "Distributed, Encrypted, Fractured File System". Its primary goal is to secure a group's files while also allowing said files to be accessible from multiple machines on a local network, and preserving the ability to keep files private from others.
 		</p>
 
-		<h2 class="small_indent">Example Use Case</h2>
-		
-		<p class="indent">
-			A small laboratory has 3 employees: a Chemist, a Biologist, and a Physicist. 
-			They're working on an experiment together, so they'd like to share files. 
-			Traditional solutions to this issue include git or Google Drive, however none of the 3 employees are programmers, and their files are large enough that they don't want to have to pay for extra storage from Google. 
-		</p>
-		
-		<p class="indent">
-			DEFFS provides a non-invasive, easy-to-use solution for their issue. On each of their machines, they create two folders, "storepoint" and "mountpoint", at any location they desire.
-			<br>
-			<code>$ mkdir storepoint mountpoint</code>
-			<br>
-			They execute the DEFFS binary, providing the paths to the two folders they created, and the number of machines that DEFFS will interact with (2, as the Chemist's machine will interact with the Biologist's and the Physicist's, and etc).
-			<br>
-			<code>$ DEFFS mountpoint storepoint -n 2</code>
-			<br>
-			Now, whenever they want to share files, all they have to do is copy the files into "mountpoint", or just work in that directory by default. 
-			Whenever files are written inside of the mountpoint, their contents are encrypted and split into shards which are distributed to the other machines via their shared local network.
-		</p>
+		<div class="toc">
+                        <h2 class="center_text">
+                                Table of Contents
+                        </h2>
+			<div class="toc_links">
+				<a href="#ex_use_case">Example Use Case</a>
+				<a href="#security">Security</a>
+				<a href="#faq">FAQs</a>
+			</div>
+                </div>
 
-		<p class="indent">
-			For example, the Physicist would like to share his new star charts with his coworkers. 
-			He copies the chart files and pastes them into a new folder inside of "mountpoint". 
-			Each of the charts is split into 3 encrypted shards, 2 of them being sent to the Chemist's and Biologist's machines. 
-			When the Chemist opens her own "mountpoint" directory, she will see the new folder containing the star charts. 
-			Upon opening the chart, DEFFS will send a TCP request to the other 2 machines, asking for the corresponding file shards. 
-			The shards will be recombined, decrypted, and displayed to the Chemist.
-			No manual uploading or downloading required.
-			In this way, DEFFS treats a network of machines as a single machine, distributing its contents over each node.
-		</p>
+		<h2 class="small_indent" id="ex_use_case">Example Use Case</h2>
 		
-		<h2 class="small_indent">Security</h2>
-		<p class="indent">
-			DEFFS currently encrypts file contents with the plain AES cipher provided by OpenSSL, but this will soon be replaced by AES GCM for improved security.
-			The symmetric encryption keys are passed through Shamir's Secret Sharing Scheme, providing a number of key chunks equal to the number of shards to be created and machines to interact with.
-			Shard files are stored in a hidden directory within the storepoint (the shardpoint) with an SHA256-generated filename, and contain the Shamir-encoded encryption key chunks.
-			"Header" files, or the normally-visible files that users will interact with, actually only contain the SHA256 hash that corresponds with the file's shards.
-			To access a file, <b>all</b> shards for the corresponding file must be retrieved to unlock the file's contents, due to the nature of Shamir's algorithm.
-		</p>
+		<div class="indent">
+		    <p>
+    			A small laboratory has 3 employees: a Chemist, a Biologist, and a Physicist. 
+    			They're working on an experiment together, so they'd like to share files. 
+    			Traditional solutions to this issue include git or Google Drive, however none of the 3 employees are programmers, and their files are large enough that they don't want to have to pay for extra storage from Google. 
+    		</p>
+    		
+    		<p>
+    			DEFFS provides a non-invasive, easy-to-use solution for their issue. On each of their machines, they create two folders, "storepoint" and "mountpoint", at any location they desire.
+    			<br>
+    			<code>$ mkdir storepoint mountpoint</code>
+    			<br>
+    			They execute the DEFFS binary, providing the paths to the two folders they created, and the number of machines that DEFFS will interact with (2, as the Chemist's machine will interact with the Biologist's and the Physicist's, and etc).
+    			<br>
+    			<code>$ DEFFS mountpoint storepoint -n 2</code>
+    			<br>
+    			Now, whenever they want to share files, all they have to do is copy the files into "mountpoint", or just work in that directory by default. 
+    			Whenever files are written inside of the mountpoint, their contents are encrypted and split into shards which are distributed to the other machines via their shared local network.
+    		</p>
+    
+    		<p>
+    			For example, the Physicist would like to share his new star charts with his coworkers. 
+    			He copies the chart files and pastes them into a new folder inside of "mountpoint". 
+    			Each of the charts is split into 3 encrypted shards, 2 of them being sent to the Chemist's and Biologist's machines. 
+    			When the Chemist opens her own "mountpoint" directory, she will see the new folder containing the star charts. 
+    			Upon opening the chart, DEFFS will send a TCP request to the other 2 machines, asking for the corresponding file shards. 
+    			The shards will be recombined, decrypted, and displayed to the Chemist.
+    			No manual uploading or downloading required.
+    			In this way, DEFFS treats a network of machines as a single machine, distributing its contents over each node.
+    		</p>
+		</div>
 		
-		<footer class="indent">
+		<h2 class="small_indent" id="security">Security</h2>
+		<div class="indent">
+            <p>
+                DEFFS currently encrypts file contents with the plain AES cipher provided by OpenSSL, but this will soon be replaced by AES GCM for improved security.
+                The symmetric encryption keys are passed through Shamir's Secret Sharing Scheme, providing a number of key chunks equal to the number of shards to be created and machines to interact with.
+                Shard files are stored in a hidden directory within the storepoint (the shardpoint) with an SHA256-generated filename, and contain the Shamir-encoded encryption key chunks.
+                "Header" files, or the normally-visible files that users will interact with, actually only contain the SHA256 hash that corresponds with the file's shards.
+                To access a file, <b>all</b> shards for the corresponding file must be retrieved to unlock the file's contents, due to the nature of Shamir's algorithm.
+            </p>
+		</div>
+		
+
+		<h2 class="small_indent" id="faq">FAQs</h2>
+		<div class="indent">
+            <h3 class="light_green">
+                What distinguishes DEFFS from other distributed filesystems?
+            </h3>
+            <p>
+                Distributed filesystems are not a new concept, and DEFFS builds on the conventions that previous projects have set up. Among other distributed filesystems,
+                DEFFS is most similar to <a href="https://en.wikipedia.org/wiki/Tahoe-LAFS" target="_blank">Tahoe-LAFS</a>. 
+            </p>
+            <p>
+                DEFFS stands apart in a few key ways:
+                <ul>
+                    <li>
+                        <p class="light_green" style="display: inline;">
+                        Configuration
+                        </p>
+                        <p style="display: inline;">
+                            - DEFFS aims to be a highly-configurable zeroconf system, meaning it is well-tuned for usage out-of-the-box, but can be fine-tuned
+                            for any user's individual needs. These configs include simple options like the port number over which DEFFS interacts, and high-level options like
+                            node groups for larger networks. Have a config request? <a href = "mailto:charles.averill@utdallas.edu">Email me!</a>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="light_green" style="display: inline;">
+                        Language
+                        </p>
+                        <p style="display: inline;">
+                            - DEFFS is written in C for maximum compatability and efficiency
+                        </p>
+                    </li>
+                    <li>
+                        <p class="light_green" style="display: inline;">
+                        Node Communication
+                        </p>
+                        <p style="display: inline;">
+                            - each node in a DEFFS network leaves a port open for communication. Sockets on new threads are opened and closed for each interaction, like
+                            any threaded server. Only encrypted contents are sent across these connections
+                        </p>
+                    </li>
+                </ul>
+            </p>
+            <h3 class="light_green">
+                Do I have to approve shard requests when my colleagues want to view files?
+            </h3>
+            <p>
+                No, shard requests and replies are completely automatic.
+            </p>
+            <h3 class="light_green">
+                What if a new machine joins the network after DEFFS has been mounted?
+            </h3>
+            <p>
+                By default, the new DEFFS instance will sniff the network for other DEFFS instances, and notify them that it has joined the network. The new node will receive
+                file headers but shards will <b>not</b> be redistributed. The new machine will only begin to store shards if a file is written to.
+            </p>
+            <h3 class="light_green">
+                What if a hard drive disconnects, dies, or otherwise leaves the network?
+            </h3>
+            <p>
+                The default DEFFS configuration is geared towards an always-on network of reliable machines, so this is not a top issue right now. However, the current planned
+                solution to this issue is to base DEFFS shard architecture on RAID 1 mirroring to allow any machine to disconnect without data loss. A simpler option that will be
+                implemented soon is the option to automatically create redundant shards. 
+            </p>
+            <h3 class="light_green">
+                What's the deal with concurrent file writes?
+            </h3>
+            <p>
+                This solution to the issue of concurrent file modifications is a currently-undecided one, but there are a few different ways to go. The simplest solution is to lock or make readonly
+                a file on all machines if it's open on one, preventing more than one user from working on a given file at once. This solution is better for smaller networks with 
+                users that don't modify each other's files a lot. The second option is to have a git-like commit feature, which would be harder to implement and more complicated for users to understand,
+                but would handle cases where files are highly-shared.
+            </p>
+		</div>
+		
+		<footer class="indent" style="margin-bottom: 1em;">
 			<a href="https://github.com/CharlesAverill/DEFFS/blob/main/LICENSE" target="_blank">License</a>
 		</footer>
 
