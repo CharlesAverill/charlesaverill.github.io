@@ -111,13 +111,32 @@ End
 
 		<details>
 			<summary>BOUNCE</summary>
-			<button class="copy-text" onclick="copyText('#title')">
+			<button class="copy-text" onclick="copyText('#bounce')">
 				<i class="fa fa-clipboard"></i>
 			</button>
 			<p>
 				An animation that bounces a pixel across your graph screen
 			</p>
-			<pre class="indent"><code id="title"></code></pre>
+			<pre class="indent"><code id="bounce">ClLCD
+ZStd
+ZSqr
+AxesOff
+DispG
+
+0->A
+0->B
+e^(-1)->C
+π^(-1)->D
+
+While (1==1)
+If A>=17 or A<=-17
+C*-1->C
+If B>=10 or B<=10
+D*-1->D
+A+C->A
+B+D->B
+PtChg(A,B)
+End</code></pre>
 		</details>
 
 		<details>
