@@ -1,0 +1,76 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+
+        <meta name="description" content="A collection of some TI-BASIC scripts I use often">
+        <meta name="author" content="Charles Averill">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="TI-BASIC Scripts">
+        <meta name="twitter:description" content="A collection of some TI-BASIC scripts I use often">
+        <meta name="twitter:site" content="@caverill_">
+
+        {% include analytics.html %}
+
+        <title>TI-BASIC Scripts</title>
+
+        <link href="../css/codepage.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	</head>
+	<body>
+		<h1>
+			<a href="../index.html">
+				<i class="fa fa-home" style="font-size:36px; margin-left: 1em;"></i>
+			</a>
+			(Somewhat) useful TI-BASIC scripts
+		</h1>
+		<h2>
+			These scripts are written for a TI-85, so there are modern counterparts to many of these commands. <code>-></code> represents the "STO>" key.
+		</h2>
+
+		<details class="indent">
+			<summary>BASECONV</summary>
+			<button class="copy-text" onclick="copyText('#lazygit')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				A Base Converter that works from bases 2-10. Other bases are undefined behavior.
+			</p>
+						<pre class="indent"><code id="lazygit">ClLCD
+
+Input "DIGITS: ",D
+Input "NUM: ",A
+Input "SRC BASE: ",B
+Input "DEST BASE: ",F
+
+O->T
+O->C
+
+For(J,0,D-1)
+int(A/(10^(D-1-J)))->C
+C*B^(D-1-J)+T->T
+A-C*10^(D-1-J)->A
+End
+
+1->P
+0->E
+For(K,0,15)
+int(T/(F^(15-K)))->E
+Outpt(5,P,E)
+T-(E*F^(15-K))->T
+P+1->P
+End
+Disp ""</code></pre>
+		</details>
+
+		
+
+		{% include codepage_footer.html %}
+
+		<script src="../js/codepage.js"></script>
+	</body>
+</html>
