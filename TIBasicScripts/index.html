@@ -28,19 +28,19 @@
 			</a>
 			(Somewhat) useful TI-BASIC scripts
 		</h1>
-		<h2>
-			These scripts are written for a TI-85, so there are modern counterparts to many of these commands. <code>-></code> represents the "STO>" key.
-		</h2>
+		<p>
+			These scripts are written for a TI-85, so there are modern counterparts to many of these commands. <code>-></code> represents the <code>STO></code> key.
+		</p>
 
 		<details class="indent">
 			<summary>BASECONV</summary>
-			<button class="copy-text" onclick="copyText('#lazygit')">
+			<button class="copy-text" onclick="copyText('#baseconv')">
 				<i class="fa fa-clipboard"></i>
 			</button>
 			<p>
 				A Base Converter that works from bases 2-10. Other bases are undefined behavior.
 			</p>
-						<pre class="indent"><code id="lazygit">ClLCD
+						<pre class="indent"><code id="baseconv">ClLCD
 
 Input "DIGITS: ",D
 Input "NUM: ",A
@@ -67,7 +67,46 @@ End
 Disp ""</code></pre>
 		</details>
 
-		
+		<details>
+			<summary>BASELOG</summary>
+			<button class="copy-text" onclick="copyText('#baselog')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				A calculator that solves logarithmic expressions of form logB(A) = E
+			</p>
+						<pre class="indent"><code id="baselog">
+Disp "BASE - 1"
+Disp "ARGUMENT - 2"
+Disp "EXPONENT - 3"
+Disp "WHICH NEEDED? "
+Prompt Z
+
+If(Z==1)
+Then
+Prompt A
+Prompt E
+Disp (E^x√A)
+End
+
+If(Z==2)
+Then
+Prompt B
+Prompt E
+Disp (B^E)
+End
+
+If(Z==3)
+Then
+Prompt B
+Prompt A
+log A->T1
+log B->T2
+Disp (T1/T2)
+End
+</code></pre>
+
+		</details>
 
 		{% include codepage_footer.html %}
 
