@@ -44,12 +44,7 @@
 				<br>
 				Dependency for multiple scripts that follow.
 			</p>
-			<pre class="indent"><code id="prmtvecs">Prompt UX
-Prompt UY
-Prompt UZ
-Prompt VX
-Prompt VY
-Prompt VZ
+			<pre class="indent"><code id="prmtvecs">Prompt UX,UY,UZ,VX,VY,VZ
 			</code></pre>
 		</details>
 
@@ -98,30 +93,24 @@ Disp ""</code></pre>
 			<p>
 				A calculator that solves logarithmic expressions of form logB(A) = E
 			</p>
-			<pre class="indent"><code id="baselog">Disp "BASE - 1"
-Disp "ARGUMENT - 2"
-Disp "EXPONENT - 3"
-Disp "WHICH NEEDED? "
+			<pre class="indent"><code id="baselog">Disp "BASE - 1","ARGUMENT - 2","EXPONENT - 3","WHICH NEEDED? "
 Prompt Z
 
 If(Z==1)
 Then
-Prompt A
-Prompt E
+Prompt A,E
 Disp (E^x√A)
 End
 
 If(Z==2)
 Then
-Prompt B
-Prompt E
+Prompt B,E
 Disp (B^E)
 End
 
 If(Z==3)
 Then
-Prompt B
-Prompt A
+Prompt B,A
 log A->T1
 log B->T2
 Disp (T1/T2)
@@ -174,9 +163,7 @@ End</code></pre>
 ((UX*VZ)-(UZ*VX))*-1->J
 ((UX*VY)-(UY*VX))->K
 
-Disp I
-Disp J
-Disp K</code></pre>
+Disp I,J,K</code></pre>
 		</details>
 
 		<details>
@@ -223,9 +210,7 @@ Disp O
 			<pre class="indent"><code id="factors">Prompt N
 
 For(I,2,N,1)
-Disp I
-Disp (N/I)->Frac
-Disp "-----"
+Disp I,(N/I)->Frac,"-----"
 
 Pause
 End
@@ -248,8 +233,7 @@ Then
 0->TWO
 1->LAST
 
-Disp 0
-Disp 1
+Disp 0,1
 
 While 1==1
 Pause
@@ -275,9 +259,7 @@ Else
 			<p>
 				A calculator for determining the flux through a surface
 			</p>
-			<pre class="indent"><code id="flx2surf">Prompt E
-Prompt A
-Prompt THETA
+			<pre class="indent"><code id="flx2surf">Prompt E,A,THETA
 Disp E*A*cos THETA
 			</code></pre>
 
@@ -293,8 +275,7 @@ Disp E*A*cos THETA
 			</p>
 			<pre class="indent"><code id="integral">Disp "LOAD FUNC IN y1"
 
-Prompt LO
-Prompt HI
+Prompt LO,HI
 
 Disp fnInt(y1,x,LO,HI)
 			</code></pre>
@@ -314,22 +295,16 @@ Prompt A
 
 If A==1
 Then
-Prompt R
-Prompt T
+Prompt R,T
 
-Disp "X:"
-Disp R*cos T
-Disp "Y:"
-Disp R*sin T
+Disp "X:",R*cos T
+Disp "Y:",R*sin T
 
 Else
-Prompt X
-Prompt Y
+Prompt X,Y
 
-Disp "R:"
-Disp √(X^2+Y^2)
-Disp "T:"
-Disp tan^-1(Y/X)
+Disp "R:",√(X^2+Y^2)
+Disp "T:",tan^-1(Y/X)
 
 End
 			</code></pre>
@@ -344,10 +319,7 @@ End
 			<p>
 				A Polar distance calculator
 			</p>
-			<pre class="indent"><code id="poldist">Prompt R1
-Prompt T1
-Prompt R2
-Prompt T2
+			<pre class="indent"><code id="poldist">Prompt R1,T1,R2,T2
 
 Disp √(R1^2+R2^2-2(R1)(R2)cos (T1-T2))
 			</code></pre>
@@ -398,16 +370,13 @@ ClLCD:""
 If (C>HISCORE)
 Then
 C->HISCORE
-Disp "NEW HIGH SCORE!"
-Disp C
+Disp "NEW HIGH SCORE!",C
 End
 
 If (C<=HISCORE)
 Then
-Disp "SCORE:"
-Disp C
-Disp "HIGH SCORE:"
-Disp HISCORE
+Disp "SCORE:",C
+Disp "HIGH SCORE:",HISCORE
 End
 			</code></pre>
 
@@ -428,13 +397,9 @@ PRMTVECS
 
 DP/(VX^2+VY^2+VZ^2)->SP
 
-Disp "PX"
-Disp VX/SP
-Disp "PY"
-Disp VY/SP
-Disp "PZ"
-Disp VZ/SP
-			</code></pre>
+Disp "PX",VX/SP
+Disp "PY",VY/SP
+Disp "PZ",VZ/SP</code></pre>
 
 		</details>
 
@@ -446,7 +411,16 @@ Disp VZ/SP
 			<p>
 				A calculator for the quadratic formula
 			</p>
-			<pre class="indent"><code id="quadr"></code></pre>
+			<pre class="indent"><code id="quadr">Prompt A,B,C
+
+0->x1
+0->x2
+
+((-1*B)+√((B^2)-(4*A*C)))/(2*A)->x1
+((-1*B)-√((B^2)-(4*A*C)))/(2*A)->x2
+
+Disp x1,x2
+			</code></pre>
 
 		</details>
 
@@ -458,7 +432,14 @@ Disp VZ/SP
 			<p>
 				A wrapper for the sum function
 			</p>
-			<pre class="indent"><code id="sumcalc"></code></pre>
+			<pre class="indent"><code id="sumcalc">Disp "PUT EXPR IN y1"
+
+Prompt LO
+Prompt HI
+Prompt STEP
+
+Disp sum (seq(y1,x,LO,HI,STEP))
+			</code></pre>
 
 		</details>
 
