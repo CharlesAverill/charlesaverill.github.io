@@ -390,16 +390,18 @@ End
 			<p>
 				A 3D Vector projection calculator
 			</p>
-			<pre class="indent"><code id="project">Disp "U ONTO V"
+			<pre class="indent"><code id="project">Disp "V ONTO U"
 PRMTVECS
 
 (UX*VX)+(UY*VY)+(UZ*VZ)->DP
+√(UX^2+UY^2+UZ^2)->MAG
 
-DP/(VX^2+VY^2+VZ^2)->SP
+DP/MAG->SP
 
-Disp "PX",VX/SP
-Disp "PY",VY/SP
-Disp "PZ",VZ/SP</code></pre>
+Disp VX/SP/MAG
+Disp VY/SP/MAG
+Disp VZ/SP/MAG
+Disp "SP",SP</code></pre>
 
 		</details>
 
