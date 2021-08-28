@@ -35,6 +35,27 @@
 		</p>
 
 		<details class="indent">
+			<summary>PRMTVECS</summary>
+			<button class="copy-text" onclick="copyText('#prmtvecs')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				Prompts for two 3D Vectors as U/V XYZ. 
+				<br>
+				Dependency for multiple scripts that follow.
+			</p>
+			<pre class="indent"><code id="prmtvecs">Prompt UX
+Prompt UY
+Prompt UZ
+Prompt VX
+Prompt VY
+Prompt VZ
+			</code></pre>
+		</details>
+
+		<br>
+
+		<details class="indent">
 			<summary>BASECONV</summary>
 			<button class="copy-text" onclick="copyText('#baseconv')">
 				<i class="fa fa-clipboard"></i>
@@ -147,12 +168,7 @@ End</code></pre>
 			<p>
 				3D Cross Product calculator
 			</p>
-			<pre class="indent"><code id="crosprod">Prompt UX
-Prompt UY
-Prompt UZ
-Prompt VX
-Prompt VY
-Prompt VZ
+			<pre class="indent"><code id="crosprod">PRMTVECS
 
 ((UY*VZ)-(UZ*VY))->I
 ((UX*VZ)-(UZ*VX))*-1->J
@@ -171,7 +187,11 @@ Disp K</code></pre>
 			<p>
 				A 3D Distance calculator
 			</p>
-			<pre class="indent"><code id="dist"></code></pre>
+			<pre class="indent"><code id="dist">PRMTVECS
+
+√((VX-UX)^2+(VY-UY)^2+(VZ-UZ)^2)->O                                             
+                                                                                
+Disp O</code></pre>
 
 		</details>
 
