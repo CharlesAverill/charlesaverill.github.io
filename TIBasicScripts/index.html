@@ -344,7 +344,13 @@ End
 			<p>
 				A Polar distance calculator
 			</p>
-			<pre class="indent"><code id="poldist"></code></pre>
+			<pre class="indent"><code id="poldist">Prompt R1
+Prompt T1
+Prompt R2
+Prompt T2
+
+Disp √(R1^2+R2^2-2(R1)(R2)cos (T1-T2))
+			</code></pre>
 
 		</details>
 
@@ -356,7 +362,54 @@ End
 			<p>
 				A basic 1-player Pong implementation
 			</p>
-			<pre class="indent"><code id="pong"></code></pre>
+			<pre class="indent"><code id="pong">3->M
+20->X
+1->S
+1->T
+0->C
+
+abs (int ((rand*10)-8))->Y
+
+Repeat K==16 or X==1 and M/=Y
+ClLCD
+
+Outpt(M,1,"[")
+Outpt(1,1,C)
+Outpt(Y,X,"O")
+
+getKy->K
+
+max(1,min(8,M+(Ans==34)-(Ans==25->M
+T(Y>1 and Y<8)+(Y==1)-(Y==8->T
+S(X>1 and X<21)+(X==1)-(X--21->S
+
+X+Ans->X
+Y+T->Y
+
+If (X==1)
+Then
+C+1->C
+End
+End
+
+Pause "GAME OVER"
+ClLCD:""
+
+If (C>HISCORE)
+Then
+C->HISCORE
+Disp "NEW HIGH SCORE!"
+Disp C
+End
+
+If (C<=HISCORE)
+Then
+Disp "SCORE:"
+Disp C
+Disp "HIGH SCORE:"
+Disp HISCORE
+End
+			</code></pre>
 
 		</details>
 
