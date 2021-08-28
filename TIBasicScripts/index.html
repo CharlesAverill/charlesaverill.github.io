@@ -34,21 +34,46 @@
 			<code>-></code> represents the <code>STO></code> key.
 		</p>
 
+		<p>
+			Dependencies
+		</p>
+
 		<details class="indent">
 			<summary>PRMTVECS</summary>
 			<button class="copy-text" onclick="copyText('#prmtvecs')">
 				<i class="fa fa-clipboard"></i>
 			</button>
 			<p>
-				Prompts for two 3D Vectors as U/V XYZ. 
-				<br>
-				Dependency for multiple scripts that follow.
+				Prompts for two 3D Vectors as U/V XYZ.
 			</p>
 			<pre class="indent"><code id="prmtvecs">Prompt UX,UY,UZ,VX,VY,VZ
 			</code></pre>
 		</details>
 
-		<br>
+		<details>
+			<summary>PROJECT</summary>
+			<button class="copy-text" onclick="copyText('#project')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				A 3D Vector projection calculator
+			</p>
+			<pre class="indent"><code id="project">Disp "V ONTO U"
+
+DOTPROD
+√(UX^2+UY^2+UZ^2)->MAG
+DP/MAG->SP
+
+Disp UX*SP/MAG->Frac
+Disp UY*SP/MAG->Frac
+Disp UZ*SP/MAG->Frac
+Disp "SP",SP</code></pre>
+
+		</details>
+
+		<p>
+			Programs
+		</p>
 
 		<details class="indent">
 			<summary>BASECONV</summary>
@@ -192,9 +217,9 @@ Disp O</code></pre>
 			</p>
 			<pre class="indent"><code id="DOTPROD">PRMTVECS
 
-(UX*VX)+(UY*VY)+(UZ*VZ)->O
+(UX*VX)+(UY*VY)+(UZ*VZ)->DP
 
-Disp O
+Disp DP
 			</code></pre>
 
 		</details>
@@ -379,28 +404,6 @@ Disp "SCORE:",C
 Disp "HIGH SCORE:",HISCORE
 End
 			</code></pre>
-
-		</details>
-
-		<details>
-			<summary>PROJECT</summary>
-			<button class="copy-text" onclick="copyText('#project')">
-				<i class="fa fa-clipboard"></i>
-			</button>
-			<p>
-				A 3D Vector projection calculator
-			</p>
-			<pre class="indent"><code id="project">Disp "V ONTO U"
-PRMTVECS
-
-(UX*VX)+(UY*VY)+(UZ*VZ)->DP
-√(UX^2+UY^2+UZ^2)->MAG
-DP/MAG->SP
-
-Disp UX*SP/MAG->Frac
-Disp UY*SP/MAG->Frac
-Disp UZ*SP/MAG->Frac
-Disp "SP",SP</code></pre>
 
 		</details>
 
