@@ -51,23 +51,19 @@
 		</details>
 
 		<details>
-			<summary>PROJECT</summary>
-			<button class="copy-text" onclick="copyText('#project')">
+			<summary>DOTPROD</summary>
+			<button class="copy-text" onclick="copyText('#dotprod')">
 				<i class="fa fa-clipboard"></i>
 			</button>
 			<p>
-				A 3D Vector projection calculator
+				A 3D Dot Product calculator
 			</p>
-			<pre class="indent"><code id="project">Disp "V ONTO U"
+			<pre class="indent"><code id="DOTPROD">PRMTVECS
 
-DOTPROD
-√(UX^2+UY^2+UZ^2)->MAG
-DP/MAG->SP
+(UX*VX)+(UY*VY)+(UZ*VZ)->DP
 
-Disp UX*SP/MAG->Frac
-Disp UY*SP/MAG->Frac
-Disp UZ*SP/MAG->Frac
-Disp "SP",SP</code></pre>
+Disp DP
+			</code></pre>
 
 		</details>
 
@@ -204,23 +200,6 @@ Disp I,J,K</code></pre>
 √((VX-UX)^2+(VY-UY)^2+(VZ-UZ)^2)->O                                             
                                                                                 
 Disp O</code></pre>
-
-		</details>
-
-		<details>
-			<summary>DOTPROD</summary>
-			<button class="copy-text" onclick="copyText('#dotprod')">
-				<i class="fa fa-clipboard"></i>
-			</button>
-			<p>
-				A 3D Dot Product calculator
-			</p>
-			<pre class="indent"><code id="DOTPROD">PRMTVECS
-
-(UX*VX)+(UY*VY)+(UZ*VZ)->DP
-
-Disp DP
-			</code></pre>
 
 		</details>
 
@@ -408,6 +387,27 @@ End
 		</details>
 
 		<details>
+			<summary>PROJECT</summary>
+			<button class="copy-text" onclick="copyText('#project')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				A 3D Vector projection calculator
+			</p>
+			<pre class="indent"><code id="project">Disp "V ONTO U"
+
+DOTPROD
+√(UX^2+UY^2+UZ^2)->MAG
+DP/MAG->SP
+
+Disp UX*SP/MAG->Frac
+Disp UY*SP/MAG->Frac
+Disp UZ*SP/MAG->Frac
+Disp "SP",SP</code></pre>
+
+		</details>
+
+		<details>
 			<summary>QUADR</summary>
 			<button class="copy-text" onclick="copyText('#quadr')">
 				<i class="fa fa-clipboard"></i>
@@ -444,6 +444,24 @@ Prompt STEP
 
 Disp sum (seq(y1,x,LO,HI,STEP))
 			</code></pre>
+
+		</details>
+
+		<details>
+			<summary>VECSANGL</summary>
+			<button class="copy-text" onclick="copyText('#vecsangl')">
+				<i class="fa fa-clipboard"></i>
+			</button>
+			<p>
+				A calculator to find the angle between vectors
+			</p>
+			<pre class="indent"><code id="vecsangl">PRMTVECS
+
+DOTPROD
+√(UX^2+UY^2+UZ^2)->UMAG
+√(VX^2+VY^2+VZ^2)->VMAG
+
+Disp cos^1(DP/UMAG/VMAG)</code></pre>
 
 		</details>
 
