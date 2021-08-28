@@ -421,7 +421,20 @@ End
 			<p>
 				A 3D Vector projection calculator
 			</p>
-			<pre class="indent"><code id="project"></code></pre>
+			<pre class="indent"><code id="project">Disp "U ONTO V"
+PRMTVECS
+
+(UX*VX)+(UY*VY)+(UZ*VZ)->DP
+
+DP/(VX^2+VY^2+VZ^2)->SP
+
+Disp "PX"
+Disp VX/SP
+Disp "PY"
+Disp VY/SP
+Disp "PZ"
+Disp VZ/SP
+			</code></pre>
 
 		</details>
 
