@@ -309,7 +309,30 @@ Disp fnInt(y1,x,LO,HI)
 			<p>
 				A program that converts between Cartesian and Polar coordinates
 			</p>
-			<pre class="indent"><code id="polcart"></code></pre>
+			<pre class="indent"><code id="polcart">Disp "P2C (1) OR C2P (2)"
+Prompt A
+
+If A==1
+Then
+Prompt R
+Prompt T
+
+Disp "X:"
+Disp R*cos T
+Disp "Y:"
+Disp R*sin T
+
+Else
+Prompt X
+Prompt Y
+
+Disp "R:"
+Disp √(X^2+Y^2)
+Disp "T:"
+Disp tan^-1(Y/X)
+
+End
+			</code></pre>
 
 		</details>
 
