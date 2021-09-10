@@ -7,7 +7,7 @@ body {
     padding: 0 2%;
 }
 
-h1 {
+h1, h2 {
     font-family: Forest;
     color: #ff8000;
     -webkit-text-stroke: .5px black;
