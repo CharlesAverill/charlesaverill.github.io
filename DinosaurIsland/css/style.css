@@ -17,6 +17,10 @@ li {
     list-style-image: url(../images/list.png);
 }
 
+table, th, td {
+  border: 1px solid black;
+}
+
 a, i {
     color: #ff9800;
     font-weight: bold;
