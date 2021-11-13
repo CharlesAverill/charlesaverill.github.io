@@ -31,7 +31,7 @@
 		<p>
 			These scripts are written for a TI-85, so there are modern counterparts to many of these commands.
 			<br>
-			<code>-></code> represents the <code>STO></code> key.
+			Note: <code>-></code> represents the <code>STO></code> key.
 		</p>
 
 		<p>
@@ -265,6 +265,54 @@ Else
 			</p>
 			<pre class="indent"><code id="flx2surf">Prompt E,A,THETA
 Disp E*A*cos THETA
+			</code></pre>
+
+		</details>
+
+		<details>
+			<summary>FVPTSUMM</summary>
+			<button class="copy-text" onclick="copyText('#fvptsumm')">
+				<i class="icon icon-clipboard"></i>
+			</button>
+			<p>
+				A calculator for determining the <a href="https://en.wikipedia.org/wiki/Five-number_summary">five-point summary</a> of a sequence of numbers stored in xStat.
+				Modified from <a href="http://www.pstcc.edu/facstaff/crenier/1530TI85-5NumSum.html">this implementation</a>.
+			</p>
+			<pre class="indent"><code id="fvptsumm">5 -> dimL q5s
+sortA xStat -> qL
+
+min(qL) -> q5s(1)
+max(qL) -> q5s(5)
+
+dimL qL -> QSIZE
+
+QSIZE / 2 -> QQL
+
+If fPart QQL ≠ 0
+(qL(iPart QQL) + qL(iPart QQL + 1)) / 2 -> q5s(3)
+
+If fPart QQL == 0
+qL(QQL) -> q5s(3)
+
+.25 * QSIZE -> QQL
+
+If fPart QQL ≠ 0
+qL( iPart QQL + 1 ) -> q5s(2)
+
+If fPart QQL == 0
+(qL(QQL) + qL(QQL + 1)) / 2 -> q5s(2)
+
+.75 * QSIZE -> QQL
+
+If fPart QQL ≠ 0
+qL( iPart QQL + 1 ) -> q5s(4)
+
+If fPart QQL == 0
+(qL(QQL) + qL(QQL + 1)) / 2 -> q5s(4)
+
+For(I,1,5)
+Disp q5s(I)
+End
 			</code></pre>
 
 		</details>
