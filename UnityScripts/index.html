@@ -6,17 +6,17 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
 
-		<meta name="description" content="A collection of some Unity Editor scripts I use from time to time">
+		<meta name="description" content="A collection of some Unity scripts I use from time to time">
 		<meta name="author" content="Charles Averill">
 
 		<meta name="twitter:card" content="summary">
-		<meta name="twitter:title" content="Unity Editor Scripts">
-		<meta name="twitter:description" content="A collection of some Unity Editor scripts I use from time to time">
+		<meta name="twitter:title" content="Unity Scripts">
+		<meta name="twitter:description" content="A collection of some Unity scripts I use from time to time">
 		<meta name="twitter:site" content="@caverill_">
 
 		{% include analytics.html %}
 
-		<title>Unity Editor Scripts</title>
+		<title>Unity Scripts</title>
 
 		<link href="/static/css/codepage.css" rel="stylesheet">
         <link href="/static/css/icons/iconstyle.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 			<a href="../">
 				<i class="icon icon-home" style="font-size:36px;"></i>
 			</a>
-			(Somewhat) useful Unity Editor scripts
+			Useful Unity scripts
 		</h1>
 
 		<details class="indent">
@@ -330,6 +330,42 @@ public class BuildPlayer : EditorWindow {
 }
 #endif
 </code></pre>
+		</details>
+
+		<details class="indent">
+			<summary>IntroLoop</summary>
+			<button class="copy-text" onclick="copyText('#IntroLoop')">
+				<i class="icon icon-clipboard"></i>
+			</button>
+			<p>
+				I've used this script in most of my Unity games. It provides a utility for letting music loop with an intro bit. E.g. if a song has an "introduction" section, it will play the introduction section, and when it loops it'll skip that intro.
+			</p>
+			<pre class="indent"><code id="IntroLoop">using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class IntroLoop : MonoBehaviour
+{
+    
+    public float loop_start_seconds;
+    public float loop_end_seconds;
+    
+    AudioSource source;
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if(source.time >= loop_end_seconds){
+            source.time = loop_start_seconds;
+        }
+    }
+}</code></pre>
 		</details>
 
 		{% include codepage_footer.html %}
