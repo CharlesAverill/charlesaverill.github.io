@@ -33,7 +33,7 @@
 		<details class="indent">
 			<summary>PlatformerUtils (WIP)</summary>
 			<button class="copy-text" onclick="copyText('#PlatformerUtils')">
-				<i class="icon icon-clipboard"></i>
+				<i class="icon icon-paste"></i>
 			</button>
 			<p>
 				This is a script I actively use in the development of <a href="../DinosaurIsland/">Dinosaur Island</a>. For example, I use it to make sure all of my pickup objects start at the same height from the ground without having to calculate that at runtime.
@@ -183,7 +183,7 @@ public class PlatformerUtils : EditorWindow
 		<details class="indent">
 			<summary>BuildPlayer</summary>
 			<button class="copy-text" onclick="copyText('#BuildPlayer')">
-				<i class="icon icon-clipboard"></i>
+				<i class="icon icon-paste"></i>
 			</button>
 			<p>
 				I really hate the Unity build menu. It's got too many options and it isn't easily navigatable via keyboard. This is a script I wrote to build multiple platform standalones in quick succession, and I use it all the time
@@ -335,7 +335,7 @@ public class BuildPlayer : EditorWindow {
 		<details class="indent">
 			<summary>IntroLoop</summary>
 			<button class="copy-text" onclick="copyText('#IntroLoop')">
-				<i class="icon icon-clipboard"></i>
+				<i class="icon icon-paste"></i>
 			</button>
 			<p>
 				I've used this script in most of my Unity games. It provides a utility for letting music loop with an intro bit. E.g. if a song has an "introduction" section, it will play the introduction section, and when it loops it'll skip that intro.
@@ -346,12 +346,12 @@ using UnityEngine;
 
 public class IntroLoop : MonoBehaviour
 {
-    
+
     public float loop_start_seconds;
     public float loop_end_seconds;
-    
+
     AudioSource source;
-    
+
     // Start is called before the first frame update
     void Start()
     {
