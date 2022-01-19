@@ -1,0 +1,75 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en-US">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+
+		<meta name="description" content="A Fun Turing-Complete Language">
+		<meta name="author" content="Charles Averill">
+
+		<meta name="twitter:card" content="summary">
+		<meta name="twitter:title" content="A Fun Turing-Complete Language">
+		<meta name="twitter:description" content="Turing">
+		<meta name="twitter:site" content="@caverill_">
+
+		{% include analytics.html %}
+
+		<title>Turing</title>
+
+		<link href="/static/css/style.css" rel="stylesheet">
+		<link href="style.css" rel="stylesheet">
+		<link href="/static/css/icons/iconstyle.css" rel="stylesheet">
+
+		<link rel="icon" type="image/ico" href="/static/favicon.ico" />
+	</head>
+
+	<body>
+		<noscript>You need to enable JavaScript to run this app.</noscript>
+
+		<h1>Turing</h1>
+
+		<h2>Tape</h2>
+		<div id="tape"></div>
+		<div id="pointer"></div>
+
+		<h2>Program</h2>
+		<button id="run" type="button" onclick="Start()">Start</button>
+		<button id="stop" type="button" onclick="Stop()">Stop</button>
+		<button id="reset" type="button" onclick="Reset()">Reset</button>
+		<!--<button id="undo" type="button" onclick="Undo()">Undo</button>-->
+		<p>
+			<span id="program" class="textarea" role="textbox" contenteditable></span>
+		</p>
+
+		<h2>Language Specification</h2>
+		<h3>Commands</h3>
+		<ul>
+			<li><span class="command_spec">[Label]:</span> - Defines a named label used for jumping</li>
+			<li><span class="command_spec">Goto [label]</span> - Jump to the specified label</li>
+			<li><span class="command_spec">Gotoif [label] [condition]</span> - Jump to the specified label if the condition matches the contents of the current cell. If the condition is <strong>%</strong>, the jump will occur if the current cell is the leftmost cell</li>
+			<li><span class="command_spec">Break</span> - End program execution</li>
+			<li><span class="command_spec">Write [value]</span> - Write the specified value to the current cell</li>
+			<li><span class="command_spec">Increment/Incr</span> - Increment the value of the current cell</li>
+			<li><span class="command_spec">Decrement/Decr</span> - Decrement the value of the current cell</li>
+			<li><span class="command_spec">Left</span> - Move the pointer left</li>
+			<li><span class="command_spec">Right</span> - Move the pointer right</li>
+		</ul>
+
+		<h3>Tips</h3>
+		<ul>
+			<li>Commands are not case-sensitive, but labels are</li>
+			<li>New cells will spawn automatically at the right</li>
+			<li><span class="command_spec">#</span> or <span class="command_spec">/</span> can be used to denote a comment line</li>
+			<li>All computations can be performed in this interpreter with enough time</li>
+		</ul>
+
+		<h2>Example Programs</h2>
+		Check back for these later!
+
+		<script src="main.js"></script>
+	</body>
+
+</html>
