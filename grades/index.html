@@ -1,0 +1,267 @@
+
+<!-- saved from url=(0035)https://www.charles.systems/grades/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Grade Calculator</title>
+		<link rel="stylesheet" href="/static/css/style.css">
+        <link href="iconstyle.css" rel="stylesheet">
+		<link rel="icon" type="image/ico" href="https://www.charles.systems/static/favicon.ico">
+	</head>
+
+	<body>
+		<script src="js/main.js" type="module"></script>
+
+		<div id="Header" class="center">
+			<a href="https://www.charles.systems/" class="icon">
+				<i class="icon icon-home" style="font-size:36px;"></i>
+			</a>
+			<a href="https://github.com/CharlesAverill/grades" class="icon">
+				<i class="icon icon-github" style="font-size: 36px;"></i>
+			</a>
+
+			<h1 class="inline_block" style="margin-left: 0.5em;">Charles's Final Grade Calculator</h1>
+		</div>
+
+		<hr>
+		<hr>
+
+		<form id="fileIO">
+			<p>
+				<input type="button" value="Save to JSON" onclick="saveToJSON()"><a id="downloadAsJSON"></a>
+			</p>
+			<p>
+				<label for="loadFromJSONButton">Load from JSON</label>
+				<input type="file" name="loadFromJSONButton" accept=".json" onchange="loadFromJSON(event)">
+			</p>
+		</form>
+
+		<hr>
+		<hr>
+
+		<form id="classAddRemove">
+			<p>
+				<input type="button" value="Add Class" onclick="addClass()"><input type="button" value="Remove Class" onclick="removeClass()">
+			</p>
+		</form>
+
+		<hr>
+		<hr>
+
+		<div id="classContainer">
+		
+<div id="class1">
+    <details open="">
+    	<summary>
+            <i class="icon icon-pencil class" onclick="editTextContent(this)"> Class_1</i>
+                - <strong id="class1_average">0</strong>
+        </summary>
+
+        <br>
+
+        <form id="class1_categoryUpdate">
+            <p>
+                <input type="button" value="Add Category" onclick="addCategory(&#39;class1&#39;)">
+                <input type="button" value="Remove Category" onclick="removeCategory(&#39;class1&#39;)">
+            </p>
+        </form>
+<div id="class1_cat0" class="indent_element">
+    <h3><i class="icon icon-pencil category" onclick="editTextContent(this)"> Exams</i></h3>
+
+    <label for="class1_cat0_weight">Category Weight:</label>
+    <input type="number" step="0.1" name="class1_cat0_weight" value="0.6" onkeyup="updateCatWeight(&#39;class1_cat0&#39;)">
+
+    <input type="button" value="Add row" onclick="addAssignment(class1_cat0)"><input type="button" value="Remove row" class="inline_block" onclick="removeAssignment(class1_cat0)"><table>
+        
+        
+        <tbody><tr>
+            <th>Name</th>
+            <th>Grade (%)</th>
+            <!--<th>Custom Weight</th>-->
+        </tr>
+<tr id="class1_cat0_assignment0">
+	<td><input type="text" name="assignmentName" value="" onkeyup="updateAssignment(this, this.value, &#39;name&#39;)"></td>
+	<td><input type="number" name="assignmentGrade" step="0.1" value="null" onkeyup="updateAssignment(this, this.value, &#39;grade&#39;)"></td>
+	<!--<td><input type="number" name="assignmentCustomWeight" step="0.1" value="null"></td>-->
+</tr>
+
+        <tr>
+                <th>Average</th>
+                <th id="class1_cat0_average">0.00</th>
+                <!--<th></th>-->
+        </tr>
+    </tbody></table>
+</div>
+
+<div id="class1_cat1" class="indent_element">
+    <h3><i class="icon icon-pencil category" onclick="editTextContent(this)"> Homework</i></h3>
+
+    <label for="class1_cat1_weight">Category Weight:</label>
+    <input type="number" step="0.1" name="class1_cat1_weight" value="0.3" onkeyup="updateCatWeight(&#39;class1_cat1&#39;)">
+
+    <input type="button" value="Add row" onclick="addAssignment(class1_cat1)"><input type="button" value="Remove row" class="inline_block" onclick="removeAssignment(class1_cat1)"><table>
+        
+        
+        <tbody><tr>
+            <th>Name</th>
+            <th>Grade (%)</th>
+            <!--<th>Custom Weight</th>-->
+        </tr>
+<tr id="class1_cat1_assignment0">
+	<td><input type="text" name="assignmentName" value="" onkeyup="updateAssignment(this, this.value, &#39;name&#39;)"></td>
+	<td><input type="number" name="assignmentGrade" step="0.1" value="null" onkeyup="updateAssignment(this, this.value, &#39;grade&#39;)"></td>
+	<!--<td><input type="number" name="assignmentCustomWeight" step="0.1" value="null"></td>-->
+</tr>
+
+        <tr>
+                <th>Average</th>
+                <th id="class1_cat1_average">0.00</th>
+                <!--<th></th>-->
+        </tr>
+    </tbody></table>
+</div>
+
+<div id="class1_cat2" class="indent_element">
+    <h3><i class="icon icon-pencil category" onclick="editTextContent(this)"> Participation</i></h3>
+
+    <label for="class1_cat2_weight">Category Weight:</label>
+    <input type="number" step="0.1" name="class1_cat2_weight" value="0.1" onkeyup="updateCatWeight(&#39;class1_cat2&#39;)">
+
+    <input type="button" value="Add row" onclick="addAssignment(class1_cat2)"><input type="button" value="Remove row" class="inline_block" onclick="removeAssignment(class1_cat2)"><table>
+        
+        
+        <tbody><tr>
+            <th>Name</th>
+            <th>Grade (%)</th>
+            <!--<th>Custom Weight</th>-->
+        </tr>
+<tr id="class1_cat2_assignment0">
+	<td><input type="text" name="assignmentName" value="" onkeyup="updateAssignment(this, this.value, &#39;name&#39;)"></td>
+	<td><input type="number" name="assignmentGrade" step="0.1" value="null" onkeyup="updateAssignment(this, this.value, &#39;grade&#39;)"></td>
+	<!--<td><input type="number" name="assignmentCustomWeight" step="0.1" value="null"></td>-->
+</tr>
+
+        <tr>
+                <th>Average</th>
+                <th id="class1_cat2_average">0.00</th>
+                <!--<th></th>-->
+        </tr>
+    </tbody></table>
+</div>
+
+
+    </details>
+
+    <hr>
+
+<div>
+</div></div>
+<div id="class2">
+    <details open="">
+    	<summary>
+            <i class="icon icon-pencil class" onclick="editTextContent(this)"> Class_2</i>
+                - <strong id="class2_average">0</strong>
+        </summary>
+
+        <br>
+
+        <form id="class2_categoryUpdate">
+            <p>
+                <input type="button" value="Add Category" onclick="addCategory(&#39;class2&#39;)">
+                <input type="button" value="Remove Category" onclick="removeCategory(&#39;class2&#39;)">
+            </p>
+        </form>
+<div id="class2_cat0" class="indent_element">
+    <h3><i class="icon icon-pencil category" onclick="editTextContent(this)"> Exams</i></h3>
+
+    <label for="class2_cat0_weight">Category Weight:</label>
+    <input type="number" step="0.1" name="class2_cat0_weight" value="0.6" onkeyup="updateCatWeight(&#39;class2_cat0&#39;)">
+
+    <input type="button" value="Add row" onclick="addAssignment(class2_cat0)"><input type="button" value="Remove row" class="inline_block" onclick="removeAssignment(class2_cat0)"><table>
+        
+        
+        <tbody><tr>
+            <th>Name</th>
+            <th>Grade (%)</th>
+            <!--<th>Custom Weight</th>-->
+        </tr>
+<tr id="class2_cat0_assignment0">
+	<td><input type="text" name="assignmentName" value="" onkeyup="updateAssignment(this, this.value, &#39;name&#39;)"></td>
+	<td><input type="number" name="assignmentGrade" step="0.1" value="null" onkeyup="updateAssignment(this, this.value, &#39;grade&#39;)"></td>
+	<!--<td><input type="number" name="assignmentCustomWeight" step="0.1" value="null"></td>-->
+</tr>
+
+        <tr>
+                <th>Average</th>
+                <th id="class2_cat0_average">0.00</th>
+                <!--<th></th>-->
+        </tr>
+    </tbody></table>
+</div>
+
+<div id="class2_cat1" class="indent_element">
+    <h3><i class="icon icon-pencil category" onclick="editTextContent(this)"> Homework</i></h3>
+
+    <label for="class2_cat1_weight">Category Weight:</label>
+    <input type="number" step="0.1" name="class2_cat1_weight" value="0.3" onkeyup="updateCatWeight(&#39;class2_cat1&#39;)">
+
+    <input type="button" value="Add row" onclick="addAssignment(class2_cat1)"><input type="button" value="Remove row" class="inline_block" onclick="removeAssignment(class2_cat1)"><table>
+        
+        
+        <tbody><tr>
+            <th>Name</th>
+            <th>Grade (%)</th>
+            <!--<th>Custom Weight</th>-->
+        </tr>
+<tr id="class2_cat1_assignment0">
+	<td><input type="text" name="assignmentName" value="" onkeyup="updateAssignment(this, this.value, &#39;name&#39;)"></td>
+	<td><input type="number" name="assignmentGrade" step="0.1" value="null" onkeyup="updateAssignment(this, this.value, &#39;grade&#39;)"></td>
+	<!--<td><input type="number" name="assignmentCustomWeight" step="0.1" value="null"></td>-->
+</tr>
+
+        <tr>
+                <th>Average</th>
+                <th id="class2_cat1_average">0.00</th>
+                <!--<th></th>-->
+        </tr>
+    </tbody></table>
+</div>
+
+<div id="class2_cat2" class="indent_element">
+    <h3><i class="icon icon-pencil category" onclick="editTextContent(this)"> Participation</i></h3>
+
+    <label for="class2_cat2_weight">Category Weight:</label>
+    <input type="number" step="0.1" name="class2_cat2_weight" value="0.1" onkeyup="updateCatWeight(&#39;class2_cat2&#39;)">
+
+    <input type="button" value="Add row" onclick="addAssignment(class2_cat2)"><input type="button" value="Remove row" class="inline_block" onclick="removeAssignment(class2_cat2)"><table>
+        
+        
+        <tbody><tr>
+            <th>Name</th>
+            <th>Grade (%)</th>
+            <!--<th>Custom Weight</th>-->
+        </tr>
+<tr id="class2_cat2_assignment0">
+	<td><input type="text" name="assignmentName" value="" onkeyup="updateAssignment(this, this.value, &#39;name&#39;)"></td>
+	<td><input type="number" name="assignmentGrade" step="0.1" value="null" onkeyup="updateAssignment(this, this.value, &#39;grade&#39;)"></td>
+	<!--<td><input type="number" name="assignmentCustomWeight" step="0.1" value="null"></td>-->
+</tr>
+
+        <tr>
+                <th>Average</th>
+                <th id="class2_cat2_average">0.00</th>
+                <!--<th></th>-->
+        </tr>
+    </tbody></table>
+</div>
+
+
+    </details>
+
+    <hr>
+
+<div>
+</div></div></div>
+
+		<hr>
+	
+
+</body></html>
