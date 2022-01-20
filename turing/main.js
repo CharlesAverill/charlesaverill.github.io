@@ -50,7 +50,7 @@ function appendCell() {
 function pointAt(cellIndex) {
     var rect = cellElements[cellIndex].getBoundingClientRect();
 
-    pointerElement.style.marginLeft = rect.width * cellIndex;
+    pointerElement.style.marginLeft = rect.width * cellIndex + "px";
 }
 
 function sleep(ms) {
