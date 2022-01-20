@@ -1,5 +1,6 @@
 // Variables
 var tapeElement = document.getElementById("tape");
+var manualTapeElement = document.getElementById("manualTapeContents");
 var cellElements = [];
 var tapeContents = [];
 var tapeAppendIndex = -1;
@@ -184,7 +185,6 @@ function parseLine(waitCounter = 0) {
         default:
             setProgramStatus(false);
     }
-    //}, waitCounter * 0);
 }
 
 function setCellContents(index, newValue) {
@@ -243,6 +243,18 @@ function ChangeExecutionSpeed() {
         speedWarning.hidden = false;
     } else {
         speedWarning.hidden = true;
+    }
+}
+
+function SetTapeContents() {
+    var newContents = manualTapeElement.value;
+
+    for(var i = 0; i < newContents.length; i++) {
+        setCellContents(i, newContents[i]);
+
+        if(i >= tapeAppendIndex - 20) {
+            appendCell();
+        }
     }
 }
 
