@@ -72,7 +72,7 @@ function appendToTrace(line) {
 }
 
 // Program Parsing Logic
-async function parseProgram() {
+async function parseProgram(oneLine = false) {
     setProgramStatus(true);
 
     programContents = programElement.innerText.split("\n");
@@ -86,20 +86,25 @@ async function parseProgram() {
         }
     }
 
-    var waitCounter = -1;
     while(programExecuting) {
-        parseLine(waitCounter++);
+        parseLine();
         await sleep(instructionDelayMilliseconds);
+
+        if(oneLine) {
+            break;
+        }
     }
 
     setProgramStatus(false);
 
-    if(programCounter == programContents.length - 1) {
+    if(programCounter == programContents.length - 1 && !oneLine) {
         programCounter = 0;
     }
 }
 
-function parseLine(waitCounter = 0) {
+function parseLine() {
+    console.log(programCounter + " " + programContents.length);
+
     if(programCounter >= programContents.length) {
         setProgramStatus(false);
         return;
@@ -207,6 +212,10 @@ function parseLabel(line) {
 async function Start() {
     appendToTrace("----------");
     await parseProgram();
+}
+
+function Step() {
+    parseProgram(true);
 }
 
 function Stop() {
