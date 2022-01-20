@@ -4,6 +4,12 @@ var cellElements = [];
 var tapeContents = [];
 var tapeAppendIndex = -1;
 
+var executionElement = document.getElementById("executionStatus");
+var traceElement = document.getElementById("trace");
+
+var speedSliderElement = document.getElementById("speedSlider");
+var speedWarningElement = document.getElementById("speedWarning");
+
 var pointerElement = document.getElementById("pointer");
 var programElement = document.getElementById("program");
 
@@ -13,6 +19,8 @@ var programCounter = 0;
 var programExecuting = false;
 var programContents = [];
 var programLabels = {};
+
+var instructionDelayMilliseconds = 500;
 
 // Frontend Logic
 function onLoad() {
@@ -45,9 +53,26 @@ function pointAt(cellIndex) {
     pointerElement.style.marginLeft = rect.width * cellIndex;
 }
 
+function sleep(ms) {
+    return new Promise(resolve => {
+        setTimeout(() => { resolve('') }, ms);
+    })
+}
+
+function setProgramStatus(status) {
+    programExecuting = status;
+    executionElement.style.backgroundColor = status ? "green" : "red";
+    program.contentEditable = !status;
+}
+
+function appendToTrace(line) {
+    trace.innerHTML += line + " <br>";
+    trace.scrollTop = trace.scrollHeight;
+}
+
 // Program Parsing Logic
-function parseProgram() {
-    programExecuting = true;
+async function parseProgram() {
+    setProgramStatus(true);
 
     programContents = programElement.innerText.split("\n");
 
@@ -56,16 +81,17 @@ function parseProgram() {
         var label = parseLabel(programContents[i]);
 
         if(label != null) {
-            programLabels[label] = i + 1;
+            programLabels[label] = i;
         }
     }
 
     var waitCounter = -1;
     while(programExecuting) {
         parseLine(waitCounter++);
+        await sleep(instructionDelayMilliseconds);
     }
 
-    programExecuting = false;
+    setProgramStatus(false);
 
     if(programCounter == programContents.length - 1) {
         programCounter = 0;
@@ -74,14 +100,12 @@ function parseProgram() {
 
 function parseLine(waitCounter = 0) {
     if(programCounter >= programContents.length) {
-        programExecuting = false;
+        setProgramStatus(false);
         return;
     }
 
-    console.log("hi");
-
-    //setTimeout(() => {
     var line = programContents[programCounter++];
+    appendToTrace(line);
 
     // Skip if label or comment or not programExecuting
     if(line == null || parseLabel(line) || "#/".includes(line.charAt(0)) || !programExecuting) {
@@ -108,7 +132,7 @@ function parseLine(waitCounter = 0) {
             }
             break;
         case "BREAK":
-            programExecuting = false;
+            setProgramStatus(false);
             break;
         case "WRITE":
             var n = Number(parts[1]);
@@ -132,9 +156,11 @@ function parseLine(waitCounter = 0) {
             if(pointerIndex >= tapeAppendIndex - 20) {
                 appendCell();
             }
-            
+
             pointAt(++pointerIndex);
             break;
+        default:
+            setProgramStatus(false);
     }
     //}, waitCounter * 0);
 }
@@ -156,16 +182,17 @@ function parseLabel(line) {
 }
 
 // User Functions
-function Start() {
-    parseProgram();
+async function Start() {
+    appendToTrace("----------");
+    await parseProgram();
 }
 
 function Stop() {
-    programExecuting = false;
+    setProgramStatus(false);
 }
 
 function Reset() {
-    programExecuting = false;
+    setProgramStatus(false);
     programCounter = 0;
 
     pointerIndex = 0;
@@ -182,6 +209,19 @@ function Undo() {
     Stop();
     programCounter--;
     parseLine();
+}
+
+function ClearTrace() {
+    trace.innerHTML = "";
+}
+
+function ChangeExecutionSpeed() {
+    instructionDelayMilliseconds = speedSliderElement.value;
+    if(speedSliderElement.value == 0) {
+        speedWarning.hidden = false;
+    } else {
+        speedWarning.hidden = true;
+    }
 }
 
 // Load

@@ -35,14 +35,26 @@
 		<div id="tape"></div>
 		<div id="pointer"></div>
 
-		<h2>Program</h2>
-		<button id="run" type="button" onclick="Start()">Start</button>
-		<button id="stop" type="button" onclick="Stop()">Stop</button>
-		<button id="reset" type="button" onclick="Reset()">Reset</button>
-		<!--<button id="undo" type="button" onclick="Undo()">Undo</button>-->
+		<h2>Program <span id="executionStatus"></span></h2>
+		<div id="controls">
+			<button id="run" type="button" onclick="Start()">Start</button>
+			<button id="stop" type="button" onclick="Stop()">Stop</button>
+			<button id="reset" type="button" onclick="Reset()">Reset</button>
+			<!--<button id="undo" type="button" onclick="Undo()">Undo</button>-->
+			<form oninput="ChangeExecutionSpeed()" style="display: inline;">
+				<label for="speedSlider">Instruction Delay</label>
+				<input id="speedSlider" type="range" min="0" max="2000" value="500" style="vertical-align: middle;">
+			</form>
+			<span id="speedWarning" style="color:red; font-weight: heavy;" hidden>WARNING: With no instruction delay, looping code can become dangerous and may crash the tab.</span>
+		</div>
 		<p>
-			<span id="program" class="textarea" role="textbox" contenteditable></span>
+			<span id="program" class="textarea" role="textbox" contenteditable="true"></span>
 		</p>
+
+		<details>
+			<summary>Program Trace <button onclick="ClearTrace()">Clear</button></summary>
+			<div id="trace" style="overflow: auto; height: 10rem;"></div>
+		</details>
 
 		<h2>Language Specification</h2>
 		<h3>Commands</h3>
