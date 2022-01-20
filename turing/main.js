@@ -123,11 +123,12 @@ function parseLine(waitCounter = 0) {
             }
             break;
         case "GOTOIF":
-            if(parts.length >= 3 && programLabels.hasOwnProperty(parts[1])) {
+            if(parts.length >= 3 && programLabels.hasOwnProperty(parts[2])) {
+                console.log(parts[2] + " " + tapeContents[pointerIndex]);
                 // Goto if condition is % and at index 0, or if condition matches current value
-                if((parts[2] == "%" && pointerIndex == 0) ||
-                        (Number(parts[2]) == Number(tapeContents[pointerIndex]))) {
-                    programCounter = programLabels[parts[1]];
+                if((parts[1] == "%" && pointerIndex == 0) ||
+                        (parts[1] == tapeContents[pointerIndex])) {
+                    programCounter = programLabels[parts[2]];
                 }
             }
             break;

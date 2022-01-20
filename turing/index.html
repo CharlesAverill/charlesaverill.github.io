@@ -21,6 +21,7 @@
 
 		<link href="/static/css/style.css" rel="stylesheet">
 		<link href="style.css" rel="stylesheet">
+        <link href="/static/css/icons/iconstyle.css" rel="stylesheet">
 		<link href="/static/css/icons/iconstyle.css" rel="stylesheet">
 
 		<link rel="icon" type="image/ico" href="/static/favicon.ico" />
@@ -29,7 +30,12 @@
 	<body>
 		<noscript>You need to enable JavaScript to run this app.</noscript>
 
-		<h1>Turing</h1>
+		<h1>
+			<a href="../" style="text-decoration: none;">
+				<i class="icon-home" style="font-size:36px;"></i>
+			</a>
+			Turing
+		</h1>
 
 		<h2>Tape</h2>
 		<div id="tape"></div>
@@ -56,12 +62,15 @@
 			<div id="trace" style="overflow: auto; height: 10rem;"></div>
 		</details>
 
+		<h2>Challenges and Examples</h2>
+		Check back for these later!
+
 		<h2>Language Specification</h2>
 		<h3>Commands</h3>
 		<ul>
 			<li><span class="command_spec">[Label]:</span> - Defines a named label used for jumping</li>
 			<li><span class="command_spec">Goto [label]</span> - Jump to the specified label</li>
-			<li><span class="command_spec">Gotoif [label] [condition]</span> - Jump to the specified label if the condition matches the contents of the current cell. If the condition is <strong>%</strong>, the jump will occur if the current cell is the leftmost cell</li>
+			<li><span class="command_spec">Gotoif [condition] [label]</span> - Jump to the specified label if the condition matches the contents of the current cell. If the condition is <strong>%</strong>, the jump will occur if the current cell is the leftmost cell</li>
 			<li><span class="command_spec">Break</span> - End program execution</li>
 			<li><span class="command_spec">Write [value]</span> - Write the specified value to the current cell</li>
 			<li><span class="command_spec">Increment/Incr</span> - Increment the value of the current cell</li>
@@ -73,13 +82,10 @@
 		<h3>Tips</h3>
 		<ul>
 			<li>Commands are not case-sensitive, but labels are</li>
-			<li>New cells will spawn automatically at the right</li>
+			<li>New cells will spawn automatically at the right, therefore the tape is infinite</li>
 			<li><span class="command_spec">#</span> or <span class="command_spec">/</span> can be used to denote a comment line</li>
 			<li>All computations can be performed in this interpreter with enough time</li>
 		</ul>
-
-		<h2>Example Programs</h2>
-		Check back for these later!
 
 		<script src="main.js"></script>
 	</body>
