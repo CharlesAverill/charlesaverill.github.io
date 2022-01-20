@@ -136,18 +136,39 @@ function parseLine(waitCounter = 0) {
             setProgramStatus(false);
             break;
         case "WRITE":
-            var n = Number(parts[1]);
-            if(Number.isInteger(n) && n > 0) {
-                setCellContents(pointerIndex, n);
-            }
+            setCellContents(pointerIndex, parts[1]);
             break;
         case "INCREMENT":
         case "INCR":
-            setCellContents(pointerIndex, tapeContents[pointerIndex] + 1);
+            if(isNaN(tapeContents[pointerIndex])) {
+                if(tapeContents[pointerIndex] == "z") {
+                    setCellContents(pointerIndex, 0);
+                } else {
+                    setCellContents(pointerIndex, String.fromCharCode(tapeContents[pointerIndex].charCodeAt(0) + 1));
+                }
+            } else {
+                if(tapeContents[pointerIndex] == 9) {
+                    setCellContents(pointerIndex, "a");
+                } else {
+                    setCellContents(pointerIndex, tapeContents[pointerIndex] + 1);
+                }
+            }
             break;
         case "DECREMENT":
         case "DECR":
-            setCellContents(pointerIndex, tapeContents[pointerIndex] - 1);
+            if(isNaN(tapeContents[pointerIndex])) {
+                if(tapeContents[pointerIndex] == "a") {
+                    setCellContents(pointerIndex, 9);
+                } else {
+                    setCellContents(pointerIndex, String.fromCharCode(tapeContents[pointerIndex].charCodeAt(0) - 1));
+                }
+            } else {
+                if(tapeContents[pointerIndex] == 0) {
+                    setCellContents(pointerIndex, "z");
+                } else {
+                    setCellContents(pointerIndex, tapeContents[pointerIndex] + 1);
+                }
+            }
             break;
         case "LEFT":
             pointerIndex = Math.max(0, pointerIndex - 1);
