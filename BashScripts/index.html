@@ -92,6 +92,35 @@
 		</details>
 
 		<details class="indent">
+			<summary>Clang-Format + CMake</summary>
+			<button class="copy-text" onclick="copyText('#format_cmake')">
+				<i class="icon icon-paste"></i>
+			</button>
+			<p>
+				I use this to format and compile my code with some boilerplate to make the output look pretty.
+				This usually ends up as a bash script in my project directory, not a function in <code>~/.bashrc</code>.
+				If working with other languages, make sure to replace the <code>"*.c"</code> and <code>"*.h"</code> in the <code>clang-format</code> line with the appropriate file extensions.
+				This requires a <code>.clang-format</code> file in the project directory. To remove this requirement, remove <code>style=file</code> from the <code>clang-format</code> line.
+			</p>
+			<pre class="indent"><code id="format_cmake">echo "---CLANG-FORMAT----"
+clang-format style=file -i $(find src -name "*.c") $(find include -name "*.h")
+echo "-----CMAKE---------"
+cd build
+if cmake .. ; then
+    echo "-----MAKE----------"
+    if make -j$(nproc) ; then
+        cd ../bin
+        echo "-----EXECUTING-----"
+		./helloworld
+    else
+        echo "-----MAKE FAILURE-----"
+    fi
+else
+    echo "-----CMAKE FAILURE-----"
+fi</code></pre>
+		</details>
+
+		<details class="indent">
 			<summary>Steampipe Upload</summary>
 			<button class="copy-text" onclick="copyText('#steampipe_upload')">
 				<i class="icon icon-paste"></i>
