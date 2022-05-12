@@ -103,7 +103,7 @@
 				This requires a <code>.clang-format</code> file in the project directory. To remove this requirement, remove <code>style=file</code> from the <code>clang-format</code> line.
 			</p>
 			<pre class="indent"><code id="format_cmake">echo "---CLANG-FORMAT----"
-clang-format style=file -i $(find src -name "*.c") $(find include -name "*.h")
+clang-format -i $(find src -name "*.c") $(find include -name "*.h")
 echo "-----CMAKE---------"
 cd build
 if cmake .. ; then
