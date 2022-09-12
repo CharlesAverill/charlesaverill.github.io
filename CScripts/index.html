@@ -1,0 +1,195 @@
+---
+---
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+
+        <meta name="description" content="A collection of some C scripts I use from time to time">
+        <meta name="author" content="Charles Averill">
+
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="C Scripts">
+        <meta name="twitter:description" content="A collection of some C scripts I use from time to time">
+        <meta name="twitter:site" content="@caverill_">
+
+        {% include analytics.html %}
+
+        <title>C Scripts</title>
+
+        <link href="/static/css/codepage.css" rel="stylesheet">
+        <link href="/static/css/icons/iconstyle.css" rel="stylesheet">
+		<link rel="icon" type="image/ico" href="/static/favicon.ico"/>
+	</head>
+	<body>
+		<h1>
+			<a href="../">
+				<i class="icon icon-home" style="font-size:36px;"></i>
+			</a>
+			(Somewhat) useful C scripts
+		</h1>
+
+		<details class="indent">
+			<summary>Logging</summary>
+			<a href="./logging.h">
+				<button class="copy-text" href="">
+					<code>logging.h</code> <i class="icon icon-download"></i>
+				</button>
+			</a>
+			<br>
+			<a href="./logging.c">
+				<button class="copy-text" href="">
+					<code>logging.c</code> <i class="icon icon-download"></i>
+				</button>
+			</a>
+			<p>
+				A simple logging library based on Python's logging library
+			</p>
+			<pre class="indent"><code id="logging">/**
+* @file logging.h
+* @author Charles Averill
+* @brief Function headers, ANSI defines, and enums for logging and raising warnings and errors
+* @date 08-Sep-2022
+*/
+
+#ifndef LOGGING_H
+#define LOGGING_H
+
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#define ANSI_BOLD "\033[1m"
+#define ANSI_RED "\033[38:5:196m"
+#define ANSI_ORANGE "\033[38:5:208m"
+#define ANSI_YELLOW "\033[38:5:178m"
+#define ANSI_RESET "\033[0m"
+
+#define ERROR_RED ANSI_RED ANSI_BOLD
+#define ERROR_ORANGE ANSI_ORANGE ANSI_BOLD
+#define ERROR_YELLOW ANSI_YELLOW ANSI_BOLD
+
+/**
+* @brief Severity levels of logging statements emitted by the compiler 
+*/
+typedef enum {
+	LOG_NONE,
+	LOG_DEBUG,
+	LOG_INFO,
+	LOG_WARNING,
+	LOG_ERROR,
+	LOG_CRITICAL
+} LogLevel;
+
+typedef struct {
+	LogLevel level;
+	char* name;
+	char* color;
+} LogInfo;
+
+const LogInfo logInfoLevels[] = {
+	{LOG_NONE, "", ANSI_RESET},          {LOG_DEBUG, "[DEBUG]", ANSI_BOLD},
+	{LOG_INFO, "[INFO]", ANSI_BOLD},     {LOG_WARNING, "[WARNING]", ANSI_YELLOW},
+	{LOG_ERROR, "[ERROR]", ANSI_ORANGE}, {LOG_CRITICAL, "[CRITICAL]", ANSI_RED}};
+
+/**
+* @brief Return codes used in different scenarios
+*/
+typedef enum {
+	RC_OK,
+	RC_ERROR,
+	// Put more return codes here if needed. I wrote this for a compiler, 
+	// so I have return codes for syntax errors, memory errors, file errors, etc.
+} ReturnCode;
+
+/**
+* @brief String representation of return codes
+*/
+const char* returnCodeStrings[] = {
+	"OK", "ERROR", // add more for extra return codes defined above
+};
+
+void fatal(ReturnCode rc, const char* fmt, ...);
+
+void log(LogLevel level, const char* fmt, ...);
+
+#endif /* LOGGING_H */
+
+/**
+ * @file logging.c
+ * @author Charles Averill
+ * @brief Logging, warnings, and fatal error handling
+ * @date 08-Sep-2022
+ */
+
+#include "logging.h"
+
+/**
+ * @brief Raises a fatal error that will exit the program
+ * 
+ * @param rc Return code to exit with
+ * @param fmt Format string for printed error
+ * @param ... Varargs for printed error
+ */
+void fatal(ReturnCode rc, const char* fmt, ...)
+{
+    va_list func_args;
+
+    va_start(func_args, fmt);
+    fprintf(stderr, "%s%s%s", ERROR_RED "[", returnCodeStrings[rc], "] - " ANSI_RESET);
+    vfprintf(stderr, fmt, func_args);
+    va_end(func_args);
+
+    // Print fence for error distinguishing
+    fprintf(stderr, "\n----------------------------------------\n");
+
+    if (D_INPUT_FILE) {
+        fclose(D_INPUT_FILE);
+    }
+
+    exit(rc);
+}
+
+/**
+ * @brief Raises a non-fatal logging statement
+ * 
+ * @param level Severity of statement
+ * @param fmt Format string for printed statement
+ * @param ... Varargs for printed statement
+ */
+void log(LogLevel level, const char* fmt, ...)
+{
+    va_list func_args;
+    FILE *output_stream;
+
+	/* If using argp.h, you can add a `logging` field to your arguments to control the level of statements that are printed
+    if(args->logging == LOG_NONE || args->logging > level) {
+        return;
+    }
+
+    if(args->logging > LOG_INFO) {
+        output_stream = stderr;
+    } else {
+        output_stream = stdout;
+    }
+	*/
+
+	output_stream = stdout;
+
+    va_start(func_args, fmt);
+    fprintf(output_stream, "LOG:%s%s%s", logInfoLevels[level].color, logInfoLevels[level].name,
+            " - " ANSI_RESET);
+    vfprintf(output_stream, fmt, func_args);
+    fprintf(output_stream, "\n");
+    va_end(func_args);
+}
+
+</code></pre>
+		</details>
+
+		{% include codepage_footer.html %}
+
+		<script src="/static/js/codepage.js"></script>
+	</body>
+</html>
