@@ -7,3 +7,4 @@
 [submodule "Purple"]
 	path = Purple
 	url = https://github.com/CharlesAverill/Purple/
+	branch = gh-pages
