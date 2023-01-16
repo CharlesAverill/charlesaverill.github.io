@@ -1,0 +1,9 @@
+[submodule "BirdAndBeans"]
+	path = BirdAndBeans
+	url = https://github.com/CharlesAverill/BirdAndBeans/
+[submodule "PDMusic"]
+	path = PDMusic
+	url = https://github.com/CharlesAverill/PDMusic/
+[submodule "Purple"]
+	path = Purple
+	url = https://github.com/CharlesAverill/Purple/
