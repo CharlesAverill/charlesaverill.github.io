@@ -2,13 +2,29 @@
 <html lang="en">
 	<head>
 		<title>Logs</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	</head>
 
 	<body>
 		<h1>Last git pull</h1>
-		<embed src="last_pulled.log">
+		<div id="last_pulled">
+		</div>
 
 		<h1>Last git submodule update --remote</h1>
-		<embed src="last_submodules_pulled.log">
+		<div id="last_submodules_pulled">
+		</div>
+
+		<script>
+			function append_url_content_to_div(url, selector){
+				$.get(url, function(returned_data){
+				    console.dir(returned_data);
+				    var content = '<span>'+returned_data+'</span>';
+				    $(selector).append(content);								
+				  });
+			}
+
+			append_url_content_to_div("/last_pulled.log", "#last_pulled");
+			append_url_content_to_div("/last_submodules_pulled.log", "#last_submodules_pulled");
+		</script>
 	</body>
 </html>
