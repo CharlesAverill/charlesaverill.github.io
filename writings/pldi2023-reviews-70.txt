@@ -1,0 +1,140 @@
+PLDI 2023 Paper #70 Reviews and Comments
+===========================================================================
+Paper #70 Prettybird: A DSL for Programmatic Font Compilation
+
+
+Review #70A
+===========================================================================
+
+Overall merit
+-------------
+1. Reject
+
+Reviewer expertise
+------------------
+3. Knowledgeable
+
+Paper summary
+-------------
+The submission describes a domain-specific functional language (Prettybird) to simplify the early stages of font design, targetting the same problem as Knuth's Metafont.  There are three contributions: 
+1. the language design, which supports function reuse
+2. the implementation of a compiler that helps with scaling and generates output in standard formats
+3. a survey-based user study
+
+Comments for authors
+--------------------
+This is an interesting piece of work on a subject that doesn't seem to have received a lot of attention, and I enjoyed reading the paper.  Font definition languages with basic abstraction mechanisms like functions seem like a clear improvement over the current state of things.
+
+Unfortunately, the submission has some fairly significant shortcomings.  The work is not fully developed, the evaluation is not compelling, and the exposition lacks essential detail.  Even if these were fixed, I'm not sure there'd be enough: while I don't doubt that the tool is useful, it's not clear what novel insights or results the work brings.
+
+### Detailed comments
+
+- I'm not sure I'm a good judge of font aesthetics, but the kerning in Figure 1 looks very strange to me.
+- Section 1.1: The reader would like to know at this point what the four basic functions are
+- Section 1.2: Why are you telling me that the compiler uses the Lark parsing library?
+- Section 1.2: Don't give so much detail about the limitations of the compiler at this point.  Mention them briefly, and discuss them at the end of the paper.
+- Section 4: It'd be a good idea to have an example in the text.
+- I'm not sure about the choice to embed floating point into the design of the language.  Aren't rounding and precision issues rather important in this domain?
+- Section 4.3: I'd like to see a more robust argument that the four primitive atoms (vectors, rectangles, ellipses, Bezier curves) are a good subset.  (What does Metafont use?)
+- It'd be good to show the definition of one of the derived operations such as spline
+- Section 4.4 (the glyph space stack): this is well-motivated!
+- Section 4.5: you haven't given enough detail for a user to understand even the basics of how the automatic hinting and kerning work
+- I didn't find this evaluation compelling.  Everyone will of course agree that the version with less text is easier to read.  A more compelling evaluation could try timing how long it takes users to successfully modify a glyph to meet a given specification.
+- Conclusion: "its utility is limited" is not a very convincing ending!
+- From the other text in the conclusion, it sounds like you're going to have to go beyond the four primitives to make the language useful, which weakens your earlier argument
+- Note: there are no line numbers in the submission.
+
+
+
+Review #70B
+===========================================================================
+
+Overall merit
+-------------
+1. Reject
+
+Reviewer expertise
+------------------
+2. Some familiarity
+
+Paper summary
+-------------
+The authors present a DSL for font design called Prettybird. The work is primarily motivated by broadly increasing usage of custom fonts, dwindling choice among font design packages, and the cost of professional design software. The Prettybird DSL provides four primitive drawing commands as well as sequential composition, function abstractions, and function calls. The authors collected survey responses which indicate that users anticipate they would rather read and write Prettybird code than METAFONT.
+
+Comments for authors
+--------------------
+This is a super interesting domain! The background on font design was interesting and the goal to revive programming as a font design technique is very intriguing.
+
+Unfortunately, the current submission is not ready for publication at PLDI. Perhaps most seriously, the primary evaluation, a survey, does not describe the recruitment protocol or survey design methodology. Respondents also did not actual use Prettybird, but were only asked if the suspected they would prefer Prettybird to METAFONT. Given the comparisons in Figs 10 and 11, it's not clear the survey could have gone any other way ;) It would be helpful though if the authors could explain why the METAFONT code is so much more complex -- I am worried that this may be another kind of "Bentley frames Knuth" setup... Do the additional features in METAFONT help with maintainability / parameterization / etc.? Adding a detailed related work section may help address such concerns.
+
+Additionally, since the goal of Prettybird is to revive programming-based font design, it would ideally be compared to the existing graphical approaches!
+
+The paper refers to Prettybird as a "functional" DSL, but as far as I can tell (only the syntax definition is provided, no semantics), the language is quite imperative. It seems like a subset of SVG. What are the advantages of programming in Prettybird vs. writing, say, a python script to generate SVGs?
+
+While I do not feel the paper is ready to appear at PLDI, the domain is super interesting!
+
+
+
+Review #70C
+===========================================================================
+
+Overall merit
+-------------
+1. Reject
+
+Reviewer expertise
+------------------
+2. Some familiarity
+
+Paper summary
+-------------
+This paper presents Prettybird, a DSL for defining fonts. Prettybird is in the
+tradition of Metafont, providing a programmatic way to specify curves and shapes
+that compose a font. Prettybird is designed to be easier to use than Metafont,
+while providing the new feature of essentially, functions, as composable
+building blocks for creating fonts. The example used in the paper is adding
+serifs, which can be defined as a function and then re-used for multiple glyphs,
+eg I and T. The paper gives a grammar for the language, and sketches of the
+semantics as well as 3 example programs in an appendix. The paper also presents
+the results of an anonymous survey, showing that programmers found Prettybird code
+samples to be preferable to Metafont code samples, and they expected the
+Prettybird code to be easier to modify.
+
+Comments for authors
+--------------------
+Prettybird seems like an exciting new language for font design, however the
+paper is not yet ready for publication. 
+
+The primary problem is that the paper provides very little explanation of the
+actual language. The grammar is given, but there's little discussion of how
+anything works. The only instances of Prettybird code appear in the appendix.
+The paper is very short, but it only begins describing the language in section
+4, at the end of page 5.
+
+Here are a few suggestions for improving this:
+ - move the motivating example earlier, and include the code.
+ - then explain the actual code, before presenting the grammar.
+ - shorten the discussion of contributions substantially, and instead discuss
+   the contributions at the point they are presented. Eg, there's no need to
+   spend time on the growing popularity of web fonts.
+ - spend much less space on the Background section, especially since eg Kerning
+   is not needed to understand the basics of Prettybird.
+
+The discussion of the actual language is also hard to follow. For example, the
+concept of a "glyph space" is fundamental to the semantics, but I still don't
+understand what it is, since it's never defined. What does it mean to apply a
+vector pattern? 
+
+Finally, although a user survey is nice, just asking programmers for their
+preferences between two code snippets doesn't tell us very much. For example,
+METAFONT syntax is not very similar to common languages today, which might bias
+the evaluation when just focusing on what people think about it. But who knows
+if that makes a difference for modifying the code?
+
+### Smaller issues
+
+* please don't turn off the line numbering
+* 4.5: how are users already manually hinting their fonts? Is there manual
+  hinting in the prettybird semantics?
+* Substantially more details about the survey would be helpful. How were participants
+  recruited? Was there IRB approval? Was anything about the respondents checked?
