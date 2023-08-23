@@ -1,1 +1,69 @@
 <!DOCTYPE html>
+<html>
+	<head>
+		<title>Introduction to Compiler Design Lectures</title>
+        <link href="/static/css/style.css" rel="stylesheet">
+        <link href="/static/css/icons/iconstyle.css" rel="stylesheet">
+		<link rel="icon" type="image/ico" href="/static/favicon.ico"/>
+	</head>
+	<body>
+		<h1 style="display: inline-block;">
+			<a class="icon" href="../">
+				<i class="icon icon-home" style="font-size:36px;"></i>
+			</a>
+			Introduction to Compiler Design Lectures
+		</h1>
+		<br>
+		<a href="ICD_Syllabus.pdf" target="_blank">Syllabus</a> (<a href="https://www.overleaf.com/read/fvrykpbgjxwg" target="_blank">LaTeX Source</a>) - <a href="https://github.com/CharlesAverill/ECCO" target="_blank">ECCO Project Base</a>
+<!-- 		<ol start="0">
+            <li>
+                <a href="PCD_00.pdf" target="_blank">Prerequisite Review</a> - <a href="https://www.overleaf.com/read/drvkjhztbrdw" target="_blank">LaTeX Source</a> - <a href="https://youtu.be/eb3KHRnam-I" target="_blank">Video</a>
+            </li>
+            <li>
+                <a href="PCD_01.pdf" target="_blank">Introduction, Scanning</a> - <a href="https://www.overleaf.com/read/whzxkjkhbmxv" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=Vsz6scLlKx0" target="_blank">Video</a>
+            </li>
+			<li>
+				<a href="PCD_02.pdf" target="_blank">Parsing, Precedence</a> - <a href="https://www.overleaf.com/read/qbksxwkjcvgt" target="_blank">LaTeX Source</a> - <a href="https://youtu.be/xSdnhZOcmII" target="_blank">Video</a>
+			</li>
+			<li>
+					<a href="PCD_03.pdf" target="_blank">LLVM Generation</a> - <a href="https://www.overleaf.com/read/zvyqvsrmvyhp" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=bEAytND1Yiw" target="_blank">Video</a>
+			</li>
+			<li>
+					<a href="PCD_04.pdf" target="_blank">Statements</a> - <a href="https://www.overleaf.com/read/jgmjjktgbpzr" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=69JtVY9z1ko" target="_blank">Video</a>
+			</li>
+			<li>
+				<a href="PCD_05.pdf" target="_blank">Global Variables</a> - <a href="https://www.overleaf.com/read/vntnjytxqynw" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=F5yW88qwPmI" target="_blank">Video</a>
+			</li>
+			<li>
+				<a href="PCD_06.pdf" target="_blank">Comparisons</a> - <a href="https://www.overleaf.com/read/tsswkfnhbdpy" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=ue8iBcCMAtM" target="_blank">Video</a>
+			</li>
+			<li>
+				<a href="PCD_07.pdf" target="_blank">Conditional Statements and Loops</a> - <a href="https://www.overleaf.com/read/mwzjfwvctgyf" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=fXQaLByLUvM" target="_blank">Video</a>
+			</li>
+			<li>
+				<a href="PCD_08.pdf" target="_blank">Function Declarations and the Char Type</a> - <a href="https://www.overleaf.com/read/jtfspghjpcjv" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=CTlHS2Gd9r8" target="_blank">Video</a>
+			</li>
+			<li>
+					<a href="PCD_09.pdf" target="_blank">Function Calls and Return Statements</a> - <a href="https://www.overleaf.com/read/pvbmdvfphbjv" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=8BYWdpiCMtY" target="_blank">Video</a>
+			</li>
+			<li>
+					<a href="PCD_10.pdf" target="_blank">Pointers</a> - <a href="https://www.overleaf.com/read/ntnzstdknvtr" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=XySKJmovQSc" target="_blank">Video</a>
+			</li>
+			<li>
+					<a href="PCD_11.pdf" target="_blank">Arithmetic and Stack Optimizations</a> - <a href="https://www.overleaf.com/read/rqpgnpbvthbf" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=zmJv3h2sHK0" target="_blank">Video</a>
+			</li>
+			<li>
+					<a href="PCD_12.pdf" target="_blank">Generalizing Leftvalues</a> - <a href="https://www.overleaf.com/read/nckzrmgrjrtw" target="_blank">LaTeX Source</a> - <a href="https://www.youtube.com/watch?v=x0xJX0VCUDA" target="_blank">Video</a>
+			</li>
+			<li>
+					<a href="PCD_13.pdf" target="_blank">Function Arguments, Local Variables</a> - <a href="https://www.overleaf.com/read/rnjcprczhsfj" target="_blank">LaTeX Source</a> - <a href="https://youtube.com/live/KmAPF41gfq8" target="_blank">Video</a>
+			</li>
+			<li>
+					<a href="PCD_14.pdf" target="_blank">Finishing Local Variables</a> - <a href="https://www.overleaf.com/read/yqsvgcgrhgyv" target="_blank">LaTeX Source</a> - <a href="https://youtube.com/live/43Pv171UeFs" target="_blank">Video</a>
+			</li>
+			<li>
+					<a href="PCD_15.pdf" target="_blank">Arrays</a> - <a href="https://www.overleaf.com/read/qffhdrvwwxqc" target="_blank">LaTeX Source</a> - <a href="https://youtube.com/live/srGOkRfHJ9E" target="_blank">Video</a>
+			</li>
+		</ol> -->
+	</body>
+</html>
