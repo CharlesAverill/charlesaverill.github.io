@@ -30,7 +30,7 @@ def sort_by_ddc(items):
     return sorted_items
 
 # Read the markdown file
-with open('bookshelf.md', 'r') as file:
+with open('bookshelf_unsorted.md', 'r') as file:
     markdown_content = file.read()
 
 # Parse the markdown content
@@ -41,10 +41,10 @@ sorted_items = sort_by_ddc(bookshelf_items)
 
 # Print the sorted items
 for item in sorted_items:
-    print(item['title'])
+    print(item['title'], flush=True)
     if item['authors']:
-        print('- ' + ', '.join(item['authors']))
+        print('- ' + ', '.join(item['authors']), flush=True)
     if item['ddc']:
-        print('- ' + item['ddc'])
-    print()
+        print('- ' + item['ddc'], flush=True)
+    print("", flush=True)
 
