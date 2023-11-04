@@ -3,6 +3,6 @@ while True:
     a = input("Author(s): ")
     i = input("DDC: ")
     
-    file = open("bookshelf.md", "a")
+    file = open("bookshelf_unsorted.md", "a")
     file.write(f"{t}\n- {a}\n- {i}\n\n")
     file.close()
