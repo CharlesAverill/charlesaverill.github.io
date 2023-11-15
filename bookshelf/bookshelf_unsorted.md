@@ -413,3 +413,23 @@ Platform for Change: A Message from Stafford Beer
 - Stafford Beer
 - 003.09
 
+Computers & Typesetting: Volume A - The TEXBook
+- Knuth
+- 686.22544
+
+Computers & Typesetting: Volume B - TEX: The Program
+- Knuth
+- 686.22544
+
+Computers & Typesetting: Volume C - The METAFONTbook
+- Knuth
+- 686.22544
+
+Computers & Typesetting: Volume D - METAFONT: The Program
+- Knuth
+- 686.22544
+
+Computers & Typesetting: Volume E - Computer Modern Typefaces
+- Knuth
+- 686.22544
+
