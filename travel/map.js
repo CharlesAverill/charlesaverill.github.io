@@ -55,12 +55,12 @@ const visitedStates = {
 
 // Define different colors for each category
 const colors = {
-    'home': 'blue',
-    'school': 'green',
+    'home': 'red',
+    'school': 'orange',
     'work': 'yellow',
-    'academia': 'purple',
-    'vacation': 'orange',
-    'hiking': 'brown',
+    'academia': 'green',
+    'vacation': 'blue',
+    'hiking': 'indigo',
     // 'not_visited': 'gray',
 };
 
