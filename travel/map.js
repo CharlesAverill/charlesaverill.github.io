@@ -36,7 +36,7 @@ const visitedStates = {
     'Louisiana': {reasons: ['Birthplace', 'Family'], links: [], categories: ['home', 'vacation']},
     'Mississippi': {reasons: ['Family'], links: [], categories: ['vacation']},
     'Florida': {reasons: ['Family', 'PLDI 2023'], links: [], categories: ['academia', 'vacation']},
-    'New Mexico': {reasons: ['Pecos Wilderness', 'White Sands', 'California 2023'], links: [], categories: ['vacation', 'hiking', 'work']},
+    'New Mexico': {reasons: ['Pecos Wilderness', 'White Sands', 'California 2023'], links: [], categories: ['work', 'vacation', 'hiking']},
     'Arizona': {reasons: ['California 2023'], links: [], categories: ['vacation', 'work']},
     'California': {reasons: ['NVIDIA', 'Redwood Forest', 'San Francisco'], links: [], categories: ['home', 'work', 'vacation', 'hiking']},
     'Washington': {reasons: ['IEEE Quantum Week 2023'], links: [], categories: ['school', 'academia', 'vacation']},
