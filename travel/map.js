@@ -46,6 +46,7 @@ const visitedStates = {
     'Colorado': {reasons: ['Cabin Building', 'Camping Trips'], links: [], categories: ['vacation', 'hiking']},
     'Wyoming': {reasons: ['Gannett Peak'], links: [], categories: ['vacation', 'hiking']},
     'Virginia': {reasons: ['Family'], links: [], categories: ['vacation']},
+    'Virginia': {reasons: ['Family'], links: [], categories: ['vacation']},
     'Maryland': {reasons: ['Family'], links: [], categories: ['vacation']},
     'Indiana': {reasons: ['Purdue 2023'], links: [], categories: ['vacation']}
     // 'California': { reasons: ['Vacation', 'Beach', 'Hiking'], links: ['https://example.com/california-vacation', 'https://example.com/california-beach', 'https://example.com/california-hiking'], category: 'vacation' },
