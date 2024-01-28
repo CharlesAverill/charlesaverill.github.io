@@ -6,13 +6,23 @@
                     "gr": "Υπάρχει κάποιο καλό εστιατόριο κοντά;",
                     "it": "C'è un buon ristorante nelle vicinanze?"
                 }
+            }, {
+                "What dish do you recommend?" : {
+                    "gr": "Τι πιάτο προτείνετε;",
+                    "it": "Che piatto consigli?"
+                }
             }],
             "Grocery Store": {},
             "Pastry Shop": {},
             "Water Fountain": {}
         },
         "Small Talk": {
-            "Weather": {},
+            "Weather": [{
+                "The weather is nice today!": {
+                    "gr": "Ο καιρός είναι ωραίος σήμερα!",
+                    "it": "Il tempo è bello oggi!"
+                }
+            }],
             "Local Events": {},
             "Culture": {},
             "Professions": {},
