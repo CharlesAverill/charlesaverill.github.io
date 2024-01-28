@@ -43,6 +43,7 @@ let root = {};
 let globalTreeData = {};
 let currentNode = '';
 let reload = false;
+let languageCode = 'gr';
 
 // Function to generate and display buttons based on the selected node
 async function displayTree(treeData, node) {
@@ -63,9 +64,35 @@ async function displayTree(treeData, node) {
     document.getElementById("cat-name").textContent = node == "root" ? "" : node;
     const treeNavigator = document.getElementById('treeNavigator');
     treeNavigator.innerHTML = '';
+    const phraseNavigator = document.getElementById('phraseNavigator');
+    phraseNavigator.innerHTML = '';
 
     const children = treeData[node];
-    if (children && Object.keys(children).length > 0) {
+    if (Array.isArray(children) && children.length > 0) {
+        // Display a table for a list of phrases
+        const table = document.createElement('table');
+        table.classList.add('phrase-table');
+
+        children.forEach(phraseItem => {
+            let key = Object.keys(phraseItem)[0];
+            const phraseObj = phraseItem[key];
+            const translationObj = phraseObj[languageCode];
+
+            const row = table.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+
+            cell1.textContent = key; // English phrase
+            cell2.textContent = translationObj || ''; // Translated phrase for the selected language
+        });
+
+        phraseNavigator.appendChild(table);
+
+        const rows = document.querySelectorAll('td');
+        rows.forEach(row => {
+            row.style.width = `50%`;
+        });
+    } else if (children && Object.keys(children).length > 0) {
         let { rows, columns, flipped } = calculateRowsAndColumns(Object.keys(children).length);
         const table = document.createElement('table');
 
@@ -161,8 +188,6 @@ function addItem() {
         reload = true;
         displayTree(globalTreeData, currentNode);
     }
-
-    console.log(root);
 }
 
 function download(fileName) {
@@ -181,10 +206,12 @@ upButton.addEventListener('click', () => {
     displayTree(treeAndNode[0], treeAndNode[1]);
 });
 
+document.getElementById('lang-selector').addEventListener('change', function() {
+    languageCode = this.value;
+    displayTree(globalTreeData, currentNode);
+});
+
 // Initial display with root nodes
 displayTree(null, 'root');
 
 setupModal();
-
-console.log("hello world");
-

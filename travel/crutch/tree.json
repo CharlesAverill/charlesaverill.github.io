@@ -1,1 +1,39 @@
-{"root":{"Food and Drink":{"Restaurant":{},"Grocery Store":{},"Pastry Shop":{},"Water Fountain":{}},"Small Talk":{"Weather":{},"Local Events":{},"Culture":{},"Professions":{},"Games":{},"Music":{}},"Emergency":{"Hospital":{},"Police":{}},"Transportation":{"Taxi":{},"Train":{},"Boat":{},"Airport":{}},"Housing":{"Hostel":{},"Hotel":{}},"Sightseeing":{},"Word Search":{}}}
+{
+    "root": {
+        "Food and Drink": {
+            "Restaurant": [{
+                "Is there a good restaurant nearby?" : {
+                    "gr": "Υπάρχει κάποιο καλό εστιατόριο κοντά;",
+                    "it": "C'è un buon ristorante nelle vicinanze?"
+                }
+            }],
+            "Grocery Store": {},
+            "Pastry Shop": {},
+            "Water Fountain": {}
+        },
+        "Small Talk": {
+            "Weather": {},
+            "Local Events": {},
+            "Culture": {},
+            "Professions": {},
+            "Games": {},
+            "Music": {}
+        },
+        "Emergency": {
+            "Hospital": {},
+            "Police": {}
+        },
+        "Transportation": {
+            "Taxi": {},
+            "Train": {},
+            "Boat": {},
+            "Airport": {}
+        },
+        "Housing": {
+            "Hostel": {},
+            "Hotel": {}
+        },
+        "Sightseeing": {},
+        "Word Search": {}
+    }
+}

@@ -13,6 +13,18 @@ table {
     margin: auto;
 }
 
+.phrase-table :is(table,th,td) {
+    border: 1px solid;
+}
+
+#phraseNavigator {
+    width: 100%;
+}
+
+#phraseNavigator :is(table,tbody,tr,td) {
+    width: 100%;
+}
+
 td {
     width: 100px;
     height: 100px;
