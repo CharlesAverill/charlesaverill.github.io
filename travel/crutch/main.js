@@ -43,7 +43,7 @@ let root = {};
 let globalTreeData = {};
 let currentNode = '';
 let reload = false;
-let languageCode = 'gr';
+let languageCode = 'el';
 
 // Function to generate and display buttons based on the selected node
 async function displayTree(treeData, node) {

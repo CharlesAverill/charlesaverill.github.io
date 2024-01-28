@@ -3,12 +3,12 @@
         "Food and Drink": {
             "Restaurant": [{
                 "Is there a good restaurant nearby?" : {
-                    "gr": "Υπάρχει κάποιο καλό εστιατόριο κοντά;",
+                    "el": "Υπάρχει κάποιο καλό εστιατόριο κοντά;",
                     "it": "C'è un buon ristorante nelle vicinanze?"
                 }
             }, {
                 "What dish do you recommend?" : {
-                    "gr": "Τι πιάτο προτείνετε;",
+                    "el": "Τι πιάτο προτείνετε;",
                     "it": "Che piatto consigli?"
                 }
             }],
@@ -19,7 +19,7 @@
         "Small Talk": {
             "Weather": [{
                 "The weather is nice today!": {
-                    "gr": "Ο καιρός είναι ωραίος σήμερα!",
+                    "el": "Ο καιρός είναι ωραίος σήμερα!",
                     "it": "Il tempo è bello oggi!"
                 }
             }],
