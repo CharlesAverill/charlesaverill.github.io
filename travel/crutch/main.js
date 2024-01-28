@@ -186,3 +186,5 @@ displayTree(null, 'root');
 
 setupModal();
 
+console.log("hello world");
+
