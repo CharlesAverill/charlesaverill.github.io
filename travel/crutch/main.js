@@ -69,7 +69,8 @@ async function displayTree(treeData, node) {
 
     const children = treeData[node];
     console.log(Array.isArray(children) && children.length > 0);
-    console.log(children); //
+    console.log(children);
+    console.log("Bruh");
     if (Array.isArray(children) && children.length > 0) {
         // Display a table for a list of phrases
         const table = document.createElement('table');
