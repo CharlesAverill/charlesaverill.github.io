@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Language Crutch</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <div id="header" class="inline-div">
+        <div class="inline">
+            <div class="inline">
+                <h1>Language Crutch</h1>
+                <h4 id="cat-name"></h4>
+            </div>
+        </div>
+        <div class="inline">
+            <button hidden id="up-button" class="inline header-btn">Back</button>
+        </div>
+        <div class="inline">
+            <div class="inline">
+                <select id="lang-selector" class="header-dropdown">
+                    <option value="el">Greek</option>
+                    <option value="it">Italian</option>
+                    <option value="la">Latin</option>
+                </select>
+                <button class="header-btn" onclick="download('tree.json')">Download JSON</button>
+            </div>
+            <div class="inline">
+                <button id="add-item-btn" class="inline header-btn">Add Item</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-item-modal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <form id="add-item-form" class="inline-div">
+                <input type="text" id="item-name" placeholder="Item Name" />
+                <input type="submit" value="Add" />
+                <span class="close">&times;</span>
+            </form>
+        </div>
+    </div>
+
+    <table id="treeNavigator"></table>
+    <script src="main.js" async defer></script>
+</body>
+
+</html>
