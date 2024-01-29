@@ -13,27 +13,48 @@ async function fetchTreeData() {
 }
 
 function calculateRowsAndColumns(n) {
-    // let bestRows = 1;
-    // let bestCols = n;
-
-    // for (let rows = 1; rows <= Math.sqrt(n); rows++) {
-    //     if (n % rows === 0) {
-    //         const cols = n / rows;
-
-    //         // Check if the new arrangement is more square
-    //         if (cols - rows < bestCols - bestRows) {
-    //             bestRows = rows;
-    //             bestCols = cols;
-    //         }
-    //     }
-    // }
-
-    // let bestRows = bestCols = Math.ceil(Math.sqrt(n));
     let bestCols = 2;
     let bestRows = n / bestCols;
 
     let flipped = false;
     return { rows: bestRows, columns: bestCols, flipped: flipped };
+}
+
+function objectToMap(obj) {
+    const map = new Map();
+
+    for (const key in obj) {
+        if (!Array.isArray(obj[key]) && typeof obj[key] === 'object' && obj[key] !== null) {
+            map.set(key, objectToMap(obj[key]));
+        } else {
+            map.set(key, obj[key]);
+        }
+    }
+
+    return map;
+}
+
+function mapToJSON(map, indent = 0) {
+    let result = '{';
+
+    if (Array.from(map.keys()).length == 0) {
+        result += ",";
+    } else {
+        map.forEach((value, key) => {
+            if (value instanceof Map) {
+                result += `"${key}":${mapToJSON(value, indent + 1)},`;
+            } else {
+                result += `"${key}":${JSON.stringify(value)},`;
+            }
+        });
+    }
+
+    // Remove the trailing comma and newline for the last item
+    result = result.slice(0, -1);
+
+    result += `}`;
+
+    return result;
 }
 
 // Stack to keep track of navigation history
@@ -42,17 +63,24 @@ const navigationStack = [];
 let root = {};
 let globalTreeData = {};
 let currentNode = '';
+let atBase = false;
 let reload = false;
 let languageCode = 'el';
+let langStringOfCode = {
+    'el': 'Greek',
+    'it': 'Italian',
+    'la': 'Latin'
+}
 
 // Function to generate and display buttons based on the selected node
 async function displayTree(treeData, node) {
-    if(treeData == null) {
+    if (treeData == null) {
         treeData = await fetchTreeData();
+        treeData = objectToMap(treeData);
         root = treeData;
     }
 
-    if(reload) {
+    if (reload) {
         reload = false;
         treeData = globalTreeData;
         node = currentNode;
@@ -67,11 +95,10 @@ async function displayTree(treeData, node) {
     const phraseNavigator = document.getElementById('phraseNavigator');
     phraseNavigator.innerHTML = '';
 
-    const children = treeData[node];
-    console.log(Array.isArray(children) && children.length > 0);
+    let children = treeData.get(node);
     console.log(children);
-    console.log("Bruh");
-    if (Array.isArray(children) && children.length > 0) {
+    atBase = Array.isArray(children) && children.length > 0;
+    if (atBase) {
         // Display a table for a list of phrases
         const table = document.createElement('table');
         table.classList.add('phrase-table');
@@ -89,21 +116,47 @@ async function displayTree(treeData, node) {
             cell2.textContent = translationObj || ''; // Translated phrase for the selected language
         });
 
+        // Generate "Add Row" button
+        const row = table.insertRow();
+        const cell = row.insertCell(0);
+        cell.colSpan = "2";
+        const button = document.createElement('button');
+        button.id = 'add-row-btn';
+        button.textContent = 'Add Row';
+        button.addEventListener('click', () => {
+            var modal = document.getElementById("add-item-modal");
+            let itemForm = document.getElementById("add-item-form");
+            let rowForm = document.getElementById("add-row-form");
+
+            modal.style.display = "block";
+
+            // Disable child-adding form
+            itemForm.hidden = true;
+            itemForm.classList.remove("inline-div");
+            // Enable row-adding form
+            rowForm.hidden = false;
+            rowForm.classList.add("inline-div");
+            // Set Language text
+            document.getElementById('non-en-phrase').placeholder = `${langStringOfCode[languageCode]} Phrase`;
+        });
+        cell.appendChild(button);
+
         phraseNavigator.appendChild(table);
 
         const rows = document.querySelectorAll('td');
         rows.forEach(row => {
             row.style.width = `50%`;
         });
-    } else if (children && Object.keys(children).length > 0) {
-        let { rows, columns, flipped } = calculateRowsAndColumns(Object.keys(children).length);
+    } else if (children && Array.from(children.keys()).length > 0) {
+        let children_arr = Array.from(children.keys());
+        let { rows, columns, flipped } = calculateRowsAndColumns(children_arr.length);
         const table = document.createElement('table');
 
         for (let i = 0; i < rows; i++) {
             const row = table.insertRow();
             for (let j = 0; j < columns; j++) {
                 const index = i * columns + j;
-                const childNode = Object.keys(children)[index];
+                const childNode = children_arr[index];
 
                 if (childNode) {
                     const button = document.createElement('button');
@@ -119,8 +172,36 @@ async function displayTree(treeData, node) {
             }
         }
 
+        // Generate "Add Item" button
+        let row;
+        if (children_arr.length % 2 !== 0) {
+            let rows = Array.from(table.rows);
+            row = rows[rows.length - 1];
+        } else {
+            row = table.insertRow();
+        }
+        const cell = row.insertCell();
+        const button = document.createElement('button');
+        button.id = 'add-item-btn';
+        button.textContent = 'Add Category';
+        button.addEventListener('click', () => {
+            var modal = document.getElementById("add-item-modal");
+            let itemForm = document.getElementById("add-item-form");
+            let rowForm = document.getElementById("add-row-form");
+
+            modal.style.display = "block";
+
+            // Enable child-adding form
+            itemForm.hidden = false;
+            itemForm.classList.add("inline-div");
+            // Disable row-adding form
+            rowForm.hidden = true;
+            rowForm.classList.remove("inline-div");
+        });
+        cell.appendChild(button);
+
         // Calculate dynamic button size based on the number of rows and columns
-        if(flipped) {
+        if (flipped) {
             [rows, columns] = [columns, rows];
         }
         const buttonWidth = (1.0 / columns) * 75;
@@ -149,21 +230,19 @@ function setupModal() {
     // Get the modal
     var modal = document.getElementById("add-item-modal");
 
-    // Get the button that opens the modal
-    var btn = document.getElementById("add-item-btn");
+    // Get the <span> elements that close the modal
+    var spans = Array.from(document.getElementsByClassName("close"));
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks on the button, open the modal
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
+    // Get each form
+    let itemForm = document.getElementById("add-item-form");
+    let rowForm = document.getElementById("add-row-form");
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
+    spans.forEach(span => {
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+    });
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
@@ -172,9 +251,16 @@ function setupModal() {
         }
     }
 
-    document.getElementById("add-item-form").addEventListener("submit", function(e) {
+    itemForm.addEventListener("submit", function (e) {
         e.preventDefault() // Cancel the default action
         addItem();
+
+        modal.style.display = 'none';
+    });
+
+    rowForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        addRow();
 
         modal.style.display = 'none';
     });
@@ -184,20 +270,47 @@ function addItem() {
     const itemName = document.getElementById("item-name").value;
     document.getElementById("item-name").value = "";
 
-    if(globalTreeData[itemName]) {
+    if (globalTreeData.get(itemName)) {
         alert(`An item with the name "${itemName}" already exists`);
     } else {
-        globalTreeData[currentNode][itemName] = {};
+        // globalTreeData.set(currentNode[itemName], {});
+        globalTreeData.get(currentNode).set(itemName, new Map());
         reload = true;
         displayTree(globalTreeData, currentNode);
     }
 }
 
+function addRow() {
+    const enPhrase = document.getElementById("en-phrase").value;
+    const nonEnPhrase = document.getElementById("non-en-phrase").value;
+    document.getElementById("en-phrase").value = '';
+    document.getElementById("non-en-phrase").value = '';
+
+    let child = globalTreeData.get(currentNode).find(el => {
+        return Object.keys(el)[0] === enPhrase
+    }) || {};
+    if (Object.keys(child).length == 0) {
+        child[enPhrase] = {};
+    } else {
+        globalTreeData.set(currentNode, globalTreeData.get(currentNode).filter(el => {
+            return el !== child;
+        }));
+    }
+
+    console.log(child);
+    child[enPhrase][languageCode] = nonEnPhrase;
+    globalTreeData.get(currentNode).push(child);
+
+    reload = true;
+    displayTree(globalTreeData, currentNode);
+}
+
 function download(fileName) {
-    let content = JSON.stringify(root);
+    // let content = JSON.stringify(mapToObject(root));
+    let content = mapToJSON(root);
     let contentType = "text/plain";
     var a = document.createElement("a");
-    var file = new Blob([content], {type: contentType});
+    var file = new Blob([content], { type: contentType });
     a.href = URL.createObjectURL(file);
     a.download = fileName;
     a.click();
@@ -209,7 +322,7 @@ upButton.addEventListener('click', () => {
     displayTree(treeAndNode[0], treeAndNode[1]);
 });
 
-document.getElementById('lang-selector').addEventListener('change', function() {
+document.getElementById('lang-selector').addEventListener('change', function () {
     languageCode = this.value;
     displayTree(globalTreeData, currentNode);
 });

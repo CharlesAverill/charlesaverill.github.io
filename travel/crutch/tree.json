@@ -1,28 +1,33 @@
 {
     "root": {
         "Food and Drink": {
-            "Restaurant": [{
-                "Is there a good restaurant nearby?" : {
-                    "el": "Υπάρχει κάποιο καλό εστιατόριο κοντά;",
-                    "it": "C'è un buon ristorante nelle vicinanze?"
+            "Restaurant": [
+                {
+                    "Is there a good restaurant nearby?": {
+                        "el": "Υπάρχει κάποιο καλό εστιατόριο κοντά;",
+                        "it": "C'è un buon ristorante nelle vicinanze?"
+                    }
+                },
+                {
+                    "What dish do you recommend?": {
+                        "el": "Τι πιάτο προτείνετε;",
+                        "it": "Che piatto consigli?"
+                    }
                 }
-            }, {
-                "What dish do you recommend?" : {
-                    "el": "Τι πιάτο προτείνετε;",
-                    "it": "Che piatto consigli?"
-                }
-            }],
+            ],
             "Grocery Store": {},
             "Pastry Shop": {},
             "Water Fountain": {}
         },
         "Small Talk": {
-            "Weather": [{
-                "The weather is nice today!": {
-                    "el": "Ο καιρός είναι ωραίος σήμερα!",
-                    "it": "Il tempo è bello oggi!"
+            "Weather": [
+                {
+                    "The weather is nice today!": {
+                        "el": "Ο καιρός είναι ωραίος σήμερα!",
+                        "it": "Il tempo è bello oggi!"
+                    }
                 }
-            }],
+            ],
             "Local Events": {},
             "Culture": {},
             "Professions": {},
