@@ -30,7 +30,14 @@
             ],
             "Local Events": {},
             "Culture": {},
-            "Professions": {},
+            "Professions": [
+                {
+                    "I research Computer Science": {
+                        "el": "Κάνω έρευνα Πληροφορικής",
+                        "it": "Sto facendo ricerche in Informatica"
+                    }
+                }
+            ],
             "Games": {},
             "Music": {}
         },
