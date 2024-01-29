@@ -217,7 +217,7 @@ async function displayTree(treeData, node) {
         treeNavigator.appendChild(table);
 
         // Apply dynamic button size
-        const buttons = document.querySelectorAll('button:not(.header-btn)');
+        const buttons = document.querySelectorAll('button:not(.header-btn,.close)');
         buttons.forEach(button => {
             const fontSize = buttonWidth * 0.5;
             button.style.width = `${buttonWidth}vw`;

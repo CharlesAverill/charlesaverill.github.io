@@ -32,7 +32,7 @@ td {
     text-align: center;
 }
 
-button:not(.header-btn) {
+button:not(.header-btn,.close) {
     width: 100%;
     height: 100%;
     word-wrap: break-word;
@@ -44,9 +44,14 @@ button:not(.header-btn) {
     text-align: center;
 }
 
-.header-btn {
+.header-btn:not(#up-button) {
     height: calc(var(--header-height));
     width: calc(1.5 * var(--header-height));
+}
+
+#up-button {
+    height: calc(var(--header-height));
+    width: calc(0.75 * var(--header-height));
 }
 
 .header-dropdown {
@@ -101,10 +106,10 @@ button:not(.header-btn) {
 
 /* The Close Button */
 .close {
-    color: #aaa;
+    /* color: #aaa; */
     float: right;
-    font-size: 28px;
-    font-weight: bold;
+    /* font-size: 28px; */
+    /* font-weight: bold; */
     cursor: pointer;
 }
 
