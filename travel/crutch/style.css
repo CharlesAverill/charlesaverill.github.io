@@ -63,15 +63,6 @@ button:not(.header-btn) {
 /* Define a custom property for the header height */
 :root {
     --header-height: 10vh;
-    /* Adjust as needed */
-}
-
-/* Media query for adjusting custom property on smaller screens */
-@media (max-width: 768px) {
-    :root {
-        --header-height: 5vh;
-        /* Adjust as needed for smaller screens */
-    }
 }
 
 
