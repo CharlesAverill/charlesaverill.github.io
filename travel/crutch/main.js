@@ -72,6 +72,61 @@ let langStringOfCode = {
     'la': 'Latin'
 }
 
+function renderAddRow(table) {
+    const row = table.insertRow();
+    const cell = row.insertCell(0);
+    cell.colSpan = "2";
+    const button = document.createElement('button');
+    button.id = 'add-row-btn';
+    button.textContent = 'Add Row';
+    button.addEventListener('click', () => {
+        var modal = document.getElementById("add-item-modal");
+        let itemForm = document.getElementById("add-item-form");
+        let rowForm = document.getElementById("add-row-form");
+
+        modal.style.display = "block";
+
+        // Disable child-adding form
+        itemForm.hidden = true;
+        itemForm.classList.remove("inline-div");
+        // Enable row-adding form
+        rowForm.hidden = false;
+        rowForm.classList.add("inline-div");
+        // Set Language text
+        document.getElementById('non-en-phrase').placeholder = `${langStringOfCode[languageCode]} Phrase`;
+    });
+    cell.appendChild(button);
+}
+
+function renderAddItem(children_arr, table) {
+    let row;
+    if (children_arr.length % 2 !== 0) {
+        let rows = Array.from(table.rows);
+        row = rows[rows.length - 1];
+    } else {
+        row = table.insertRow();
+    }
+    const cell = row.insertCell();
+    const button = document.createElement('button');
+    button.id = 'add-item-btn';
+    button.textContent = 'Add Category';
+    button.addEventListener('click', () => {
+        var modal = document.getElementById("add-item-modal");
+        let itemForm = document.getElementById("add-item-form");
+        let rowForm = document.getElementById("add-row-form");
+
+        modal.style.display = "block";
+
+        // Enable child-adding form
+        itemForm.hidden = false;
+        itemForm.classList.add("inline-div");
+        // Disable row-adding form
+        rowForm.hidden = true;
+        rowForm.classList.remove("inline-div");
+    });
+    cell.appendChild(button);
+}
+
 // Function to generate and display buttons based on the selected node
 async function displayTree(treeData, node) {
     if (treeData == null) {
@@ -96,8 +151,7 @@ async function displayTree(treeData, node) {
     phraseNavigator.innerHTML = '';
 
     let children = treeData.get(node);
-    console.log(children);
-    atBase = Array.isArray(children) && children.length > 0;
+    atBase = (Array.isArray(children) && children.length > 0);
     if (atBase) {
         // Display a table for a list of phrases
         const table = document.createElement('table');
@@ -117,29 +171,7 @@ async function displayTree(treeData, node) {
         });
 
         // Generate "Add Row" button
-        const row = table.insertRow();
-        const cell = row.insertCell(0);
-        cell.colSpan = "2";
-        const button = document.createElement('button');
-        button.id = 'add-row-btn';
-        button.textContent = 'Add Row';
-        button.addEventListener('click', () => {
-            var modal = document.getElementById("add-item-modal");
-            let itemForm = document.getElementById("add-item-form");
-            let rowForm = document.getElementById("add-row-form");
-
-            modal.style.display = "block";
-
-            // Disable child-adding form
-            itemForm.hidden = true;
-            itemForm.classList.remove("inline-div");
-            // Enable row-adding form
-            rowForm.hidden = false;
-            rowForm.classList.add("inline-div");
-            // Set Language text
-            document.getElementById('non-en-phrase').placeholder = `${langStringOfCode[languageCode]} Phrase`;
-        });
-        cell.appendChild(button);
+        renderAddRow(table);
 
         phraseNavigator.appendChild(table);
 
@@ -173,32 +205,7 @@ async function displayTree(treeData, node) {
         }
 
         // Generate "Add Item" button
-        let row;
-        if (children_arr.length % 2 !== 0) {
-            let rows = Array.from(table.rows);
-            row = rows[rows.length - 1];
-        } else {
-            row = table.insertRow();
-        }
-        const cell = row.insertCell();
-        const button = document.createElement('button');
-        button.id = 'add-item-btn';
-        button.textContent = 'Add Category';
-        button.addEventListener('click', () => {
-            var modal = document.getElementById("add-item-modal");
-            let itemForm = document.getElementById("add-item-form");
-            let rowForm = document.getElementById("add-row-form");
-
-            modal.style.display = "block";
-
-            // Enable child-adding form
-            itemForm.hidden = false;
-            itemForm.classList.add("inline-div");
-            // Disable row-adding form
-            rowForm.hidden = true;
-            rowForm.classList.remove("inline-div");
-        });
-        cell.appendChild(button);
+        renderAddItem(children_arr, table);
 
         // Calculate dynamic button size based on the number of rows and columns
         if (flipped) {
@@ -217,6 +224,17 @@ async function displayTree(treeData, node) {
             button.style.height = `${buttonHeight}vh`;
             button.style.fontSize = `${fontSize}px`;
         });
+    } else if (Array.from(children).length == 0) {
+        // Show add item button
+        let table = document.createElement('table');
+        renderAddItem([], table);
+        treeNavigator.appendChild(table);
+
+        // Show add row button
+        table = document.createElement('table');
+        table.classList.add('phrase-table');
+        renderAddRow(table);
+        phraseNavigator.appendChild(table);
     }
 
     if (navigationStack.length > 0) {
@@ -285,6 +303,10 @@ function addRow() {
     const nonEnPhrase = document.getElementById("non-en-phrase").value;
     document.getElementById("en-phrase").value = '';
     document.getElementById("non-en-phrase").value = '';
+
+    if (!Array.isArray(globalTreeData.get(currentNode))) {
+        globalTreeData.set(currentNode, []);
+    }
 
     let child = globalTreeData.get(currentNode).find(el => {
         return Object.keys(el)[0] === enPhrase

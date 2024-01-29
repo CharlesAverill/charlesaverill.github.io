@@ -30,7 +30,7 @@
             ],
             "Local Events": {},
             "Culture": {},
-            "Professions": [
+            "Profession": [
                 {
                     "I research Computer Science": {
                         "el": "Κάνω έρευνα Πληροφορικής",
@@ -45,7 +45,7 @@
             "Hospital": {},
             "Police": {}
         },
-        "Transportation": {
+        "Transit": {
             "Taxi": {},
             "Train": {},
             "Boat": {},
@@ -55,7 +55,7 @@
             "Hostel": {},
             "Hotel": {}
         },
-        "Sightseeing": {},
+        "Sights": {},
         "Word Search": {}
     }
 }
