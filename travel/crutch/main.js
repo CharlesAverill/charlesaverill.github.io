@@ -286,6 +286,10 @@ function setupModal() {
 
 function addItem() {
     const itemName = document.getElementById("item-name").value;
+    if (itemName == '') {
+        return;
+    }
+
     document.getElementById("item-name").value = "";
 
     if (globalTreeData.get(itemName)) {
@@ -301,6 +305,10 @@ function addItem() {
 function addRow() {
     const enPhrase = document.getElementById("en-phrase").value;
     const nonEnPhrase = document.getElementById("non-en-phrase").value;
+    if (enPhrase == '' || nonEnPhrase == '') {
+        return;
+    }
+
     document.getElementById("en-phrase").value = '';
     document.getElementById("non-en-phrase").value = '';
 
