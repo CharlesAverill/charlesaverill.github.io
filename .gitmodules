@@ -10,4 +10,4 @@
 	branch = gh-pages
 [submodule "ctpe"]
 	path = ctpe
-	url = git@github.com:CharlesAverill/ctpe.git
+	url = https://github.com/CharlesAverill/ctpe.git
