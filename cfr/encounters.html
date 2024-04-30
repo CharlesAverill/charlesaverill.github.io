@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic HTML Loading</title>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+        // URL of the content to be loaded
+        const url = "https://example.com";
+
+        // Fetch the HTML content from the URL
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(html => {
+                // Create a temporary element to hold the fetched content
+                const tempElement = document.createElement('div');
+                tempElement.innerHTML = html;
+
+                // Extract the content you want from the fetched HTML
+                const extractedContent = tempElement.querySelector('#content');
+
+                // Get the container element where you want to append the content
+                const container = document.getElementById('content');
+
+                // Clear the existing content in the container
+                container.innerHTML = '';
+
+                // Append the extracted content to the container
+                container.appendChild(extractedContent);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    </script>
+</body>
+</html>
+
