@@ -1,0 +1,12 @@
+<!doctype HTML>
+<body>
+<script>
+fetch('https://raw.githubusercontent.com/CharlesAverill/pokefirered/latest/changelog/locations.html')
+  .then(response => response.text())
+  .then((data) => {
+    document.open();
+        document.write(data);
+        document.close()
+  }) 
+</script>
+</body>
