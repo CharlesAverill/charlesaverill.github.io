@@ -42,16 +42,50 @@ const visitedStates = {
     'Washington': {reasons: ['IEEE Quantum Week 2023'], links: [], categories: ['school', 'academia', 'vacation']},
     'Alaska': {reasons: ['Aurora Borealis 2024'], links: [], categories: ['vacation']},
     'Oklahoma': {reasons: ['Black Mesa', 'Camping Trips'], links: [], categories: ['vacation', 'hiking']},
-    'Arkansas': {reasons: ['Camping Trips'], links: [], categories: ['vacation', 'hiking']},
+    'Arkansas': {reasons: ['Camping Trips', 'Dartmouth 2024'], links: [], categories: ['vacation', 'hiking', 'work']},
     'Colorado': {reasons: ['Cabin Building', 'Camping Trips'], links: [], categories: ['vacation', 'hiking']},
     'Wyoming': {reasons: ['Gannett Peak'], links: [], categories: ['vacation', 'hiking']},
     'Virginia': {reasons: ['Family'], links: [], categories: ['vacation']},
     'Virginia': {reasons: ['Family'], links: [], categories: ['vacation']},
     'Maryland': {reasons: ['Family'], links: [], categories: ['vacation']},
-    'Indiana': {reasons: ['Purdue 2023'], links: [], categories: ['vacation']}
+    'Indiana': {reasons: ['Purdue 2023'], links: [], categories: ['vacation']},
+	'Tennessee': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
+	'Kentucky': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
+	'Ohio': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
+	'Pennsylvania': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
+	'New York': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
+	'Vermont':  {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
+	'New Hampshire':  {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
+	'Massachusetts':  {reasons: ['Dartmouth 2024'], links: [], categories: ['work']}
     // 'California': { reasons: ['Vacation', 'Beach', 'Hiking'], links: ['https://example.com/california-vacation', 'https://example.com/california-beach', 'https://example.com/california-hiking'], category: 'vacation' },
     // 'New York': { reasons: ['Business trip', 'Meetings'], links: ['https://example.com/new-york-business', 'https://example.com/new-york-meetings'], category: 'business' },
     // Add more states as needed
+};
+
+const italyCities = {
+	'Roma': {reasons: ['Mediterranean 2024'], links: [], categories: ['vacation', 'academia']},
+	'Venezia': {reasons: ['Mediterranean 2024'], links: [], categories: ['vacation']},
+	'Trieste': {reasons: ['Mediterranean 2024', 'Antico Spazzacamino'], links: [], categories: ['vacation']},
+	'Firenze': {reasons: ['Mediterranean 2024'], links: [], categories: ['vacation']},
+	'Napoli': {reasons: ['Mediterranean 2024', 'Pompeii Excavation', 'Herculaneum Excavation', 'Vesuvius Hike'], links: [], categories: ['vacation', 'hiking']},
+	'Palermo': {reasons: ['Mediterranean 2024'], links: [], categories: ['vacation']},
+	'Messina': {reasons: ['Mediterranean 2024', 'Taormina Hike'], links: [], categories: ['vacation', 'hiking']},
+	'Brindisi': {reasons: ['Mediterranean 2024'], links: [], categories: ['vacation']}
+};
+
+const croatiaCities = {
+	'Istarska': {reasons: ['Mediterranean 2024', 'Pula'], links: [], categories: ['vacation']},
+	'Zadarska': {reasons: ['Mediterranean 2024', 'Silba, Ancestral Homeland'], links: [], categories: ['vacation', 'hiking']}
+};
+
+const greeceCities = {
+	'Epirus': {reasons: ['Mediterranean 2024', 'Epirus Road Trip', 'Igoumenitsa', 'River Acheron', 'Mesopotamos', 'Necromanteion', 'Ioannina'], links: [], categories: ['vacation', 'hiking']},
+	'Peloponnese': {reasons: ['Mediterranean 2024', 'Corinth', 'Paris Olympic Torch Reception'], links: [], categories: ['vacation']},
+	'Attica': {reasons: ['Mediterranean 2024', 'Athens', 'Paris Olympic Torch Reception'], links: [], categories: ['vacation']},
+	'Crete': {reasons: ['Mediterranean 2024', 'Create Road Trip', 'Ida Hike', 'Heraklion', 'Chania', 'Palaiochora', 'Vai Beach'], links: [], categories: ['vacation', 'hiking']},
+	'Central Greece': {reasons: ['Mediterranean 2024', 'Levadeia', 'Delphi', 'Lethe Spring', 'Temple of Apollo'], links: [], categories: ['vacation', 'hiking']},
+	'Central Macedonia': {reasons: ['Mediterranean 2024', 'Thessaloniki'], links: [], categories: ['vacation']},
+	'Thessaly': {reasons: ['Mediterranean 2024', 'Olympos Hike', 'River Styx', 'Styx Road Trip', 'Litochoro', 'Prionia', 'Larissa', 'Elassona'], links: [], categories: ['vacation', 'hiking']}
 };
 
 // Define different colors for each category
@@ -71,8 +105,8 @@ let uniqueColors = Array.from(new Set(Object.values(colors)));
 // Create a linear gradient for each unique color
 function createGradientString(colors) {
     const stops = colors.map((color, index) => {
-        const offsetStart = index * (90 / colors.length);
-        const offsetEnd = (index + 1) * (90 / colors.length);
+        const offsetStart = index * (105 / colors.length);
+        const offsetEnd = (index + 1) * (105 / colors.length);
         return `<stop offset="${offsetStart}%" stop-color="${color}" />
                 <stop offset="${offsetEnd}%" stop-color="${color}" />`;
     });
@@ -80,14 +114,27 @@ function createGradientString(colors) {
     return stops.join('\n');
 }
 
-// Add the GeoJSON layer for US states
-fetch('https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json')
+// Add the GeoJSON layers
+const geoJsonStuff = [
+	['https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json', visitedStates, 'name'],
+	['https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_provinces.geojson', italyCities, 'prov_name'],
+	['hr.json', croatiaCities, 'name'],
+	['gr.geojson', greeceCities, 'name']
+];
+
+var i = 0;
+geoJsonStuff.forEach(stuff => {
+	const geoJsonUrl = stuff[0];
+	const geoJsonData = stuff[1];
+	const geoJsonNameField = stuff[2];
+
+	fetch(geoJsonUrl)
     .then(response => response.json())
     .then(data => {
         L.geoJson(data, {
             style: feature => {
-                const stateName = feature.properties.name;
-                const visitData = visitedStates[stateName] || { reasons: ['Not visited'], links: ['#'], categories: ['not_visited'] };
+                const stateName = feature.properties[geoJsonNameField];
+                const visitData = geoJsonData[stateName] || { reasons: ['Not visited'], links: ['#'], categories: ['not_visited'] };
                 const categories = visitData['categories'];
 
                 // Set fillColor to 'transparent' for 'not_visited' category
@@ -118,8 +165,8 @@ fetch('https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geo
                 };
             },
             onEachFeature: (feature, layer) => {
-                const stateName = feature.properties.name;
-                const visitData = visitedStates[stateName] || { reasons: ['Not visited'], links: ['#'], category: 'not_visited' };
+                const stateName = feature.properties[geoJsonNameField];
+                const visitData = geoJsonData[stateName] || { reasons: ['Not visited'], links: ['#'], category: 'not_visited' };
                 const { reasons, links } = visitData;
                 if (visitData.category !== 'not_visited') {
                     layer.on({
@@ -149,21 +196,24 @@ fetch('https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geo
         }).addTo(map);
 
         // Add legend
-        const legend = L.control({ position: 'bottomright' });
+		if (i == 0) {
+	        const legend = L.control({ position: 'bottomright' });
 
-        legend.onAdd = () => {
-            const div = L.DomUtil.create('div', 'info legend');
-            const categories = Object.keys(colors).filter(category => category !== 'not_visited');
+    	    legend.onAdd = () => {
+        	    const div = L.DomUtil.create('div', 'info legend');
+            	const categories = Object.keys(colors).filter(category => category !== 'not_visited');
 
-            categories.forEach(category => {
-                div.innerHTML += `<i style="background:${colors[category]}"></i> ${titleCase(category)}<br>`;
-            });
+	            categories.forEach(category => {
+    	            div.innerHTML += `<i style="background:${colors[category]}"></i> ${titleCase(category)}<br>`;
+       	    	});
+   	        	return div;
+        	};
+	        legend.addTo(map);
+		}
 
-            return div;
-        };
-
-        legend.addTo(map);
-    });
+		i = i + 1;
+	})}
+);
 
 //     let fillPalette = ['orange', 'green', 'blue'];
 
