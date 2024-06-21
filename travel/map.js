@@ -88,6 +88,11 @@ const greeceCities = {
 	'Thessaly': {reasons: ['Mediterranean 2024', 'Olympos Hike', 'River Styx', 'Styx Road Trip', 'Litochoro', 'Prionia', 'Larissa', 'Elassona'], links: [], categories: ['vacation', 'hiking']}
 };
 
+const europeCountries = {
+	'Denmark': {reasons: ['PLDI 2024'], links: [['PLDI Submission', 'https://github.com/CharlesAverill/VOLPIC']], categories: ['academia']},
+	'Sweden': {reasons: ['PLDI 2024'], links: [], categories: ['vacation']}
+};
+
 // Define different colors for each category
 const colors = {
     'home': 'red',
@@ -119,7 +124,8 @@ const geoJsonStuff = [
 	['https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json', visitedStates, 'name'],
 	['https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_provinces.geojson', italyCities, 'prov_name'],
 	['hr.json', croatiaCities, 'name'],
-	['gr.geojson', greeceCities, 'name']
+	['gr.geojson', greeceCities, 'name'],
+	['europe_countries.geojson', europeCountries, 'name']
 ];
 
 var i = 0;
