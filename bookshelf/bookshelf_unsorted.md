@@ -461,3 +461,11 @@ The Universe in a Nutshell
 - Stephen Hawking
 - 530.12
 
+Arrowsmith
+- Sinclair Lewis
+- 813.52
+
+Blood Meridian
+- Cormac McCarthy
+- 813.54
+
