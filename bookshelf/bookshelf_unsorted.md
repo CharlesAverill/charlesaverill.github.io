@@ -453,3 +453,11 @@ The Divine Comedy
 - Dante Alighieri
 - 851.1
 
+Certified Programming with Dependent Types: A Pragmatic Introduction to the Coq Proof Assistant
+- Adam Chlipala
+- 005.1
+
+The Universe in a Nutshell
+- Stephen Hawking
+- 530.12
+
