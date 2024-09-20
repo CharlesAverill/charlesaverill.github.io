@@ -11,3 +11,6 @@
 [submodule "ctpe"]
 	path = ctpe
 	url = https://github.com/CharlesAverill/ctpe.git
+[submodule "proofchat"]
+	path = proofchat
+	url = https://github.com/CharlesAverill/proofchat.git
