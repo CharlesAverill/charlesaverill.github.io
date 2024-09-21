@@ -17,14 +17,16 @@ jobs:
       with:
         submodules: true # Ensure submodules are included
 
+    - name: Git Submodule Update
+      run: |
+        git pull --recurse-submodules
+        git submodule update --remote --recursive
+
     # Update submodules
     - name: Update submodules
       run: |
-        git submodule update --init --recursive
-        git submodule update --recursive --remote
         git add .
         git commit -m "Update submodules $(date)"
-        git push
 
     # Push the changes to the repository
     - name: Push changes
