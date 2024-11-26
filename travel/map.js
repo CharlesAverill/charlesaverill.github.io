@@ -51,6 +51,7 @@ const visitedStates = {
     'Connecticut': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
     'Maryland': {reasons: ['Family'], links: [], categories: ['vacation']},
     'Indiana': {reasons: ['Purdue 2023'], links: [], categories: ['vacation']},
+    'Illinois': {reasons: ['Chicago 2024'], links: [], categories: ['vacation', 'work']},
 	'Tennessee': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
 	'Kentucky': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
 	'Ohio': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
