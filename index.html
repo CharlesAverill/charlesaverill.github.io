@@ -4,124 +4,346 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
 
-		<meta name="description" content="Cool Stuff">
+		<meta name="description" content="Charles Averill">
 		<meta name="author" content="Charles Averill">
+		<meta property="og:url" content="https://www.charles.systems/">
+		<meta property="og:type" content="website">
+		<meta name="og:image" itemprop="image" content="/static/image/main.png">
 
-		<meta name="twitter:card" content="summary">
-		<meta name="twitter:title" content="Cool Stuff">
-		<meta name="twitter:description" content="Charles Averill's Cool Stuff">
-		<meta name="twitter:site" content="@caverill_">
+		<title>Charles Averill</title>
 
-		<title>Cool Stuff</title>
-
-		<link href="/static/css/style.css" rel="stylesheet">
-		<link href="/static/css/icons/iconstyle.css" rel="stylesheet">
+		<link rel="stylesheet" href="/static/css/latex.css">
 		<link rel="icon" type="image/ico" href="/static/favicon.ico"/>
+		<script>
+			// Load JS after page render
+			var tag = document.createElement("script");
+			tag.src = "/static/js/github-cards-master/gh-cards.js";
+			document.getElementsByTagName("head")[0].appendChild(tag);
+		</script>
 	</head>
 	<body>
-		<h1>
-			<a class="icon" href="https://github.com/CharlesAverill/">
-				<i class="icon icon-github" style="font-size: 36px;"></i>
-			</a>
-			Charles Averill's Cool Stuff
-		</h1>
-		<div>
-			<p>
-				I'm Charles Averill, a Ph.D. student under <a href="https://personal.utdallas.edu/~hamlen/index.html" target="_blank">Kevin Hamlen</a> and <a href="https://faculty-directory.dartmouth.edu/christophe-hauser" target="_blank">Christophe Hauser</a> at UT Dallas.
+		<header>
+			<h1>All My Stuff</h1>
+			<p class="author">Charles Averill</p>
+		</header>
+		<div class="abstract">
+			<h2>Abstract</h2>
+			<table>
+				<tr>
+					<td>
+						<image id="imageCarousel" style="width: 1008px;" src="/static/images/main.png" onclick="imageCarousel()"></image>
+					</td>
+					<td>
+						<p style="hyphens: none;">
+							I'm Charles Averill, a Ph.D. student under <a href="https://personal.utdallas.edu/~hamlen/index.html">Kevin Hamlen</a> 
+							and <a href="https://faculty-directory.dartmouth.edu/christophe-hauser">Christophe Hauser</a> at UT Dallas.
+							
+							I study formal verification with interests in proof automation,
+							separation logic, and binary programs (among many other things).
+							
+							<!-- You can explore the majority of my projects on my 
+							<a href="https://github.com/CharlesAverill/">Github page</a>. -->
+						</p>
+						<br>
+						<p><tt>charles at utdallas dot edu</tt></p>
+						<br>
+						<p>
+							<a href="https://www.overleaf.com/read/hxsjbbvcgwzb">My Résumé</a> - 
+							<a href="https://www.overleaf.com/read/zykmjzrfqqwc#fc85c5">My Curriculum Vitae</a>
+						</p>
+					</td>
+				</tr>
+			</table>
 
-				I study formal verification, with interests in proof automation via stronger tactics, pure type theory, user-friendly verification, safe program transformations, formalized physics, invariant generation, etc. You can explore the majority of my projects on my <a href="https://github.com/CharlesAverill/">Github page</a>.
+			<p style="text-align: center; width:100%">
+				<a href="https://github.com/CharlesAverill">Github</a> -
+				<a href="https://orcid.org/0000-0001-6614-1808" style="vertical-align: top">https://orcid.org/0000-0001-6614-1808</a> -
+				<a href="https://arxiv.org/search/cs?query=Averill%2C+Charles&searchtype=author&abstracts=show">arxiv</a>
 			</p>
 		</div>
-		<div>
-			<p>
-			<a href="https://www.overleaf.com/read/hxsjbbvcgwzb" target="_blank">My Résumé</a> - <a href="https://www.overleaf.com/read/zykmjzrfqqwc#fc85c5" target="_blank">My Curriculum Vitae</a>
-			</p>
-			<p>
-				<a href="publications">My Publications</a> - <a
-    id="cy-effective-orcid-url"
-    class="underline"
-     href="https://orcid.org/0000-0001-6614-1808"
-     target="orcid.widget"
-     rel="me noopener noreferrer"
-     style="vertical-align: top">
-     <img
-        src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-        style="width: 1em; margin-inline-start: 0.5em"
-        alt="ORCID iD icon"/>
-      https://orcid.org/0000-0001-6614-1808
-    </a>
-			</p>
-			<p>
-				<a href="writings">My Writings</a>
-			</p>
-			<p>
-				<a href="teaching">Teaching</a>
-			</p>
-			<p>
-				<a href="Combinators">Combinator Calculus</a>
-			</p>
-			<p>
-				<a href="bookshelf">My Bookshelf</a>
-			</p>
-		</div>
+		<main>
+			<article>
+				<h2>My Work</h2>
+				<h3>Publications</h3>
+				<table>
+					<thead>
+					  <tr>
+						<th>Title</th>
+						<th>Venue</th>
+						<th>Link</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td><em>VOLPIC: Verifying Lifted Pascal in Coq</em></td>
+						<td>PLDI SRC 2024</td>
+						<td>
+						  <a href="/publications/VOLPIC_SRC.pdf">Extended Abstract</a>, 
+						  <a href="/publications/VOLPIC_SRC_Poster.pdf">Poster</a>
+						</td>
+					  </tr>
+					  <tr>
+						<td><em>Prettybird: A DSL for Programmatic Font Compilation</em></td>
+						<td>PLDI SRC 2023</td>
+						<td>
+						  <a href="/publications/Prettybird_SRC.pdf">Extended Abstract</a>, 
+						  <a href="/publications/Prettybird_SRC_Poster.pdf">Poster</a>
+						</td>
+					  </tr>
+					  <tr>
+						<td><em>Self-Supervised Unseen Object Instance Segmentation via Long-Term Robot Interaction</em></td>
+						<td>RSS 2023</td>
+						<td>
+						  <a href="/publications/SSUOISLTRI.pdf">Paper</a>
+						</td>
+					  </tr>
+					  <tr>
+						<td><em>Connecting the Brains via Virtual Eyes: Eye-Gaze Directions and Inter-brain Synchrony in VR</em></td>
+						<td>CHI 2021</td>
+						<td>
+						  <a href="/publications/CTBVVE_EGDaIBSVR.pdf">Paper</a>
+						</td>
+					  </tr>
+					  <tr>
+						<td><em>NFTree: Art Without Emissions</em></td>
+						<td>JIPP Vol. 2 Issue 4</td>
+						<td>
+						  <a href="/publications/JIPP_2_4_Technology_in_Policy.pdf">Article</a>
+						</td>
+					  </tr>
+					</tbody>
+				</table>
 
-		<div>
-			<h2>Projects</h2>
-			<ul>
-				<li>
-					<a href="https://www.overleaf.com/read/gcrnnzfsmrvq">Graph Shepherding Algorithms</a>
-				</li>
-				<li>
-					<a href="Projects/DEFFS/">DEFFS</a>
-				</li>
-				<li>
-					<a href="Purple/">Purple</a>
-				</li>
-				<li>
-					<a href="Projects/DinosaurIsland/">Dinosaur Island</a>
-				</li>
-				<li>
-					<a href="BirdAndBeans/docs/">Bird And Beans</a>
-				</li>
-				<li>
-					<a href="AT_CWD/">Adventure Time: Card Wars Dominion</a>
-				</li>
-				<li>
-					<a href="Projects/turing/">Turing</a>
-				</li>
-				<li>
-					<a href="PDMusic/">Transcriptions of "The International Library of Music" Public Domain Sheet Music</a>
-				</li>
-			</ul>
+				<h3>Writing<label for="sn-1" class="sidenote-toggle sidenote-number"></label>
+					<input type="checkbox" id="sn-1" class="sidenote-toggle" />
+					<span class="sidenote"><a href="/writings/index.html">More</a></span></h3>
+				<ul>
+					<li>
+						<a href="/writings/bsfmc.pdf">A Brief Survey of Formal Models of Concurrency</a>
+					</li>
+					<li>
+						<a href="/writings/The_Verification_of_ARMv7_memset.pdf">The Verification of ARMv7 <tt>memset</tt> - Progress Report</a>
+					</li>
+					<li>
+						<a href="https://www.overleaf.com/read/dyyfcncrnbbk">Theoretical Physics Notes</a>
+					</li>
+					<li>
+						<a href="/writings/relativity.pdf">Transcription of "Relativity: The Special and General Theory" by Albert Einstein</a> - <a href="https://www.overleaf.com/read/zqfsffnfmzqs">LaTeX source</a>
+						<br>
+						A nice quote from this book that I enjoyed - 
+						"No fairer destiny could be allotted to any physical theory, 
+						than that it should of itself point out the way to the introduction 
+						of a more comprehensive theory, in which it lives on as a 
+						limiting case." 
+						<!-- Incremental progress is what drives the human race. -->
+					</li>
+					<li>
+						<a href="/writings/ursa_proposal_dec21.pdf">Interactive Object Segmentation in Mobile Robots - URSA Proposal December 2021</a>
+					</li>
+					<li>
+						<a href="/writings/agc.pdf">A Brief Analysis of the Apollo Guidance Computer</a> - <a href="https://arxiv.org/abs/2201.08230">arXiv Preprint</a> - <a href="https://www.overleaf.com/read/mvztwcmwkmhq">LaTeX source</a>
+					</li>
+				</ul>
 
-			<h2>Helpful Scripts</h2>
-			<ul>
-				<li>
-					<a href="CScripts">C Scripts</a>
-				</li>
-				<li>
-					<a href="BashScripts/">Bash Scripts</a>
-				</li>
-				<li>
-					<a href="UnityScripts/">Unity Scripts</a>
-				</li>
-				<li>
-					<a href="TIBasicScripts">TI-BASIC Scripts</a>
-				</li>
-			</ul>
+				<h3>Teaching</h3>
+				<p>
+					As an undergraduate, I taught two semester-long compiler design 
+					workshops, <a href="/teaching/PCD/">Practical Compiler Design</a> in Spring 2023
+					and <a href="/teaching/ICD/">Introduction to Compiler Design</a> in Fall 2023.
+				</p>
+				<p>
+					Additionally, I've given a number of educational outreach talks
+					in fields such as formal verification and quantum computing
+					through the UTD Computer Security Group (of which I am an officer)
+					and the Dallas Hackers' Association.
+				</p>
+				<table>
+					<thead>
+					  <tr>
+						<th>Title</th>
+						<th>Venues</th>
+						<th>Dates</th>
+						<th>Links</th>
+					  </tr>
+					</thead>
+					<tbody>
+					  <tr>
+						<td><a href="/teaching/sotu_v2.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk (v2)</a></td>
+						<td>UTD CSG</td>
+						<td>November 2024</td>
+						<td><a href="/teaching/sotu_demo.v">Demo</a></td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/Qubit_Recycling__Revisited.pdf">Qubit Recycling Revisited</a></td>
+						<td>UTD Quantum Information Seminar</td>
+						<td>October 2024</td>
+						<td><a href="/teaching/Qubit_Recycling__Revisited_handout.pdf">Handout</a></td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/30_Cycles_or_It_s_Free___Formal_Timing_of_Binary_Code.pdf">30 Cycles or It's Free - Formal Timing of Binary Code</a></td>
+						<td>DHA, CSG</td>
+						<td>September, October 2024</td>
+						<td></td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/langsec_review_1.pdf">Quarterly LangSec Review #1 - Dancing, Type Systems, and Quantum Computers</a></td>
+						<td>DHA</td>
+						<td>September 2024</td>
+						<td></td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/Formal_Timing_and_Correctness_of_Binary_Code.pdf">The Good, The Bad, and The Binary: Formal Timing and Correctness of Binary Code</a></td>
+						<td>Dartmouth TrustLab</td>
+						<td>August 2024</td>
+						<td></td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/volpic.pdf">Verifier of Lifted Pascal in Coq</a></td>
+						<td>DHA</td>
+						<td>February 2024</td>
+						<td></td>
+					  </tr>
+					  <tr>
+						<td>Type Inhabitation</td>
+						<td>DHA</td>
+						<td>November 2023</td>
+						<td></td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/sotu.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk (v1)</a></td>
+						<td>CSG</td>
+						<td>October 2023</td>
+						<td></td>
+					  </tr>
+					  <tr>
+						<td>Formal Program Verification (v1, v2)</td>
+						<td>DHA</td>
+						<td>May, October 2023</td>
+						<td></td>
+					  </tr>
+					  <tr>
+						<td><a href="/Combinators/BCKW_Combinator_Calculus.pdf" target="_blank">BCKW Combinator Calculus</a></td>
+						<td>CSG</td>
+						<td>April 2023</td>
+						<td><a href="https://www.overleaf.com/read/rdycdgjftmkz" target="_blank">LaTeX Source</a></td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/fpv_cyberfest23.pdf" target="_blank">Formal Program Verification</a></td>
+						<td>Dallas Cyberfest</td>
+						<td>March 2023</td>
+						<td>
+						  <a href="https://www.overleaf.com/project/641b8856e361708a2e342052" target="_blank">LaTeX Source</a>, 
+						  <a href="https://www.youtube.com/watch?v=LC65vQSaC8g" target="_blank">Video</a>
+						</td>
+					  </tr>
+					  <!-- <tr>
+						<td><a href="/teaching/brickmachine.pdf" target="_blank">Dr. BrickMachine, or: How I Learned to Stop Worrying and <strike>Love</strike>Hate The Apache HTTP Server Project</a></td>
+						<td></td>
+						<td></td>
+					  </tr> -->
+					  <tr>
+						<td><a href="/teaching/Secure_Quantum_Information_Transfer_Tech_Talk.pdf" target="_blank">Secure Quantum Information Transfer</a></td>
+						<td>CSG</td>
+						<td>November 2022</td>
+						<td></td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/Decompilation_Shmecompilation.pdf" target="_blank">Decompilation Schmecompilation</a></td>
+						<td>CSG</td>
+						<td>October 2022</td>
+						<td></td>
+					  </tr>
+					  <tr>
+						<td><a href="/writings/Pushing_Grasping_Synergy.pdf">Analysis of "Learning Synergies between Pushing and Grasping with Self-supervised Deep Reinforcement Learning"</a></td>
+						<td>UTD Interactive Robotics and Vision Lab</td>
+						<td>April 2022</td>
+						<td><a href="https://www.overleaf.com/read/vdpdbrkvtvpk">LaTeX source</a>, <a href="https://arxiv.org/abs/1803.09956">Original Paper</a></td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/PyJail_talk.pdf">Prison Snake</a></td>
+						<td>CSG</td>
+						<td>February 2022</td>
+						<td><a href="https://www.youtube.com/watch?v=7i3qgtMq3NQ">Recording</a></td>
+					  </tr>
+					</tbody>
+				</table>
 
-			<h2>Miscellaneous</h2>
+				<h2>Projects</h2>
+				<div class="gh-card" data-repo="CharlesAverill/ZENITH" data-image="https://github.com/CharlesAverill/zenith/raw/main/media/logo.gif"></div>
+				<div id="volpiccard" class="gh-card" data-repo="CharlesAverill/VOLPIC" data-image="https://github.com/CharlesAverill/volpic/raw/main/media/logo_black.png"></div>
+				<ul>
+					<li>
+						<a href="https://www.overleaf.com/read/gcrnnzfsmrvq">Graph Shepherding Algorithms</a>
+					</li>
+					<li>
+						<a href="Projects/DEFFS/">DEFFS</a>
+					</li>
+					<li>
+						<a href="Purple/">Purple</a>
+					</li>
+					<li>
+						<a href="Projects/turing/">Turing</a>
+					</li>
+				</ul>
 
-			<ul>
-			<li><a href="https://www.discogs.com/user/caverill/collection">My Record Collection</a></li>
-			<li><a href="https://radio.charles.systems/">Radio Charles</a></li>
-			<li><a href="travel/">Where Have I Been?</a></li>
-			<li>
-					<p>Visitor Count</p>
-					<img src="https://profile-counter.glitch.me/CharlesAverill/count.svg"></img>
-			</li>
-			</ul>
-		</div>
+				<h2>Games</h2>
+				<ul>
+					<li>
+						<a href="Projects/DinosaurIsland/">Dinosaur Island</a>
+					</li>
+					<li>
+						<a href="BirdAndBeans/docs/">Bird And Beans</a>
+					</li>
+					<li>
+						<a href="AT_CWD/">Adventure Time: Card Wars Dominion</a>
+					</li>
+				</ul>
+	
+				<h2>Scripts</h2>
+				<ul>
+					<li>
+						<a href="CScripts">C Scripts</a>
+					</li>
+					<li>
+						<a href="BashScripts/">Bash Scripts</a>
+					</li>
+					<li>
+						<a href="UnityScripts/">Unity Scripts</a>
+					</li>
+					<li>
+						<a href="TIBasicScripts">TI-BASIC Scripts</a>
+					</li>
+				</ul>
+
+				<h2>Miscellaneous</h2>
+				<ul>
+					<li><a href="bookshelf">My Bookshelf</a></li>
+					<li><a href="https://www.discogs.com/user/caverill/collection">My Record Collection</a></li>
+					<li><a href="https://radio.charles.systems/">Radio Charles</a></li>
+					<li><a href="travel/">Where Have I Been?</a></li>
+					<li>
+						<a href="PDMusic/">Transcriptions of "The International Library of Music" Public Domain Sheet Music</a>
+					</li>
+					<li>
+						<p>Visitor Count</p>
+						<img src="https://profile-counter.glitch.me/CharlesAverill/count.svg"></img>
+					</li>
+				</ul>
+			</article>
+		</main>
+
+		<form style="text-align: center;">
+			<fieldset>
+				<legend>Settings</legend>
+				<label class="switch">
+					<input type="button" onclick="toggleDarkMode()" value="Toggle Dark Mode">
+				</label>
+				<br>
+				<label class="switch">
+					<input id="typeface" type="button" onclick="toggleFont()" value="Toggle Font - Latin Modern">
+				</label>
+			</fieldset>
+		</form>
 
 		<h1 class="hide" onclick="document.getElementById('slidewhist').play()">Click here!</h1>
 
@@ -129,4 +351,58 @@
 			<source src="/static/audio/snd-slidewhist.mp3" type="audio/mpeg">
 		</audio>
 	</body>
+	<script>
+		// Default values
+		let darkModeEnabled = JSON.parse(localStorage.getItem("darkModeEnabled")) ?? false;
+		let font = localStorage.getItem("font") ?? 'Latin Modern';
+
+    	const typeface = document.getElementById('typeface');
+
+		// Toggle dark mode
+		function toggleDarkModeVisual() {
+			document.body.classList.toggle('latex-dark');
+			// document.getElementById('volpiccard').setAttribute('data-image',
+			// 	'https://github.com/CharlesAverill/volpic/raw/main/media/logo_' + (darkModeEnabled ? 'white' : 'black') + '.png');
+		}
+		function toggleDarkMode() {
+			toggleDarkModeVisual();
+			darkModeEnabled = !darkModeEnabled;
+			localStorage.setItem("darkModeEnabled", darkModeEnabled);
+			console.log(localStorage);
+		}
+
+		// Toggle font
+		function toggleFontVisual() {
+			document.body.classList.toggle('libertinus');
+			typeface.textContent = "Toggle Font - " + document.body.classList.contains('libertinus') ? 'Libertinus' : 'Latin Modern';
+		}
+		function toggleFont() {
+			toggleFontVisual();
+			font = typeface.textContent;
+			localStorage.setItem("font", font);
+			console.log(localStorage);
+		}
+
+		// Rotate headshot carousel
+		const imagePath = "/static/images/";
+		const images = ["csg.png", "hackutd.png", "main.png", "main2.png", "mountain.png"];
+		const carousel = document.getElementById("imageCarousel");
+		let clicks = 0;
+		function imageCarousel() {
+			if (++clicks%3 != 0)
+				return;
+
+			let currentImage = carousel.src;
+			while(carousel.src && carousel.src == currentImage)
+				carousel.src = imagePath + images[Math.floor(Math.random() * images.length)];
+		}
+
+		if (darkModeEnabled) {
+			toggleDarkModeVisual();
+			document.getElementById("toggle")
+		}
+		if (font != 'Latin Modern') {
+			toggleFontVisual();
+		}
+	</script>
 </html>
