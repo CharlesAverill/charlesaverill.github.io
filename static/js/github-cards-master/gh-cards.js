@@ -60,11 +60,11 @@ for(let card of cards) {
     card.innerHTML = `
       <img style="width: 100%; margin-left: auto; margin-right: auto;" class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}">
       <div class="gh container">
-        <h4 class="gh">
+        <p class="gh">
           <a class="gh" href="${json.html_url}">
-            ${json.full_name}
+            <b>${json.full_name}</b>
           </a>
-        </h4>
+        </p>
         <p class="gh">${json.description}</p>
         <a class="gh" href="${json.html_url}/network">${json.forks_count} forks</a> - 
         <a class="gh" href="${json.html_url}/stargazers">${json.stargazers_count} stars</a>
