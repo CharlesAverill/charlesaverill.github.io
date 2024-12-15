@@ -24,7 +24,7 @@ let style = `
   display: inline-block;
   margin: 8px;
   border-radius: 5px;
-  width: 45%;
+  width: 44%;
 }
 
 .gh-card:hover {
