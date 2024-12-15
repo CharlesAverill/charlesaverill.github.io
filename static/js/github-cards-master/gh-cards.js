@@ -60,7 +60,7 @@ for(let card of cards) {
     card.innerHTML = `
       <img style="width: 100%; margin-left: auto; margin-right: auto;" class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}">
       <div class="gh container">
-        <p class="gh">
+        <p class="gh" style="word-break: break-all;">
           <a class="gh" href="${json.html_url}">
             <b>${json.full_name}</b>
           </a>
