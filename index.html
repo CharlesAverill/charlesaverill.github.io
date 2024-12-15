@@ -379,7 +379,7 @@
 		}
 		function toggleFont() {
 			toggleFontVisual();
-			font = typeface.textContent;
+			font = typeface.value.contains('Libertinus') ? 'Libertinus' : 'Latin Modern';
 			localStorage.setItem("font", font);
 			console.log(localStorage);
 		}
