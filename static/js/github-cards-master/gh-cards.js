@@ -86,6 +86,7 @@ for(let card of cards) {
     return resp.json();
   }).then(json => {
     
+    // <a class="gh" href="${json.html_url}/network">${json.forks_count} forks</a> - 
     card.innerHTML = `
       <img class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}">
       <div class="gh container card-content">
@@ -95,7 +96,6 @@ for(let card of cards) {
           </a>
         </p>
         <p class="gh">${json.description}</p>
-        <a class="gh" href="${json.html_url}/network">${json.forks_count} forks</a> - 
         <a class="gh" href="${json.html_url}/stargazers">${json.stargazers_count} stars</a>
       </div>
     `;
