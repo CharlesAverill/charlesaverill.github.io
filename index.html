@@ -379,11 +379,11 @@
 		// Toggle font
 		function toggleFontVisual() {
 			document.body.classList.toggle('libertinus');
-			typeface.value = "Toggle Font - " + document.body.classList.contains('libertinus') ? 'Libertinus' : 'Latin Modern';
+			typeface.value = "Toggle Font - " + (font == 'Libertinus' ? 'Latin Modern' : 'Libertinus');
 		}
 		function toggleFont() {
 			toggleFontVisual();
-			font = typeface.value.contains('Libertinus') ? 'Libertinus' : 'Latin Modern';
+			font = (font == 'Latin Modern') ? 'Libertinus' : 'Latin Modern';
 			localStorage.setItem("font", font);
 			console.log(localStorage);
 		}
