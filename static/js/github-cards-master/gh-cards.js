@@ -21,10 +21,9 @@ let style = `
 
 .gh-card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  display: inline-block;
+  display: flex;
   margin: 8px;
   border-radius: 5px;
-  width: 44%;
 }
 
 .gh-card:hover {
@@ -32,7 +31,7 @@ let style = `
 }
 
 img.gh {
-  border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 5px 5px;
   width: 100%;
 }
 
@@ -43,6 +42,36 @@ img.gh {
 .gh p {
   line-height: 1.6;
   margin: 1em 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0.5em;
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card img {
+  width: 50%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 1.5em;
+  flex: 1;
+}
+
+.card-content h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.card-content p {
+  font-size: 1em;
 }
 `;
 
@@ -58,11 +87,11 @@ for(let card of cards) {
   }).then(json => {
     
     card.innerHTML = `
-      <img style="width: 100%; margin-left: auto; margin-right: auto;" class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}">
-      <div class="gh container">
+      <img class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}">
+      <div class="gh container card-content">
         <p class="gh" style="word-break: break-all;">
           <a class="gh" href="${json.html_url}">
-            <b>${json.full_name}</b>
+            <b>${json.name}</b>
           </a>
         </p>
         <p class="gh">${json.description}</p>

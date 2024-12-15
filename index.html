@@ -20,6 +20,14 @@
 			tag.src = "/static/js/github-cards-master/gh-cards.js";
 			document.getElementsByTagName("head")[0].appendChild(tag);
 		</script>
+
+		<style>
+			table {
+				table-layout: fixed;
+				width: 100% !important;
+				word-wrap: anywhere;
+			}
+		</style>
 	</head>
 	<body>
 		<header>
@@ -45,10 +53,10 @@
 							<a href="https://github.com/CharlesAverill/">Github page</a>. -->
 						</p>
 						<br>
-						<p><tt>charles at utdallas dot edu</tt></p>
+						<p style="hyphens: none"><tt>charles at utdallas dot edu</tt></p>
 						<br>
 						<p>
-							<a href="https://www.overleaf.com/read/hxsjbbvcgwzb">My Résumé</a> - 
+							<a href="https://www.overleaf.com/read/hxsjbbvcgwzb">My Résumé</a> &nbsp;
 							<a href="https://www.overleaf.com/read/zykmjzrfqqwc#fc85c5">My Curriculum Vitae</a>
 						</p>
 					</td>
@@ -56,8 +64,8 @@
 			</table>
 
 			<p style="text-align: center; width:100%">
-				<a href="https://github.com/CharlesAverill">Github</a> -
-				<a href="https://orcid.org/0000-0001-6614-1808" style="vertical-align: top">https://orcid.org/0000-0001-6614-1808</a> -
+				<a href="https://github.com/CharlesAverill">Github</a> &nbsp;
+				<a href="https://orcid.org/0000-0001-6614-1808" style="vertical-align: top">https://orcid.org/0000-0001-6614-1808</a> &nbsp;
 				<a href="https://arxiv.org/search/cs?query=Averill%2C+Charles&searchtype=author&abstracts=show">arxiv</a>
 			</p>
 		</div>
@@ -68,48 +76,42 @@
 				<table>
 					<thead>
 					  <tr>
-						<th>Title</th>
+						<th style="width: 50%;">Title</th>
 						<th>Venue</th>
-						<th>Link</th>
+						<!-- <th style="width: 25%">Link</th> -->
 					  </tr>
 					</thead>
 					<tbody>
 					  <tr>
-						<td><em>VOLPIC: Verifying Lifted Pascal in Coq</em></td>
+						<td><em>VOLPIC: Verifying Lifted Pascal in Coq</em>
+							<br>
+							<a href="/publications/VOLPIC_SRC.pdf">Extended Abstract</a> &nbsp;
+							<a href="/publications/VOLPIC_SRC_Poster.pdf">Poster</a>
+						</td>
 						<td>PLDI SRC 2024</td>
-						<td>
-						  <a href="/publications/VOLPIC_SRC.pdf">Extended Abstract</a>, 
-						  <a href="/publications/VOLPIC_SRC_Poster.pdf">Poster</a>
-						</td>
 					  </tr>
 					  <tr>
-						<td><em>Prettybird: A DSL for Programmatic Font Compilation</em></td>
+						<td><em>Prettybird: A DSL for Programmatic Font Compilation</em>
+							<br>
+							<a href="/publications/Prettybird_SRC.pdf">Extended Abstract</a> &nbsp;
+							<a href="/publications/Prettybird_SRC_Poster.pdf">Poster</a>
+						</td>
 						<td>PLDI SRC 2023</td>
-						<td>
-						  <a href="/publications/Prettybird_SRC.pdf">Extended Abstract</a>, 
-						  <a href="/publications/Prettybird_SRC_Poster.pdf">Poster</a>
-						</td>
 					  </tr>
 					  <tr>
-						<td><em>Self-Supervised Unseen Object Instance Segmentation via Long-Term Robot Interaction</em></td>
+						<td><a href="/publications/SSUOISLTRI.pdf"><em>Self-Supervised Unseen Object Instance Segmentation via Long-Term Robot Interaction</em></a>
+						</td>
 						<td>RSS 2023</td>
-						<td>
-						  <a href="/publications/SSUOISLTRI.pdf">Paper</a>
-						</td>
 					  </tr>
 					  <tr>
-						<td><em>Connecting the Brains via Virtual Eyes: Eye-Gaze Directions and Inter-brain Synchrony in VR</em></td>
+						<td>
+							<a href="/publications/CTBVVE_EGDaIBSVR.pdf"><em>Connecting the Brains via Virtual Eyes: Eye-Gaze Directions and Inter-brain Synchrony in VR</em></a>
+						</td>
 						<td>CHI 2021</td>
-						<td>
-						  <a href="/publications/CTBVVE_EGDaIBSVR.pdf">Paper</a>
-						</td>
 					  </tr>
 					  <tr>
-						<td><em>NFTree: Art Without Emissions</em></td>
+						<td><a href="/publications/JIPP_2_4_Technology_in_Policy.pdf"><em>NFTree: Art Without Emissions</em></a></td>
 						<td>JIPP Vol. 2 Issue 4</td>
-						<td>
-						  <a href="/publications/JIPP_2_4_Technology_in_Policy.pdf">Article</a>
-						</td>
 					  </tr>
 					</tbody>
 				</table>
@@ -160,117 +162,119 @@
 				<table>
 					<thead>
 					  <tr>
-						<th>Title</th>
+						<th style="width: 45%;">Title</th>
 						<th>Venues</th>
 						<th>Dates</th>
-						<th>Links</th>
 					  </tr>
 					</thead>
 					<tbody>
 					  <tr>
-						<td><a href="/teaching/sotu_v2.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk (v2)</a></td>
-						<td>UTD CSG</td>
-						<td>November 2024</td>
-						<td><a href="/teaching/sotu_demo.v">Demo</a></td>
+						<td><a href="/teaching/sotu_v2.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk (v2)</a>
+							<br>
+							<a href="/teaching/sotu_demo.v">Demo</a>
+						</td>
+						<td>CSG</td>
+						<td>Nov 2024</td>
 					  </tr>
 					  <tr>
-						<td><a href="/teaching/Qubit_Recycling__Revisited.pdf">Qubit Recycling Revisited</a></td>
+						<td><a href="/teaching/Qubit_Recycling__Revisited.pdf">Qubit Recycling Revisited</a>
+							<br>
+							<a href="/teaching/Qubit_Recycling__Revisited_handout.pdf">Handout</a>
+						</td>
 						<td>UTD Quantum Information Seminar</td>
-						<td>October 2024</td>
-						<td><a href="/teaching/Qubit_Recycling__Revisited_handout.pdf">Handout</a></td>
+						<td>Oct 2024</td>
 					  </tr>
 					  <tr>
 						<td><a href="/teaching/30_Cycles_or_It_s_Free___Formal_Timing_of_Binary_Code.pdf">30 Cycles or It's Free - Formal Timing of Binary Code</a></td>
 						<td>DHA, CSG</td>
-						<td>September, October 2024</td>
-						<td></td>
+						<td>Sept, Oct 2024</td>
 					  </tr>
 					  <tr>
 						<td><a href="/teaching/langsec_review_1.pdf">Quarterly LangSec Review #1 - Dancing, Type Systems, and Quantum Computers</a></td>
 						<td>DHA</td>
-						<td>September 2024</td>
-						<td></td>
+						<td>Sept 2024</td>
 					  </tr>
 					  <tr>
 						<td><a href="/teaching/Formal_Timing_and_Correctness_of_Binary_Code.pdf">The Good, The Bad, and The Binary: Formal Timing and Correctness of Binary Code</a></td>
 						<td>Dartmouth TrustLab</td>
-						<td>August 2024</td>
-						<td></td>
+						<td>Aug 2024</td>
 					  </tr>
 					  <tr>
 						<td><a href="/teaching/volpic.pdf">Verifier of Lifted Pascal in Coq</a></td>
 						<td>DHA</td>
-						<td>February 2024</td>
-						<td></td>
+						<td>Feb 2024</td>
 					  </tr>
 					  <tr>
 						<td>Type Inhabitation</td>
 						<td>DHA</td>
-						<td>November 2023</td>
-						<td></td>
+						<td>Nov 2023</td>
 					  </tr>
 					  <tr>
 						<td><a href="/teaching/sotu.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk (v1)</a></td>
 						<td>CSG</td>
-						<td>October 2023</td>
-						<td></td>
+						<td>Oct 2023</td>
 					  </tr>
 					  <tr>
 						<td>Formal Program Verification (v1, v2)</td>
 						<td>DHA</td>
-						<td>May, October 2023</td>
-						<td></td>
+						<td>May, Oct 2023</td>
 					  </tr>
 					  <tr>
-						<td><a href="/Combinators/BCKW_Combinator_Calculus.pdf" target="_blank">BCKW Combinator Calculus</a></td>
-						<td>CSG</td>
-						<td>April 2023</td>
-						<td><a href="https://www.overleaf.com/read/rdycdgjftmkz" target="_blank">LaTeX Source</a></td>
-					  </tr>
-					  <tr>
-						<td><a href="/teaching/fpv_cyberfest23.pdf" target="_blank">Formal Program Verification</a></td>
-						<td>Dallas Cyberfest</td>
-						<td>March 2023</td>
-						<td>
-						  <a href="https://www.overleaf.com/project/641b8856e361708a2e342052" target="_blank">LaTeX Source</a>, 
-						  <a href="https://www.youtube.com/watch?v=LC65vQSaC8g" target="_blank">Video</a>
+						<td><a href="/Combinators/BCKW_Combinator_Calculus.pdf">BCKW Combinator Calculus</a>
+							<br>
+							<a href="https://www.overleaf.com/read/rdycdgjftmkz">LaTeX Source</a>
 						</td>
+						<td>CSG</td>
+						<td>Apr 2023</td>
+					  </tr>
+					  <tr>
+						<td><a href="/teaching/fpv_cyberfest23.pdf">Formal Program Verification</a>
+							<br>	
+							<a href="https://www.overleaf.com/project/641b8856e361708a2e342052">LaTeX Source</a> &nbsp;
+							<a href="https://www.youtube.com/watch?v=LC65vQSaC8g">Video</a>
+						</td>
+						<td>Dallas Cyberfest</td>
+						<td>Mar 2023</td>
 					  </tr>
 					  <!-- <tr>
-						<td><a href="/teaching/brickmachine.pdf" target="_blank">Dr. BrickMachine, or: How I Learned to Stop Worrying and <strike>Love</strike>Hate The Apache HTTP Server Project</a></td>
+						<td><a href="/teaching/brickmachine.pdf">Dr. BrickMachine, or: How I Learned to Stop Worrying and <strike>Love</strike>Hate The Apache HTTP Server Project</a></td>
 						<td></td>
 						<td></td>
 					  </tr> -->
 					  <tr>
-						<td><a href="/teaching/Secure_Quantum_Information_Transfer_Tech_Talk.pdf" target="_blank">Secure Quantum Information Transfer</a></td>
+						<td><a href="/teaching/Secure_Quantum_Information_Transfer_Tech_Talk.pdf">Secure Quantum Information Transfer</a></td>
 						<td>CSG</td>
-						<td>November 2022</td>
-						<td></td>
+						<td>Nov 2022</td>
 					  </tr>
 					  <tr>
-						<td><a href="/teaching/Decompilation_Shmecompilation.pdf" target="_blank">Decompilation Schmecompilation</a></td>
+						<td><a href="/teaching/Decompilation_Shmecompilation.pdf">Decompilation Schmecompilation</a></td>
 						<td>CSG</td>
-						<td>October 2022</td>
-						<td></td>
+						<td>Oct 2022</td>
 					  </tr>
 					  <tr>
-						<td><a href="/writings/Pushing_Grasping_Synergy.pdf">Analysis of "Learning Synergies between Pushing and Grasping with Self-supervised Deep Reinforcement Learning"</a></td>
+						<td><a href="/writings/Pushing_Grasping_Synergy.pdf">Analysis of "Learning Synergies between Pushing and Grasping with Self-supervised Deep Reinforcement Learning"</a>
+							<br>
+							<a href="https://www.overleaf.com/read/vdpdbrkvtvpk">LaTeX source</a> &nbsp; 
+							<a href="https://arxiv.org/abs/1803.09956">Original Paper</a>
+						</td>
 						<td>UTD Interactive Robotics and Vision Lab</td>
-						<td>April 2022</td>
-						<td><a href="https://www.overleaf.com/read/vdpdbrkvtvpk">LaTeX source</a>, <a href="https://arxiv.org/abs/1803.09956">Original Paper</a></td>
+						<td>Apr 2022</td>
 					  </tr>
 					  <tr>
-						<td><a href="/teaching/PyJail_talk.pdf">Prison Snake</a></td>
+						<td><a href="/teaching/PyJail_talk.pdf">Prison Snake</a>
+							<br>
+							<a href="https://www.youtube.com/watch?v=7i3qgtMq3NQ">Recording</a>
+						</td>
 						<td>CSG</td>
-						<td>February 2022</td>
-						<td><a href="https://www.youtube.com/watch?v=7i3qgtMq3NQ">Recording</a></td>
+						<td>Feb 2022</td>
 					  </tr>
 					</tbody>
 				</table>
 
 				<h2>Projects</h2>
-				<div class="gh-card" data-repo="CharlesAverill/ZENITH" data-image="https://github.com/CharlesAverill/zenith/raw/main/media/logo.gif"></div>
-				<div id="volpiccard" class="gh-card" data-repo="CharlesAverill/VOLPIC" data-image="https://github.com/CharlesAverill/volpic/raw/main/media/logo_black.png"></div>
+				<div id="volpiccard" class="gh-card card" data-repo="CharlesAverill/VOLPIC" data-image="https://github.com/CharlesAverill/VOLPIC/raw/main/media/logo_black.png"></div>
+				<div class="gh-card card" data-repo="CharlesAverill/ZENITH" data-image="https://github.com/CharlesAverill/ZENITH/raw/main/media/logo.gif"></div>
+				<div class="gh-card card" data-repo="CharlesAverill/proofchat" data-image="https://raw.githubusercontent.com/CharlesAverill/proofchat/refs/heads/main/media/proofchat.png"></div>
 				<ul>
 					<li>
 						<a href="https://www.overleaf.com/read/gcrnnzfsmrvq">Graph Shepherding Algorithms</a>
