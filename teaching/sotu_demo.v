@@ -34,7 +34,8 @@ Proof.
     intros. induction n. reflexivity.
     simpl. rewrite <- IHn. 
     unfold double_simple. rewrite <- mult_n_Sm.
-    replace (S (2 * n)) with (2 * n + 1) by (rewrite Nat.add_1_r; reflexivity).
+    replace (S (2 * n)) with (2 * n + 1) by 
+        (rewrite Nat.add_1_r; reflexivity).
     symmetry. apply plus_n_Sm.
 Qed. 
 
@@ -53,32 +54,41 @@ Definition mem_size (m : memory_space) := fst m.
 Definition empty_memory_space (size : nat) : memory_space := 
     (size, fun addr => (addr mod size, x00)).
 
-Compute empty_memory_space 64.
+Check empty_memory_space 64.
 
 Definition kilobyte_ram := empty_memory_space 1024.
 
 (* Accessing raw memory, a necessessity of the Von Neumann model *)
-Definition raw_mem_read (space : memory_space) (address : nat) : (nat * byte) :=
+Definition raw_mem_read (space : memory_space) (address : nat) 
+        : (nat * byte) :=
     (snd space) (address mod (mem_size space)).
 
 (* Writing to raw memory, also a necessity *)
-Definition raw_mem_write (space : memory_space) (address : nat) (new_data : byte) : memory_space :=
-    (mem_size space, fun x => if address mod (mem_size space) =? x then (address mod (mem_size space), new_data) else (raw_mem_read space x)).
+Definition raw_mem_write (space : memory_space) (address : nat) (new_data 
+        : byte) : memory_space :=
+    (mem_size space, 
+     fun x => if address mod (mem_size space) =? x then 
+                (address mod (mem_size space), new_data) 
+              else 
+                (raw_mem_read space x)).
 
 Fixpoint list_of_memory_size mem_size mem_func : list (nat * byte) :=
     match mem_size with 
     | O => nil
-    | S n' => (raw_mem_read (mem_size, mem_func) n') :: (list_of_memory_size n' mem_func)
+    | S n' => (raw_mem_read (mem_size, mem_func) n') :: 
+        (list_of_memory_size n' mem_func)
     end.
 
 (*
     Bytes print out in hex
     e.g. x11 = 0x11 = 17_10
 *)
-Definition print_mem m := match m with (s, mem) => rev (list_of_memory_size s mem) end.
+Definition print_mem m := 
+        match m with (s, mem) => rev (list_of_memory_size s mem) end.
 
 (* Example of raw memory read/write *)
 Definition tiny_ram := empty_memory_space 8.
+Compute print_mem tiny_ram.
 Definition overwritten_ram := raw_mem_write tiny_ram 7 x10.
 Compute print_mem overwritten_ram.
 Compute raw_mem_read overwritten_ram 7.
@@ -107,13 +117,15 @@ Definition read_subarray (arr : array) (position length : nat) :=
     List.map (array_access arr) (seq position length).
 
 (* Unsafe array write *)
-Definition array_write (arr : array) (address : nat) (new_data : byte) : array :=
+Definition array_write (arr : array) (address : nat) (new_data : byte) 
+        : array :=
     match arr with
     | (space, arr_loc, size) => 
         ((raw_mem_write space (arr_loc + address) new_data), arr_loc, size)
     end.
 
-Definition write_subarray (arr : array) (position : nat) (data : list byte) : array :=
+Definition write_subarray (arr : array) (position : nat) (data : list byte) 
+        : array :=
     fst (List.fold_left ( fun (acc : array * nat) (item : byte) =>
         (array_write (fst acc) (snd acc) item, (snd acc + 1))
     ) data (arr, 0)).
@@ -165,7 +177,8 @@ Compute print_arr_mem tiny_array'.
 (* Read from tiny_array' starting at position 3 for 3 bytes *)
 Compute read_subarray tiny_array' 3 3.
 (* Write [7, 7, 7, 7, 7, 7] to tiny_array' at position 0 *)
-Compute print_arr_mem (write_subarray tiny_array' 0 [x07; x07; x07; x07; x07; x07]).
+Compute print_arr_mem (write_subarray tiny_array' 0 
+    [x07; x07; x07; x07; x07; x07]).
 
 (*
     Woah! We just managed to read secret data outside of our array!
@@ -177,21 +190,25 @@ Compute print_arr_mem (write_subarray tiny_array' 0 [x07; x07; x07; x07; x07; x0
 (* Safe array access *)
 Definition array_access_safe (arr : array) (position : nat) : (nat * byte) :=
     match arr with 
-    | (space, address, size) => raw_mem_read space (address + (position mod size))
+    | (space, address, size) => 
+        raw_mem_read space (address + (position mod size))
     end.
 
 Definition read_subarray_safe (arr : array) (position length : nat) :=
     List.map (array_access_safe arr) (seq position length).
 
 (* Unsafe array write *)
-Definition array_write_safe (arr : array) (address : nat) (new_data : byte) : array :=
+Definition array_write_safe (arr : array) (address : nat) (new_data : byte) 
+        : array :=
     match arr with
     | (space, arr_loc, size) => 
-        ((raw_mem_write space (arr_loc + (address mod size)) new_data), arr_loc, size)
+        ((raw_mem_write space (arr_loc + (address mod size)) new_data), 
+         arr_loc, size)
     end.
 
-Definition write_subarray_safe (arr : array) (position : nat) (data : list byte) : array :=
-    fst (List.fold_left ( fun (acc : array * nat) (item : byte) =>
+Definition write_subarray_safe (arr : array) (position : nat) (data : list byte) 
+        : array :=
+    fst (List.fold_left (fun (acc : array * nat) (item : byte) =>
         (array_write_safe (fst acc) (snd acc) item, (snd acc + 1))
     ) data (arr, 0)).
 
@@ -212,7 +229,8 @@ Compute print_arr_mem tiny_array'''.
     Now let's do the safe counterparts of those access operations
 *)
 Compute read_subarray_safe tiny_array' 3 3.
-Compute print_arr_mem (write_subarray_safe tiny_array' 0 [x07; x07; x07; x07; x07; x07]).
+Compute print_arr_mem (write_subarray_safe tiny_array' 0 
+    [x07; x07; x07; x07; x07; x07]).
 
 (*
     Wow! We've prevented read/write access to data outside of the array bounds,
@@ -232,28 +250,26 @@ Theorem safety_of_array_access_safe :
     forall arr position
         (SPACE_HAS_SIZE : 0 < mem_size (_space arr))
         (ARR_HAS_SIZE : 0 < _size arr)
-        (ARR_STARTS_WITHIN_BOUNDS : 0 <= _addr arr + _size arr < mem_size (_space arr))
+        (ARR_STARTS_WITHIN_BOUNDS : 
+            0 <= _addr arr + _size arr < mem_size (_space arr))
         (ARR_MAX_LEN : _size arr <= mem_size (_space arr) - _addr arr)
-        (SPACE_INDICES : forall n : nat, fst (raw_mem_read (_space arr) n) = n),
+        (SPACE_INDICES : 
+            forall n : nat, fst (raw_mem_read (_space arr) n) = n),
     in_arr_bounds arr (fst (array_access_safe arr position)).
 Proof.
-    intros. 
-    destruct arr as [[space arr_addr] arr_size].
-    destruct space as [space_size space_func]. simpl in *.
-    destruct ARR_STARTS_WITHIN_BOUNDS as [ARRLOWERBOUND ARRUPPERBOUND].
-    unfold in_arr_bounds, _addr, _space in *. simpl in *.
-    split. rewrite SPACE_INDICES. apply Nat.le_add_r.
-    rewrite SPACE_INDICES. apply -> Nat.add_lt_mono_l. 
-    apply Nat.mod_upper_bound, not_eq_sym, Nat.lt_neq. assumption.
-Qed.
+    intros.
+    (* Unfold definitions for memory, arrays, bounds *) 
+    destruct arr as [[space arr_addr] arr_size];
+    destruct space as [space_size space_func];
+    destruct ARR_STARTS_WITHIN_BOUNDS as [ARRLOWERBOUND ARRUPPERBOUND];
+    unfold in_arr_bounds, _addr, _space in *; simpl in *.
 
-Lemma eqb_impl_eq:
-    forall n m,
-    n =? m = true -> n = m.
-Proof.
-    induction n; intros.
-    - inversion H. destruct m. reflexivity. inversion H1.
-    - simpl in H. destruct m. inversion H. apply eq_S. apply IHn. assumption.
+    split.
+    - (* Hanlde lower bound *)
+        rewrite SPACE_INDICES. apply Nat.le_add_r.
+    - (* Handle upper bound *)
+        rewrite SPACE_INDICES. apply -> Nat.add_lt_mono_l. 
+        apply Nat.mod_upper_bound, not_eq_sym, Nat.lt_neq. assumption.
 Qed.
 
 (*
@@ -284,7 +300,7 @@ Proof.
     simpl in *. inversion ARR'. clear ARR'. subst.
     split. admit.
     destruct ((arr_addr + position mod arr_size) mod space_size =? i mod space_size) eqn:E.
-    apply eqb_impl_eq in E. rewrite E in H.
+    apply Nat.eqb_eq in E. rewrite E in H.
     destruct space_func eqn:E1. assert (n = fst (space_func (i mod space_size))). {
     destruct space_func. inversion E1. reflexivity.
     } rewrite SPACE_INDICES in H0. subst.
@@ -302,12 +318,16 @@ Admitted.
 (* Writing to raw memory, also a necessity *)
 Definition raw_mem_write' (space : memory_space) (address : nat) (new_data : byte) : nat * memory_space :=
     (* We now return the raw address that was written to *)
-    (address mod (mem_size space), 
-    (mem_size space, fun x => if address mod (mem_size space) =? x then (address mod (mem_size space), new_data) else (raw_mem_read space x))).
+    let write_addr := address mod (mem_size space) in
+    (write_addr,
+    (mem_size space,
+        fun x => if write_addr =? x then 
+                (write_addr, new_data)
+            else (raw_mem_read space x))).
 
 Definition array_write_safe' (arr : array) (address : nat) (new_data : byte) : nat * array :=
     match arr with
-    | (space, arr_loc, size) => 
+    | (space, arr_loc, size) =>
         match raw_mem_write' space (arr_loc + (address mod size)) new_data with 
         (* Return the modified position *)
         | (edited_pos, new_space) => (edited_pos, (new_space, arr_loc, size))
@@ -318,8 +338,39 @@ Definition array_write_safe' (arr : array) (address : nat) (new_data : byte) : n
 Lemma mod_small_big:
     forall a b c d,
     (a + b mod c) mod d < c.
+Proof.
+    intros. (* is this code golf *)
+    (* No this is for my talk . apparently i proved this via some python script exhaustion proof *)
+    (* I don't think this is true unless you mean (a+b)mod c
+       e.g. (10 + 1 mod 10) mod 100 = 11 which is not < 10. 
+       Also not true if c = 0 *)
 Admitted.
+(* 
+Lemma mod_small_big':
+    forall a b c d (BOUND: 0 < c),
+    ((a + b) mod c) mod d < c.
+Proof.
+    intros.
+    remember ((a+b)mod c) as x.
+    enough (x < c).
+    enough (H2: forall a b, a mod b <= min a b).
+    apply Nat.le_lt_trans with (m:=min x d).
+        apply H2.
+        apply Nat.le_lt_trans with (m:=x); try assumption.
+        apply Nat.le_min_l.
+    clear -a; clear a; intros.
+        destruct (Nat.lt_trichotomy a b) as [Le | [Eq | Gt]].
+        rewrite (Nat.mod_small _ _ Le).
+        Search (Nat.min _ _ = _). rewrite min_l. easy.
+        admit.
+        subst. rewrite Nat.Div0.mod_same. apply Nat.le_0_l.
 
+    unfold Nat.modulo. destruct d.
+        assumption.
+        assert (S:= Nat.divmod_spec x d 0 d (le_n d)).
+        remember (snd (Nat.divmod x d 0 d)) as u''.
+        assert (U'': u'' <= d) by admit. *)
+        
 (* Proof by exhaustion *)
 Lemma le_mod:
     forall a b n,
@@ -341,7 +392,7 @@ Proof.
     destruct arr as [[space arr_addr] arr_size].
     destruct arr' as [[space' arr'_addr] arr'_size].
     destruct space as [space_size space_func].
-    destruct space' as [space'_size space'_func]. 
+    destruct space' as [space'_size space'_func].
     simpl in *.
     unfold in_arr_bounds, raw_mem_read, raw_mem_write, _space, _addr, _size in *.
     simpl in *. inversion ARR'. clear ARR'. subst.
