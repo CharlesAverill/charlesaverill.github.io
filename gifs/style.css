@@ -40,12 +40,13 @@ h2 {
 
 		li {
 			background-position: center center;
-			background-size: auto;
+			background-size: contain;
 			flex: auto;
 
 			img {
 				height: 100%;
 				opacity: 0;
+				max-width: 100%;
 			}
 		}
 	}
@@ -59,7 +60,7 @@ h2 {
 
 		li {
 			background-position: center center;
-			background-size: auto;
+			background-size: cover;
 			flex: auto;
 			height: 15vw;
 			max-height: 10rem;
