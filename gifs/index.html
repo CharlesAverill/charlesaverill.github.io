@@ -99,7 +99,7 @@
         // Dynamically create and append image elements
         shuffleArray(imageUrls).forEach(url => {
             const img = document.createElement('img');
-            img.src = url;
+            img.src = '/gifs/' + url;
             img.alt = "Gallery Image"; // Add descriptive alt text if needed
             //gallery.appendChild(img);
 			const li = document.createElement('li');
