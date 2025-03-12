@@ -42,6 +42,7 @@ img.gh {
 .gh p {
   line-height: 1.6;
   margin: 1em 0;
+  text-align: left;
 }
 
 .card {
