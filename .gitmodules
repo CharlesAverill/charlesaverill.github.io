@@ -1,16 +1,20 @@
 [submodule "BirdAndBeans"]
 	path = BirdAndBeans
-	url = https://github.com/CharlesAverill/BirdAndBeans/
+	url = https://github.com/CharlesAverill/BirdAndBeans
 [submodule "PDMusic"]
 	path = PDMusic
-	url = https://github.com/CharlesAverill/PDMusic/
+	url = https://github.com/CharlesAverill/PDMusic
 [submodule "Purple"]
 	path = Purple
-	url = https://github.com/CharlesAverill/Purple/
+	url = https://github.com/CharlesAverill/Purple
 	branch = gh-pages
 [submodule "ctpe"]
 	path = ctpe
 	url = https://github.com/CharlesAverill/ctpe
 [submodule "proofchat"]
 	path = proofchat
-	url = https://github.com/CharlesAverill/proofchat.git
+	url = https://github.com/CharlesAverill/proofchat
+[submodule "aftn.ml"]
+	path = aftn.ml
+	url = https://github.com/CharlesAverill/aftn.ml
+	branch = gh-pages
