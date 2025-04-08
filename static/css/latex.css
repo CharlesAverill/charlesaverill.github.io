@@ -323,10 +323,10 @@ table:not(.borders-custom) > tbody > tr:first-child > td,
 table:not(.borders-custom) > tbody > tr:first-child > th {
   border-top: var(--border-width-thin) solid var(--table-border-color);
 }
-table:not(.borders-custom) > tbody > tr:last-child > td,
+/* table:not(.borders-custom) > tbody > tr:last-child > td,
 table:not(.borders-custom) > tbody > tr:last-child > th {
   border-bottom: var(--border-width-thin) solid var(--table-border-color);
-}
+} */
 
 th,
 td {
@@ -749,4 +749,26 @@ h6 {
 .hide {
 	color: var(--body-bg-color);
 	cursor: default;
+}
+
+.hover-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.hover-image {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the link */
+  width: 75%;
+  max-width: 75%;
+  border: 1px solid #ccc;
+  background: white;
+  z-index: 100;
+  padding: 5px;
+}
+
+.hover-container:hover .hover-image {
+  display: block;
 }
