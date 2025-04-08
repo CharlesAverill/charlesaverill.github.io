@@ -99,7 +99,7 @@ for(let card of cards) {
               <b>${json.name}</b>
             </a>
           </p>
-          <p class="gh">${json.description}</p>
+          <p class="gh">${json.description || 'If this is broken, the site got rate-limited!'}</p>
           <a class="gh" href="${json.html_url}/stargazers">${json.stargazers_count} stars</a>
         </div>
       `;
