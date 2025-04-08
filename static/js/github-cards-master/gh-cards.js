@@ -92,7 +92,8 @@ for(let card of cards) {
       
       // <a class="gh" href="${json.html_url}/network">${json.forks_count} forks</a> - 
       card.innerHTML = `
-        <img class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}" style="object-fit: ${object_fit || 'cover'};" loading="lazy">
+        <img class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}" 
+          style="object-fit: ${object_fit || 'cover'};" loading="lazy" alt="Project image for ${json.name}">
         <div class="gh container card-content">
           <p class="gh" style="word-break: break-all;">
             <a class="gh" href="${json.html_url}">
@@ -112,7 +113,8 @@ for(let card of cards) {
     let descr = card.getAttribute('description') || "";
     let object_fit = card.getAttribute('object-fit');
     card.innerHTML = `
-    <img class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}" style="object-fit: ${object_fit || 'cover'};">
+    <img class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}" 
+      style="object-fit: ${object_fit || 'cover'};" loading="lazy" alt="Project image for ${name}">
         <div class="gh container card-content">
           <p class="gh" style="word-break: break-all;">
             <a class="gh" href="${url_override}">

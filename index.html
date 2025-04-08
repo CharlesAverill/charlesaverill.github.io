@@ -14,12 +14,6 @@
 
 		<link rel="stylesheet" href="/static/css/latex.css?v=1">
 		<link rel="icon" type="image/ico" href="/static/favicon.ico?v=1"/>
-		<script>
-			// Load JS after page render
-			var tag = document.createElement("script");
-			tag.src = "/static/js/github-cards-master/gh-cards.js?v=3";
-			document.getElementsByTagName("head")[0].appendChild(tag);
-		</script>
 
 		<style>
 			table {
@@ -39,7 +33,7 @@
 			<table>
 				<tr>
 					<td>
-						<image id="imageCarousel" style="width: 1008px;" src="/static/images/main.png" onclick="imageCarousel()"></image>
+						<img id="imageCarousel" width="1008" src="/static/images/main.png" onclick="imageCarousel()" loading="lazy" alt="Picture of me"></img>
 					</td>
 					<td>
 						<p style="hyphens: none;">
@@ -178,7 +172,7 @@
 						<td class="hover-container"><a href="/teaching/sotu_v2.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk (v2)</a>
 							<br>
 							<a href="/teaching/sotu_demo.v">Demo</a>
-							<img src="/static/images/secretsoftheuniverse.png" class="hover-image" loading="lazy">
+							<img src="/static/images/secretsoftheuniverse.png" class="hover-image" loading="lazy" alt="Poster for my Secrets of the Universe talk">
 						</td>
 						<td>CSG</td>
 						<td>Nov 2024</td>
@@ -194,7 +188,7 @@
 					  <tr>
 						<td class="hover-container">
 							<a href="/teaching/30_Cycles_or_It_s_Free___Formal_Timing_of_Binary_Code.pdf">30 Cycles or It's Free - Formal Timing of Binary Code</a>
-							<img src="/static/images/30cyclesfree.png" class="hover-image" loading="lazy">
+							<img src="/static/images/30cyclesfree.png" class="hover-image" loading="lazy" alt="Poster for my 30 Cycles or It's Free talk">
 						</td>
 						<td>DHA, CSG</td>
 						<td>Sept, Oct 2024</td>
@@ -222,7 +216,7 @@
 					  <tr>
 						<td class="hover-container">
 							<a href="/teaching/sotu.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk (v1)</a>
-							<img src="/static/images/secretsoftheuniverse.png" class="hover-image" loading="lazy">
+							<img src="/static/images/secretsoftheuniverse.png" class="hover-image" loading="lazy" alt="Poster for my Secrets of the Universe talk">
 						</td>
 						<td>CSG</td>
 						<td>Oct 2023</td>
@@ -262,7 +256,7 @@
 					  <tr>
 						<td class="hover-container">
 							<a href="/teaching/Decompilation_Shmecompilation.pdf">Decompilation Schmecompilation</a>
-							<img src="/static/images/decompilation_shmecompilation.png" class="hover-image" loading="lazy">
+							<img src="/static/images/decompilation_shmecompilation.png" class="hover-image" loading="lazy" alt="Poster for my Decompilation, Schmecompilation talk">
 						</td>
 						<td>CSG</td>
 						<td>Oct 2022</td>
@@ -281,7 +275,7 @@
 							<a href="/teaching/PyJail_talk.pdf">Prison Snake</a>
 							<br>
 							<a href="https://www.youtube.com/watch?v=7i3qgtMq3NQ">Recording</a>
-							<img src="/static/images/prisonsnake.jpg" class="hover-image" loading="lazy">
+							<img src="/static/images/prisonsnake.jpg" class="hover-image" loading="lazy" alt="Poster for my Prison Snake talk">
 						</td>
 						<td>CSG</td>
 						<td>Feb 2022</td>
@@ -318,8 +312,10 @@
 					name="Bird And Beans" description="Catch the falling beans!" object-fit="scale-down"></div>
 				<div class="gh-card card" data-image="https://caseashell.sfo2.digitaloceanspaces.com/AT_CWD/TemplateData/logo.png" url-override="/AT_CWD/"
 					name="Adventure Time: Card Wars" description="Re-implementing a defunct mobile card game"></div>
-
-				<h2><a href="https://en.wikipedia.org/wiki/Webring" target="_blank">Web Ring</a></h2>
+				<h2><a href="https://en.wikipedia.org/wiki/Webring" target="_blank">Web Ring</a>
+					<label for="sn-2" class="sidenote-toggle sidenote-number"></label>
+					<input type="checkbox" id="sn-2" class="sidenote-toggle" />
+					<span class="sidenote">Is it really a web ring yet? Not sure, gotta wait til it catches on...</span></h2>
 				<table>
 					<thead>
 						<tr>
@@ -445,6 +441,12 @@
 			<source src="/static/audio/snd-slidewhist.mp3" type="audio/mpeg">
 		</audio>
 	</body>
+	<script>
+		// Load JS after page render
+		var tag = document.createElement("script");
+		tag.src = "/static/js/github-cards-master/gh-cards.js?v=4";
+		document.getElementsByTagName("head")[0].appendChild(tag);
+	</script>
 	<script>
 		// Default values
 		let darkModeEnabled = JSON.parse(localStorage.getItem("darkModeEnabled")) ?? false;
