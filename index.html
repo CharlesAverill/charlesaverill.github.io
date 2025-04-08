@@ -17,7 +17,7 @@
 		<script>
 			// Load JS after page render
 			var tag = document.createElement("script");
-			tag.src = "/static/js/github-cards-master/gh-cards1.js";
+			tag.src = "/static/js/github-cards-master/gh-cards.js?v=1";
 			document.getElementsByTagName("head")[0].appendChild(tag);
 		</script>
 
@@ -291,10 +291,11 @@
 
 				<h2>Projects</h2>
 				<div id="volpiccard" class="gh-card card" data-repo="CharlesAverill/VOLPIC" data-image="https://github.com/CharlesAverill/VOLPIC/raw/main/media/logo_black.png"></div>
-				<div class="gh-card card" data-repo="CharlesAverill/ZENITH" data-image="https://github.com/CharlesAverill/ZENITH/raw/main/media/logo.gif"></div>
+				<div class="gh-card card" data-repo="CharlesAverill/ZENITH" data-image="https://github.com/CharlesAverill/ZENITH/raw/main/media/logo.gif" object-fit="fill"></div>
 				<div class="gh-card card" data-repo="CharlesAverill/proofchat" data-image="https://raw.githubusercontent.com/CharlesAverill/proofchat/refs/heads/main/media/proofchat.png"></div>
 				<div class="gh-card card" data-repo="CharlesAverill/MIPSelbrot" data-image="https://raw.githubusercontent.com/CharlesAverill/MIPSelbrot/refs/heads/main/media/screenshot1.png"></div>
 				<div class="gh-card card" data-repo="CharlesAverill/yarr" data-image="https://raw.githubusercontent.com/CharlesAverill/yarr/refs/heads/main/media/10_Rotation.gif"></div>
+				<div class="gh-card card" url-override="/Purple/" data-image="/Purple/logo/logo_gradient.png" name="Purple" description="Language specification for a C-like toy language" object-fit="contain"></div>
 				<ul>
 					<li>
 						<a href="Projects/EFS.pdf">Encrypted File System - CS 6324</a>
@@ -306,25 +307,17 @@
 						<a href="Projects/DEFFS/">DEFFS</a>
 					</li>
 					<li>
-						<a href="Purple/">Purple</a>
-					</li>
-					<li>
 						<a href="Projects/turing/">Turing</a>
 					</li>
 				</ul>
 
 				<h2>Games</h2>
-				<ul>
-					<li>
-						<a href="Projects/DinosaurIsland/">Dinosaur Island</a>
-					</li>
-					<li>
-						<a href="BirdAndBeans/docs/">Bird And Beans</a>
-					</li>
-					<li>
-						<a href="AT_CWD/">Adventure Time: Card Wars Dominion</a>
-					</li>
-				</ul>
+				<div class="gh-card card" data-image="/Projects/DinosaurIsland/images/title_image.png" url-override="/Projects/DinosaurIsland"
+					name="Dinosaur Island" description="Dinosaur-Themed 3D Platformer" object-fit="fill"></div>
+				<div class="gh-card card" data-image="/static/images/birdandbeans.png" url-override="/BirdAndBeans/docs/"
+					name="Bird And Beans" description="Catch the falling beans!" object-fit="scale-down"></div>
+				<div class="gh-card card" data-image="https://caseashell.sfo2.digitaloceanspaces.com/AT_CWD/TemplateData/logo.png" url-override="/AT_CWD/"
+					name="Adventure Time: Card Wars" description="Re-implementing a defunct mobile card game"></div>
 	
 				<h2>Scripts</h2>
 				<ul>
@@ -343,12 +336,14 @@
 				</ul>
 
 				<h2>Miscellaneous</h2>
+				<div class="gh-card card" data-image="https://radio.charles.systems/static/icon.png" url-override="https://radio.charles.systems/"
+					name="Radio Charles" description="What am I listening to?"></div>
+				<div class="gh-card card" data-image="/gifs/band.gif" url-override="/gifs"
+					name="My GIFs" description="All the gifs on my computer" object-fit="none"></div>
 				<ul>
 					<li><a href="bookshelf">My Bookshelf</a></li>
 					<li><a href="https://www.discogs.com/user/caverill/collection">My Record Collection</a></li>
-					<li><a href="https://radio.charles.systems/">Radio Charles</a></li>
 					<li><a href="travel/">Where Have I Been?</a></li>
-					<li><a href="gifs/">My GIFs</a></li>
 					<li>
 						<a href="PDMusic/">Transcriptions of "The International Library of Music" Public Domain Sheet Music</a>
 					</li>
