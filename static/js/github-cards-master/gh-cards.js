@@ -92,7 +92,7 @@ for(let card of cards) {
       
       // <a class="gh" href="${json.html_url}/network">${json.forks_count} forks</a> - 
       card.innerHTML = `
-        <img class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}" style="object-fit: ${object_fit || 'cover'};">
+        <img class="gh" src="${card.getAttribute('data-image') || json.owner.avatar_url}" style="object-fit: ${object_fit || 'cover'};" loading="lazy">
         <div class="gh container card-content">
           <p class="gh" style="word-break: break-all;">
             <a class="gh" href="${json.html_url}">
