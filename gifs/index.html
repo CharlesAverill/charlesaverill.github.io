@@ -71,6 +71,7 @@
         // List of image URLs (manually add your image URLs here)
 const imageUrls = [
   "rshift.gif",
+  "reimann_sphere_msltoe_v1.gif",
   "logo.gif",
   "minus.gif",
   "xor.gif",
@@ -83,6 +84,7 @@ const imageUrls = [
   "bor.gif",
   "lazydinorender.gif",
   "output.gif",
+  "cosabs.gif",
   "div.gif",
   "teapot.gif",
   "speech-bubble-bottle.gif",
@@ -93,11 +95,11 @@ const imageUrls = [
   "add2.gif",
   "working.gif",
   "bug-reading.gif",
-  "intdiv.gif",
   "lshift.gif",
+  "josleys_kleinian.gif",
   "times.gif",
-  "demo.gif",
-  "cosabs.gif"
+  "reimann_sphere_hobold_multi.gif",
+  "demo.gif"
 ];
 
 			function shuffleArray(array) {
@@ -114,7 +116,8 @@ const imageUrls = [
         shuffleArray(imageUrls).forEach(url => {
             const img = document.createElement('img');
             img.src = '/gifs/' + url;
-            img.alt = "Gallery Image"; // Add descriptive alt text if needed
+            img.alt = url; // Add descriptive alt text if needed
+            img.loading = 'lazy';
             //gallery.appendChild(img);
 			const li = document.createElement('li');
 			li.style = 'background-image:url(/gifs/' + url + ')';
