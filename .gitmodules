@@ -21,3 +21,4 @@
 [submodule "Asteroids"]
 	path = Asteroids
 	url = https://github.com/CharlesAverill/Asteroids.git
+	branch = gh-pages
