@@ -52,6 +52,7 @@ img.gh {
   border-radius: 0.5em;
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  position: relative;
 }
 
 .card img {
@@ -74,6 +75,37 @@ img.gh {
 .card-content p {
   font-size: 1em;
 }
+
+.ribbon {
+  margin: 0;
+  padding: 0;
+  background: color-mix(in srgb, var(--link-visited), gray 50%);
+  color:white;
+  position: absolute;
+  top:0;
+  right:0;
+  transform: translateX(30%) translateY(0%) rotate(45deg);
+  transform-origin: top left;
+}
+.ribbon:before,
+.ribbon:after {
+  content: '';
+  position: absolute;
+  top:0;
+  margin: 0 -1px; /* tweak */
+  width: 100%;
+  height: 100%;
+  background: color-mix(in srgb, var(--link-visited), gray 50%);
+}
+.ribbon:before {
+  right:100%;
+}
+
+@media (max-width: 600px) {
+  .ribbon {
+    display: none;
+  }
+}
 `;
 
 // injectStylesheet('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
@@ -83,6 +115,7 @@ for(let card of cards) {
   let repo = card.getAttribute('data-repo');
   let url_override = card.getAttribute('url-override');
   let object_fit = card.getAttribute('object-fit');
+  let playinbrowser = card.getAttribute('playinbrowser');
   if (url_override == null) {
     let url = 'https://api.github.com/repos/' + repo;
   
@@ -104,6 +137,10 @@ for(let card of cards) {
           <a class="gh" href="${json.html_url}/stargazers">${json.stargazers_count} stars</a>
         </div>
       `;
+
+      if (playinbrowser) {
+        card.innerHTML += "<div class='ribbon'>Play in browser!</div>"
+      }
       
     }).catch(err => {
       console.log(err);
@@ -124,5 +161,9 @@ for(let card of cards) {
           <p class="gh">${descr}</p>
         </div>
     `;
+
+    if (playinbrowser) {
+      card.innerHTML += "<div class='ribbon'>Play in browser!</div>"
+    }
   }
 }
