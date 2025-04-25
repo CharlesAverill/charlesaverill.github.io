@@ -21,6 +21,30 @@
 				width: 100% !important;
 				word-wrap: anywhere;
 			}
+
+			.command-prompt {
+				display: none;
+				position: fixed;
+				top: 20%;
+				left: 50%;
+				transform: translateX(-50%);
+				background-color: #000;
+				color: #fff;
+				padding: 20px;
+				border-radius: 10px;
+				z-index: 1000;
+				width: 300px;
+				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+			}
+
+			#command-input {
+				width: 100%;
+				background: transparent;
+				border: none;
+				color: #fff;
+				font-size: 16px;
+				outline: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -547,8 +571,17 @@
 			<source src="/static/audio/snd-slidewhist.mp3" type="audio/mpeg">
 		</audio>
 	</body>
+
+	<div class="command-prompt" id="command-prompt">
+        <input type="text" id="command-input" placeholder="Type command here...">
+    </div>
+
 	<script src="/static/js/style.js?v=1"></script>
     <script src="/static/js/scroll.js"></script>
+
+	<script src="/static/js/Box2d.min.js"></script>
+	<script src="/static/js/gravity.js"></script>
+	<script src="/static/js/cmd.js"></script>
 	<script>
 		// Load JS after page render
 		var tag = document.createElement("script");
