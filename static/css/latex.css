@@ -838,3 +838,8 @@ h6 {
 .hover-container:hover .hover-image {
   display: block;
 }
+
+.webring-header {
+  text-align: center; 
+  background-color: var(--tr-color);
+}
