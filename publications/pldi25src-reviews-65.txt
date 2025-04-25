@@ -1,0 +1,131 @@
+PLDI '25 SRC Paper #65 Reviews and Comments
+===========================================================================
+Paper #65 Formally-Verified, Tight Timing Constraints for Machine Code
+
+
+Review #65A
+===========================================================================
+
+Overall merit
+-------------
+3. Accept
+
+Reviewer expertise
+------------------
+2. Knowledgeable
+
+Technical Feedback
+------------------
+This paper introduces a Roqc library for reasoning about program timing at the level of machine code, using the Picinæ system for reasoning about machine code. The purpose of this library is to make formal guarantees about the (CPU-clock) runtime of a piece of code, thereby guarding against side channel attacks and potentially ensuring other timing properties as well.
+
+I like this idea a lot, though I found the justification for the tool's security guarantees much more convincing than the real-time systems justification offered first. Side-channel attacks are real and we have well-studied ways of combatting them: Proving the indistinguishability of two executions in terms of CPU clock cycles seems to be the correct approach. By contrast, for real time systems, the problems are portrayed as medical devices (and similar) potentially failing due to slowness. I don't know how formal guarantees can possibly address this problem, and here clock cycles no longer seem like the right level of abstraction at all. I'd either refocus this on security or try to address these concerns.
+
+Writing Feedback
+----------------
+For the most part, I thought this was quite well-written and accessible to a broad audience. 
+
+It falters when it gets to the technical details, however. I'm not fluent in RISC, so I had trouble reading Figure 2, which isn't explained at all. Figure 3 was also a struggle though Figure 4 was somewhat better for its succintness.
+
+For the poster, you will want an example, invariant set and proof that readers can easily read: That might mean even simpler than the adder, or else just much better presentation with comments. I would encourage you to have two versions of any proof: One with automation and one without. Seeing that you've built the automation is nice, but it's also important to understand how the proof is being carried out and `hammer` elides this.
+
+
+
+Review #65B
+===========================================================================
+
+Overall merit
+-------------
+2. Unsure
+
+Reviewer expertise
+------------------
+2. Knowledgeable
+
+Technical Feedback
+------------------
+# General Comment 
+The motivation is good, but the problem is very simplified, to the point where it's unclear if the results would hold up experimentally, for this board, and certainly not for more complex ones. Starting small and simple is not a problem inherently, but as a reviewer I'm not convinced that the approach scales or that at heart it's so different from prior work in this space. 
+
+If I'm not misunderstanding, the heart of the approach is to take per-instruction costs from a(n implicitly trusted) data-sheet, and essentially map those costs to the PicnaeIL instructions, summing up over execution traces, universally quantified. Integrating this flow into Rocq is cool, but not at heart different than integrating a cost model into a compiler analysis, e.g., in LLVM. 
+You say that the weakness of abstract interpretation, into which compiler-based approaches generally fall, is that "in practice, abstract interpretation often
+ faces challenges due to processor-specific models and the complexity of accurately modeling control flow and timing anomalies." That said, I don't see how your approach is better, or if it just doesn't consider the complexities.
+
+The key contribution is that you generate formulas the capture the dependencies of timing properties to various parameters; this contribution is interesting but perhaps not clear enough in the intro, which sounds like it's making bigger promises. I would have liked to see concretely what the formulas look like for the case studies as well. 
+
+I think the final future work direction (running experiments on real hardware) you sketch out is actually necessary to place the results in context, particularly for more practically-minded systems researchers. Right now the results are all fairly abstract---it doesn't matter if you've proved some time invariant on a model, if that model is inaccurate to real life. 
+
+
+# Specific Comments and Qs
+How realistic is Picinæ’s purely functional memory model for the target domain? A lot of embedded devices are programmed in imperative languages that absolutely modify global memory. 
+
+Is your approach parametric over different architectures (at least in spirit, if not in the current implementation)?
+
+How much does your technique generalize to more complicated architectures? One reason that measurement-based WCET/WCEC methods need to be so conservative is that on a full board accurate costs cannot be built up one instruction at a time; run time also depends on things like whether an interrupt fired, input values, clock frequency, etc. 
+
+How much extra work are the memory safety subproofs? What assumptions do they make about the underlying memory model?
+
+Writing Feedback
+----------------
+Please minimize use of passive voice and especially do not use it in the first sentence (first impressions matter!)
+
+That aside, I think the paper did quite a good job of clearly explaining the problem area and background. It would have been nice to see some example of the PicinæIL up front, to draw out the key ideas of your key contribution a little earlier and more explicitly, and to explain the case-studies in more depth.
+
+
+
+Review #65C
+===========================================================================
+
+Overall merit
+-------------
+3. Accept
+
+Reviewer expertise
+------------------
+2. Knowledgeable
+
+Technical Feedback
+------------------
+# Summary
+
+This paper presents a framework, mechanised in Coq, for reasoning about the number of CPU cycles required for given code to execute, with applications in real-time systems and constant-time cryptography
+
+# Comments
+
+The paper is written well, and I feel like I came away with a good understanding of the project and its particular decisions and tradeoffs in the space. My main piece of critical feedback is that the dismissal of more "traditional" constant-time reasoning approaches in L60 was a little curt and could do with some expansion. Normally these techniques assume a particular underlying CPU abstraction such that _any_ concrete instantiation of CPU cycle information (within the bounds of the abstract model) would still result in constant-time behaviour (as embodied by some non-interference property). In this sense these existing works give a more general guarantee than an approach based on concrete CPU cycle information - although I take the author's point that showing that the used timing abstraction fits any given concrete CPU is deferred and thus such a proof itself does not give an end-to-end practical guarantee.
+
+I would also appreciate a discussion on whether the author's approach would extend to more traditional consumer CPUs that are not so carefully designed to have predictable cycle counts. Clearly there would be significant friction, but there's an opportunity here to discuss ways in which the gaps might be bridged.
+
+Writing Feedback
+----------------
+I think the writing is excellent.
+
+The paper is a somewhat light on citations and therefore on substantive comparisons to existing works. 
+ I'm not so familiar with RTOS, but for constant-time cryptography "System-level Non-interference for Constant-time Cryptography" by Barthe et al (CCS 2014) might be a nice point of comparison.
+
+
+
+Review #65D
+===========================================================================
+
+Overall merit
+-------------
+3. Accept
+
+Reviewer expertise
+------------------
+3. Expert
+
+Technical Feedback
+------------------
+This paper extends a Rocq framework for reasoning about binaries to support proofs about worst-case execution time.
+
+The work seems promising and the explanation is quite clear.  Some nitpicks:
+
+- In the evaluation, why not used the Rocq-verified RISCV implementation of ChaCha20 published at PLDI last year?  This would be a great way to connect to previous work, and given that this is the PLDI SRC previous work from a recent PLDI seems particularly relevant.  See "Foundational Integration Verification of a Cryptographic Server", Erbsen et al.
+- "wall-clock time": if we assume a constant frequency, wall-clock time is just a multiple of cycle count.  If we do not assume a constant frequency, then wall-clock time would seem to be the relevant metric.  Either way, wall-clock time does capture "factors like pipeline stages and memory accesses".  The argument that wall-clock time is a high-level abstraction isn't convincing (perhaps you meant instruction count?
+- The model seems to bake in an assumption that instructions can be considered individually.  Is that realistic?  The latency of an instruction quite often depends on which specific instructions ran just before.
+- Shouldn't the instruction timing function provide ranges of cycle counts (or even probability distributions), rather than individual cycle counts?
+
+Writing Feedback
+----------------
+The writing is excellent: clean, polished, easy to follow.  The technical evaluation is good (it could have been better to spend more time on the more complex examples.  A bit more related work could have been nice.

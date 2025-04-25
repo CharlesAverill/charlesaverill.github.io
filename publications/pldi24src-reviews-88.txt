@@ -1,0 +1,62 @@
+PLDI 24 Student Research Competition Paper #88 Reviews and Comments
+===========================================================================
+Paper #88 VOLPIC: Verifying Lifted Pascal in Coq
+
+
+Review #88A
+===========================================================================
+
+Overall merit
+-------------
+4. Accept
+
+Reviewer expertise
+------------------
+3. Knowledgeable
+
+Paper summary
+-------------
+This abstract presents the design of VOLPIC, a pipeline for converting Pascal code into native Coq for verification and then into OCaml for maintainability. VOLPIC’s lifter first parses a Pascal program with a custom fork of FPC, second translates the resulting CST into a simplified AST reducing logic for code generation, and then finally uses a recursive traversal of the simplified AST to convert it to Coq source code. The Coq source code is ultimately converted to OCaml using Coq’s verified extraction facilities. The authors of VOLPIC also provide a theorem library that aims to simplify terms utilizing common Pascal data types and some additional tactics that help deal with the encoding of an imperative paradigm in Coq. VOLPIC currently has only been applied to the factorial calculator example given in the abstract.
+
+Comments for authors
+--------------------
+#### Soundness
+The techniques applied to translate Pascal code into Coq for verification and then into Ocaml seem reasonable and correct. Though I have one question about the process given below:
+* Why do you go Pascal -> Coq -> Ocaml instead of Pascal -> Ocaml -> Coq? If you tackle Pascal to Ocaml then you can utilize existing tools to take Ocaml to Coq for verification and then you have also achieved your goal of having an Ocaml version of the Pascal program.
+
+#### Significance
+Trying to verify legacy code written in Pascal after development is definitely a worthwhile endeavor, as large amounts of such code exist in mission-critical software. Furthermore, it is a plus that the paper also tackles the problem of automatically transitioning this code to a more modern language like Ocaml for future development.
+
+#### Presentation
+The overall presentation of the abstract is good, but I have a few suggestions for improvements:
+* The last sentence of the abstract makes more sense as the first sentence of the abstract to motivate VOLPIC. Then, if there were a sentence or clause connecting the motivation for VOLPIC to the sentences talking about VOLPIC and its contributions, then the abstract would read a bit better.
+* The first paragraph of Section 1 is not necessary. That section is better off starting with the third paragraph and then transitioning to the second paragraph on ln 28 afterwards (the second paragraph should drop the mention of security retrofitting as well). Talking about security retrofitting doesn’t seem worthwhile to me. It is already sufficiently motivating to verify Pascal code as Pascal code exists in mission-critical software systems.
+* I didn’t see any mention of Fig. 1 in the text. Even a brief reference to Fig. 1 in the introduction to Section 3 would be better than nothing.
+* No explicit connection to how VOLPIC makes improvements over related work; the reader is left to infer the connection.
+
+
+
+Review #88B
+===========================================================================
+
+Overall merit
+-------------
+3. Weak accept
+
+Reviewer expertise
+------------------
+2. Some familiarity
+
+Paper summary
+-------------
+This work proposes VOLPIC, a framework for lifting and verifying Pascal code using Coq. The framework first turns Pascal code into native Coq to prove the correctness specifications and later translates to OCaml. This comes with a proof of partial correctness.
+
+Comments for authors
+--------------------
+I enjoyed reading this abstract as it proposes a practical approach to verification independent of software development.
+
+A similar approach to VOLPIC can be utilized to verify programs in other imperative languages. Hence, it would be really helpful to provide some hints on how to extend Pascal-specific aspects of this framework to other languages.
+
+It would be interesting to consider the compiler's transformations/optimizations in the big picture of verification here. Are the verification guarantees valid if you turn on some optimizations in the Free Pascal Compiler? In other words, can we guarantee that the Pascal and OCaml binaries are equivalent?
+
+It is crucial to develop a plan for evaluation. How do you plan to evaluate VOLPIC? For instance, you can compare VOLPIC with the Stanford Pascal Verifier or Pascal-F verifier. In my opinion, a plan to evaluate the "development of independent verification" aspect of VOLPIC compared to one of the baselines is important.

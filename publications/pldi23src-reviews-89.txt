@@ -1,0 +1,114 @@
+PLDI SRC 2023 Paper #89 Reviews and Comments
+===========================================================================
+Paper #89 Prettybird: A DSL for Programmatic Font Compilation
+
+
+Review #89A
+===========================================================================
+
+Overall merit
+-------------
+1. Minor Revisions
+
+Reviewer expertise
+------------------
+1. No familiarity
+
+Paper summary
+-------------
+This work introduces Prettybird, a new domain-specific font description language, as an alternative to METAFONT, and the process of compiling Prettybird code into font files.
+
+Comments for authors
+--------------------
+This work also presents a non-authoritative user preference study that indicates that some users prefer Prettybird to METAFONT. However, this user study is limited to the examination of files, and here is no description of the targeted population that the study meant to sample, or of the method used to sample from this population.
+
+
+
+Review #89B
+===========================================================================
+
+Overall merit
+-------------
+2. Major Revisions
+
+Reviewer expertise
+------------------
+1. No familiarity
+
+Paper summary
+-------------
+This paper presents Prettybird, a new domain-specific font design language.
+It aims to provide the same functionality of `METAFONT` but overcomes several
+of its shortcomings such as its obscure syntaxes.
+Prettybird also offers other advantages compared to `METAFONT`, such as utilizing
+`FontForge` GUI for font designers. Additionally, the paper presents a user
+survey that shows programmers' and font designers' strong preference for
+Prettybird over `METAFONT`.
+
+Comments for authors
+--------------------
+This is a very interesting paper, and I believe it will be of interest to
+most people who work on traditional software. The claimed improvements looks
+very favorable and promising. However, the paper doesn't articulate the
+research challenges and how Prettybird solved them.
+Here are a few revision suggestions:
+
+- Remove Figure 2. A single sentence (as stated in the first paragraph of
+  Section 1) is sufficient.
+- Explain in more detail the pitfalls of `METAFONT`.
+- Explain how Prettybird improves on those pain points.
+- Explain the code in Figure 3.
+
+
+
+Review #89C
+===========================================================================
+
+Overall merit
+-------------
+1. Minor Revisions
+
+Reviewer expertise
+------------------
+2. Some familiarity
+
+Paper summary
+-------------
+The paper introduces a new domain-specific font description language, Prettybird, that tries to simplify font design early steps. A user study shows that Prettybird is more popular than Metafont among three groups of people: programmers, font designers, and those familiar with Bezier Curves.
+
+Comments for authors
+--------------------
+It is amazing to design such a font description language together with supporting tools such as compilers.
+
+The paper is generally well written but some figures are presented in the paper without descriptions, e.g., Figure 1, Figure 3, and Figure 4. I think at least the author should give some descriptions of Figure 3. Otherwise, it only takes up some space without any meaning to readers.
+
+
+
+Review #89D
+===========================================================================
+
+Overall merit
+-------------
+1. Minor Revisions
+
+Reviewer expertise
+------------------
+2. Some familiarity
+
+Paper summary
+-------------
+The author proposes a DSL for the design of fonts ("PrettyBird"), which is intended as a "more readable" replacement for Knuth's classic METAFONT. An anonymous user survey demonstrates that practitioners prefer PrettyBird.
+
+Comments for authors
+--------------------
+My only concern is that little is said about the language design itself, which is of the most interest to the audience at PLDI. So, for example, the audience will want to know what alternative syntaxes or intermediate representations were considered, and how the ones described here were chosen. I suggest you go into that in more detail in your poster/presentation, because those are the things that PLDI's SRC judges will be experts on (rather than fonts, which you can't count on us knowing much about).
+
+Looking further forward, for a conference submission I'd be concerned here about novelty: while fonts are a domain that PL experts haven't (to my rather limited knowledge) really been involved in, I'm not sure how much of a language design novelty claim you're going to be able to make. I strongly suggest putting some effort into clearly articulating exactly what is novel about this DSL from the design perspective or what we can learn from your work about designing languages for other, similar domains.
+
+
+
+Comment @A1 by Author [Charles Averill <charles.averill@utdallas.edu>]
+---------------------------------------------------------------------------
+Poster link: https://drive.google.com/file/d/1LbjT3E0XLOB1ClhpKnHemZNZruqL9B0Z/view?usp=sharing
+
+Presentation recording link: https://drive.google.com/file/d/1qL8q6r7SlTdDJ9E3crYXk6ecOS-Kp20I/view?usp=sharing
