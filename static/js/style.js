@@ -1,6 +1,5 @@
 // Default values
 let darkModeEnabled = JSON.parse(localStorage.getItem("darkModeEnabled")) ?? false;
-let font = localStorage.getItem("font") ?? 'Latin Modern';
 
 const typeface = document.getElementById('typeface');
 
@@ -18,15 +17,47 @@ function toggleDarkMode() {
 }
 
 // Toggle font
-function toggleFontVisual() {
-    document.body.classList.toggle('libertinus');
-    typeface.value = "Toggle Font - " + (font == 'Libertinus' ? 'Latin Modern' : 'Libertinus');
-}
-function toggleFont() {
-    toggleFontVisual();
-    font = (font == 'Latin Modern') ? 'Libertinus' : 'Latin Modern';
+const fonts = [
+    { name: "Latin Modern", className: "latin-modern" },
+    { name: "Libertinus", className: "libertinus" },
+    { name: "Courier Prime", className: "courier" },
+    { name: "Cloister Black", className: "fraktur" },
+    // { name: "Impact", className: "impact" }
+  ];
+let font = localStorage.getItem("font") ?? fonts[0].name;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const select = document.getElementById("typeface");
+
+    // Populate dropdown
+    fonts.forEach(f => {
+        const option = document.createElement("option");
+        option.value = f.name;
+        option.textContent = f.name;
+        option.setAttribute("style", "font-family: '" + f.name + "', serif;"); // Apply font style
+        if (f.name === font) option.selected = true;
+        select.appendChild(option);
+    });
+
+    // Apply saved font
+    applyFont(font);
+});
+
+function changeFont() {
+    const selectedFont = document.getElementById("typeface").value;
+    font = selectedFont;
     localStorage.setItem("font", font);
-    console.log(localStorage);
+    applyFont(font);
+}
+
+function applyFont(fontName) {
+    const body = document.body;
+    fonts.forEach(f => body.classList.remove(f.className));
+
+    const fontObj = fonts.find(f => f.name === fontName);
+    if (fontObj) {
+        body.classList.add(fontObj.className);
+    }
 }
 
 // Rotate headshot carousel
@@ -46,7 +77,4 @@ function imageCarousel() {
 if (darkModeEnabled) {
     toggleDarkModeVisual();
     document.getElementById("toggle")
-}
-if (font != 'Latin Modern') {
-    toggleFontVisual();
 }

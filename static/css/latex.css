@@ -93,6 +93,54 @@
   src: url('/static/fonts/Libertinus-semibold-italic.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('/static/fonts/CourierPrime-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('/static/fonts/CourierPrime-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: italic;
+  font-weight: normal;
+  font-display: swap;
+  src: url('/static/fonts/CourierPrime-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Courier Prime';
+  font-style: italic;
+  font-weight: bold;
+  font-display: swap;
+  src: url('/static/fonts/CourierPrime-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Cloister Black";
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('/static/fonts/CloisterBlack.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: "Impact";
+  font-size: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('/static/fonts/impact.ttf');
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -181,6 +229,22 @@ html {
 
 body.libertinus {
   font-family: 'Libertinus', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.latin-modern {
+  font-family: 'Latin Modern', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.courier {
+  font-family: 'Courier Prime', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.fraktur {
+  font-family: 'Cloister Black', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.impact {
+  font-family: 'Impact', Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 body {
