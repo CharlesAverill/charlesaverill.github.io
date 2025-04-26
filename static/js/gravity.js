@@ -19,8 +19,12 @@
  * are included and they just look like blobs of text
  */
 
+let gravityOn = false;
 
 window.activateGravity = function () {
+    if (gravityOn)
+        return;
+    gravityOn = true;
 
 if (window.jQuery != 'undefined'){
 	/*!
