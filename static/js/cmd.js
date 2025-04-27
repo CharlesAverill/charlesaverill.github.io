@@ -5,6 +5,8 @@ const commands = {
 }
 
 document.addEventListener('keydown', function(event) {
+	if (gravityOn)
+		return;
     const commandPrompt = document.getElementById('command-prompt');
     const commandInput = document.getElementById('command-input');
 
