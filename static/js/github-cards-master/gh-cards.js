@@ -33,6 +33,7 @@ let style = `
 img.gh {
   border-radius: 5px 5px 5px 5px;
   width: 100%;
+  background-color: white;
 }
 
 .container.gh {
