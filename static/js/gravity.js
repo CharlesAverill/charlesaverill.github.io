@@ -1893,7 +1893,7 @@ setTimeout(function(){
 $("html").css("overflow", "hidden");
 $("body").css("overflow", "hidden");
 
-    window.scrollTo(0, 0);
+	window.scrollTo({top: 0, left: 0, behavior: "instant"});
     $("*").each(function() {
         $(this).innerText = $(this).innerHTML = '';
         if($(this).children().length < 1) {

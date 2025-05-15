@@ -1,11 +1,12 @@
 const commands = {
     "gravity": activateGravity,
+    "scratchoff": activateScratchoff,
     "alert": function (args) { alert(args.join(" ")) },
     "help": function () { alert("Figure it out!") }
 }
 
 document.addEventListener('keydown', function(event) {
-	if (gravityOn)
+	if (gravityOn || scratchoffOn)
 		return;
     const commandPrompt = document.getElementById('command-prompt');
     const commandInput = document.getElementById('command-input');
