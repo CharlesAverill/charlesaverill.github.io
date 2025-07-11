@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Godzilla Collection</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background-color: #111;
+      color: #eee;
+      font-family: Arial, sans-serif;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 20%;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 0;
+      gap: 10px;
+      overflow-y: auto;
+    }
+
+    .sidebar img {
+      width: 80%;
+      height: 33%;
+      border: 2px solid #444;
+      border-radius: 4px;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 30px;
+      overflow-x: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid #333;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #222;
+    }
+
+    td a {
+      color: #7ecfff;
+      text-decoration: none;
+      position: relative;
+    }
+
+    td a:hover::after {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 100%;
+      width: 200px;
+      height: 300px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      border: 2px solid #fff;
+      background-image: attr(data-poster url);
+      z-index: 10;
+    }
+
+    .era-heading {
+      background-color: #333;
+      color: #fff;
+      font-size: 1.2em;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- Left Sidebar -->
+  <div class="sidebar">
+    <img src="/godzilla/Godzilla_Vol_1_24.png" alt="Godzilla Volume 1">
+    <img src="/godzilla/vs_ebirah.jpg" alt="Godzilla vs Ebirah">
+    <img src="/godzilla/king_of_monsters.jpg" alt="King of the Monsters">
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <h2>Godzilla Film Library</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Showa Era -->
+        <tr class="era-heading"><td colspan="2">Showa Era (1954–1975)</td></tr>
+        <tr><td>1954</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_1954.mp4">Godzilla</a></td></tr>
+        <tr><td>1955</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_raids_again_1955.mp4">Godzilla Raids Again</a></td></tr>
+        <tr><td>1963</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/king_kong_vs_godzilla_1963.mp4">King Kong vs. Godzilla</a></td></tr>
+        <tr><td>1964</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/mothra_vs_godzilla_1964.mp4">Mothra vs. Godzilla</a></td></tr>
+        <tr><td>1964</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/ghidorah_the_three_headed_monster_1964.mp4">Ghidorah, The Three-Headed Monster</a></td></tr>
+        <tr><td>1965</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/invasion_of_astro_monster_1965.mp4">Invasion of Astro-Monster</a></td></tr>
+        <tr><td>1966</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/ebirah_horror_of_the_deep_1966.mp4">Ebirah, Horror of the Deep</a></td></tr>
+        <tr><td>1967</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/son_of_godzilla_1967.mp4">Son of Godzilla</a></td></tr>
+        <tr><td>1968</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/destroy_all_monsters_1968.mp4">Destroy All Monsters</a></td></tr>
+        <tr><td>1969</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/all_monsters_attack_1969.mp4">All Monsters Attack</a></td></tr>
+        <tr><td>1971</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_vs_hedorah_1971.mp4">Godzilla vs. Hedorah</a></td></tr>
+        <tr><td>1972</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_vs_gigan_1972.mp4">Godzilla vs. Gigan</a></td></tr>
+        <tr><td>1973</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_vs_megalon_1973.mp4">Godzilla vs. Megalon</a></td></tr>
+        <tr><td>1974</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_vs_mechagodzilla_1974.mp4">Godzilla vs. Mechagodzilla</a></td></tr>
+        <tr><td>1975</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/terror_of_mechagodzilla_1975.mp4">Terror of Mechagodzilla</a></td></tr>
+
+        <!-- Heisei Era -->
+        <tr class="era-heading"><td colspan="2">Heisei Era (1984–1995)</td></tr>
+        <tr><td>1985</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_1985.mp4">Godzilla (1985)</a></td></tr>
+        <tr><td>1989</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_vs_biollante.mp4">Godzilla vs. Biollante</a></td></tr>
+        <tr><td>1991</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_vs_king_ghidorah_1991.mp4">Godzilla vs. King Ghidorah</a></td></tr>
+        <tr><td>1992</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_and_mothra_battle_for_earth_1992.mp4">Godzilla and Mothra: The Battle for Earth</a></td></tr>
+        <tr><td>1993</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_vs_mechagodzilla_2.mp4">Godzilla vs. Mechagodzilla II</a></td></tr>
+        <tr><td>1994</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_vs_space_godzilla_1994.mp4">Godzilla vs. SpaceGodzilla</a></td></tr>
+        <tr><td>1995</td><td><a href="#">Godzilla vs. Destoroyah (Missing 😢)</a></td></tr>
+
+        <!-- Millennium Era -->
+        <tr class="era-heading"><td colspan="2">Millennium Era (1999–2004)</td></tr>
+        <tr><td>1999</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_2000_1999.mp4">Godzilla 2000: Millennium</a></td></tr>
+        <tr><td>2000</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_vs_megaguirus_2000.mp4">Godzilla vs. Megaguirus</a></td></tr>
+        <tr><td>2001</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/giant_monsters_all_out_attack_2001.mp4">GMK: Giant Monsters All-Out Attack</a></td></tr>
+        <tr><td>2002</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_against_mechagodzilla_2002.mp4">Godzilla Against Mechagodzilla</a></td></tr>
+        <tr><td>2003</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_tokyo_sos_2003.mp4">Godzilla: Tokyo S.O.S.</a></td></tr>
+        <tr><td>2004</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_final_wars_2004.mp4">Godzilla: Final Wars</a></td></tr>
+
+        <!-- American Films -->
+        <tr class="era-heading"><td colspan="2">Non-Toho American Films</td></tr>
+        <tr><td>1998</td><td><a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/Godzilla/godzilla_1998.mp4">Godzilla (1998)</a></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Right Sidebar -->
+  <div class="sidebar">
+    <img src="/godzilla/vs_destoroyah.jpg" alt="Godzilla vs Destoroyah">
+    <img src="/godzilla/mechagodzilla.jpg" alt="Mechagodzilla">
+    <img src="/godzilla/vs_gigan.jpg" alt="Godzilla vs Gigan">
+  </div>
+</body>
+</html>
