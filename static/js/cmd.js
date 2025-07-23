@@ -3,7 +3,7 @@ const commands = {
     "scratchoff": activateScratchoff,
     "alert": function (args) { alert(args.join(" ")) },
     "oneko": function (args) { onekoList(args) },
-    "help": function () { alert("Figure it out!") }
+    "help": function () { alert("help, alert, gravity, scratchoff, oneko") }
 }
 
 document.addEventListener('keydown', function(event) {
