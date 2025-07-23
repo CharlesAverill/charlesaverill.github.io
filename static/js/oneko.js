@@ -34,8 +34,8 @@ function oneko(nekoFile) {
   
     const nekoEl = document.createElement("div");
   
-    let nekoPosX = 32 + Math.random() * 10;
-    let nekoPosY = 32 + Math.random() * 10;
+    let nekoPosX = 32 + Math.random() * 100;
+    let nekoPosY = 32 + Math.random() * 100;
   
     let mousePosX = 0;
     let mousePosY = 0;
@@ -219,6 +219,8 @@ function oneko(nekoFile) {
       }
       idleAnimationFrame += 1;
     }
+
+    const distanceOffset = Math.random() * 100;
   
     function frame() {
       frameCount += 1;
@@ -226,7 +228,7 @@ function oneko(nekoFile) {
       const diffY = nekoPosY - mousePosY;
       const distance = Math.sqrt(diffX ** 2 + diffY ** 2);
   
-      if (distance < nekoSpeed || distance < 48) {
+      if (distance < nekoSpeed || distance < 48 + distanceOffset) {
         idle();
         return;
       }
