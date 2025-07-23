@@ -2,6 +2,7 @@ const commands = {
     "gravity": activateGravity,
     "scratchoff": activateScratchoff,
     "alert": function (args) { alert(args.join(" ")) },
+    "oneko": function (args) { onekoList(args) },
     "help": function () { alert("Figure it out!") }
 }
 
