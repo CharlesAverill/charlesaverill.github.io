@@ -17,17 +17,107 @@ function isMouseOverPopup(map, layer) {
     return false;
 }
 
+function createGradientElement(id, colors) {
+    const gradient = document.createElementNS("http://www.w3.org/2000/svg", "linearGradient");
+    gradient.setAttribute("id", id);
+    gradient.setAttribute("x1", "12.5%");
+    gradient.setAttribute("y1", "12.5%");
+    gradient.setAttribute("x2", "87.5%");
+    gradient.setAttribute("y2", "87.5%");
+
+    colors.forEach((color, index) => {
+        const stopStart = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+        stopStart.setAttribute("offset", `${index * (105 / colors.length)}%`);
+        stopStart.setAttribute("stop-color", color);
+        gradient.appendChild(stopStart);
+
+        const stopEnd = document.createElementNS("http://www.w3.org/2000/svg", "stop");
+        stopEnd.setAttribute("offset", `${(index + 1) * (105 / colors.length)}%`);
+        stopEnd.setAttribute("stop-color", color);
+        gradient.appendChild(stopEnd);
+    });
+
+    return gradient;
+}
+
+function ensureGradientInSVG(id, colors) {
+    const svg = document.querySelector('svg');
+    if (!svg) return;
+
+    let defs = svg.querySelector('defs');
+    if (!defs) {
+        defs = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
+        svg.insertBefore(defs, svg.firstChild);
+    }
+
+    if (!svg.querySelector(`#${id}`)) {
+        const gradient = createGradientElement(id, colors);
+        defs.appendChild(gradient);
+    }
+}
+
+
 function titleCase(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-// Initialize the map
-const map = L.map('map').setView([38.8, -96], 5);
+const baseLayers = {
+    'National Geographic': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC'
+    }),
+    'Satellite': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
+    }),
+    'Terrain Base': L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Sources: Esri, USGS, NOAA'
+    }),
+    'OpenStreetMap': L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }),
+    'CartoDB Dark': L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://carto.com/">CARTO</a>'
+    })
+};
 
-// Add the base map layer (you can choose a different one if you prefer)
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC'
-}).addTo(map);
+const baseLayerKeys = Object.keys(baseLayers);
+let currentBaseIndex = 0;
+
+const map = L.map('map', {
+    center: [38.8, -96],
+    zoom: 5,
+    layers: [baseLayers[baseLayerKeys[currentBaseIndex]]]
+});
+
+const overlayLayers = []; // ← holds all your gradient overlays
+
+const tileToggleButton = L.control({ position: 'topleft' });
+tileToggleButton.onAdd = function (map) {
+    const div = L.DomUtil.create('div', 'leaflet-bar');
+    const button = L.DomUtil.create('a', '', div);
+    button.href = '#';
+    button.innerHTML = '🗺️';
+    button.title = 'Switch base map';
+
+    L.DomEvent.on(button, 'click', function (e) {
+        L.DomEvent.stopPropagation(e);
+        L.DomEvent.preventDefault(e);
+
+        // Remove current base layer
+        map.removeLayer(baseLayers[baseLayerKeys[currentBaseIndex]]);
+
+        // Advance index
+        currentBaseIndex = (currentBaseIndex + 1) % baseLayerKeys.length;
+
+        // Add next base layer
+        map.addLayer(baseLayers[baseLayerKeys[currentBaseIndex]]);
+
+        rebuildLayers();
+    });
+
+    return div;
+};
+tileToggleButton.addTo(map);
+
 
 const visitedStates = {
     'Texas': {reasons: ['Home', 'UT Dallas', '2H Offshore', 'Sam Houston National Forest', 
@@ -142,111 +232,94 @@ const geoJsonStuff = [
 	['/travel/canada_provinces.geo.json', canadaProvinces, 'name'],
 ];
 
-var i = 0;
-geoJsonStuff.forEach(stuff => {
-	const geoJsonUrl = stuff[0];
-	const geoJsonData = stuff[1];
-	const geoJsonNameField = stuff[2];
 
-	fetch(geoJsonUrl)
-    .then(response => response.json())
-    .then(data => {
-        L.geoJson(data, {
-            style: feature => {
-                const stateName = feature.properties[geoJsonNameField];
-                const visitData = geoJsonData[stateName] || { reasons: ['Not visited'], links: ['#'], categories: ['not_visited'] };
-                const categories = visitData['categories'];
-
-                // Set fillColor to 'transparent' for 'not_visited' category
-                if (categories.includes('not_visited')) {
+function rebuildLayers() {
+    let i = 0;
+    document.querySelectorAll(".legend").forEach(e => e.remove());
+    overlayLayers.forEach(e => map.removeLayer(e));
+    geoJsonStuff.forEach(stuff => {
+        const geoJsonUrl = stuff[0];
+        const geoJsonData = stuff[1];
+        const geoJsonNameField = stuff[2];
+    
+        fetch(geoJsonUrl)
+        .then(response => response.json())
+        .then(data => {
+            const geoLayer = L.geoJson(data, {
+                style: feature => {
+                    const stateName = feature.properties[geoJsonNameField];
+                    const visitData = geoJsonData[stateName] || { reasons: ['Not visited'], links: ['#'], categories: ['not_visited'] };
+                    const categories = visitData['categories'];
+                
+                    if (categories.includes('not_visited')) {
+                        return {
+                            fillColor: 'transparent',
+                            fillOpacity: 0,
+                            color: 'transparent',
+                            weight: 0,
+                        };
+                    }
+                
+                    const gradientId = `gradient-${stateName.toLowerCase().replace(/\s/g, '-')}`;
+                    const gradientColors = categories.map(cat => colors[cat]);
+                
+                    ensureGradientInSVG(gradientId, gradientColors);
+                
                     return {
-                        fillColor: 'transparent',
-                        fillOpacity: 0,
-                        color: 'transparent',
-                        weight: 0,
+                        fillColor: `url(#${gradientId})`,
+                        fillOpacity: 0.7,
+                        color: 'white',
+                        weight: 1,
                     };
-                }
-
-                // Create a unique linear gradient ID for each state
-                const gradientId = `gradient-${stateName.toLowerCase().replace(/\s/g, '-')}`;
-
-                // Create the linear gradient and add it to the DOM
-                let gradientDefs = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
-                gradientDefs.innerHTML = `<linearGradient id="${gradientId}" x1="12.5%" y1="12.5%" x2="87.5%" y2="87.5%">
-                                            ${createGradientString(categories.map(cat => colors[cat]))}
-                                        </linearGradient>`;
-                document.getElementsByTagName('svg')[0].appendChild(gradientDefs);
-
-                return {
-                    fillColor: `url(#${gradientId})`,
-                    fillOpacity: 0.7,
-                    color: 'white',
-                    weight: 1,
+                },
+                onEachFeature: (feature, layer) => {
+                    const stateName = feature.properties[geoJsonNameField];
+                    const visitData = geoJsonData[stateName] || { reasons: ['Not visited'], links: ['#'], category: 'not_visited' };
+                    const { reasons, links } = visitData;
+    
+                    if (visitData.category !== 'not_visited') {
+                        layer.on({
+                            mouseover: e => {
+                                let popupContent = `<strong>${stateName}</strong><br>`;
+                                for (let i = 0; i < reasons.length; i++) {
+                                    popupContent += `${reasons[i]}`;
+                                    if (links[i] && !links[i] == [])
+                                        popupContent += ` - <a href="${links[i][1]}" target="_blank">${links[i][0]}</a>`;
+                                    popupContent += `<br>`;
+                                }
+                                layer.bindPopup(popupContent).openPopup();
+                            },
+                            mouseout: e => {
+                                const isMouseOver = isMouseOverPopup(map, layer);
+                                if (!isMouseOver) {
+                                    layer.closePopup();
+                                }
+                            },
+                        });
+                    }
+                },
+            });
+    
+            geoLayer.addTo(map);           // Add to map now
+            overlayLayers.push(geoLayer);  // Save for later re-addition
+    
+            // Add legend only once
+            if (i === 0) {
+                const legend = L.control({ position: 'bottomright' });
+                legend.onAdd = () => {
+                    const div = L.DomUtil.create('div', 'info legend');
+                    const categories = Object.keys(colors).filter(c => c !== 'not_visited');
+                    categories.forEach(category => {
+                        div.innerHTML += `<i style="background:${colors[category]}"></i> ${titleCase(category)}<br>`;
+                       });
+                       return div;
                 };
-            },
-            onEachFeature: (feature, layer) => {
-                const stateName = feature.properties[geoJsonNameField];
-                const visitData = geoJsonData[stateName] || { reasons: ['Not visited'], links: ['#'], category: 'not_visited' };
-                const { reasons, links } = visitData;
-                if (visitData.category !== 'not_visited') {
-                    layer.on({
-                        mouseover: e => {
-                            let popupContent = `<strong>${stateName}</strong><br>`;
-                            
-                            for (let i = 0; i < reasons.length; i++) {
-                                popupContent += `${reasons[i]}`
-                                if (links[i] && !links[i] == [])
-                                    popupContent += ` - <a href="${links[i][1]}" target="_blank">${links[i][0]}</a>`;
-                                popupContent += `<br>`;
-                            }
+                legend.addTo(map);
+            }
+    
+            i += 1;
+        });
+    });    
+}
 
-                            layer.bindPopup(popupContent).openPopup();
-                        },
-                        mouseout: e => {
-                            // Check if the mouse is over the popup before closing it
-                            const isMouseOver = isMouseOverPopup(map, layer);
-
-                            if (!isMouseOver) {
-                                layer.closePopup();
-                            }
-                        },
-                    });
-                }
-            },
-        }).addTo(map);
-
-        // Add legend
-		if (i == 0) {
-	        const legend = L.control({ position: 'bottomright' });
-
-    	    legend.onAdd = () => {
-        	    const div = L.DomUtil.create('div', 'info legend');
-            	const categories = Object.keys(colors).filter(category => category !== 'not_visited');
-
-	            categories.forEach(category => {
-    	            div.innerHTML += `<i style="background:${colors[category]}"></i> ${titleCase(category)}<br>`;
-       	    	});
-   	        	return div;
-        	};
-	        legend.addTo(map);
-		}
-
-		i = i + 1;
-	})}
-);
-
-//     let fillPalette = ['orange', 'green', 'blue'];
-
-// let gradientString = `<linearGradient id="stripes" x1="0%" y1="0%" x2="100%" y2="100%">
-//     <stop offset=0 stop-color=${fillPalette[0]} />
-//     <stop offset=33% stop-color=${fillPalette[0]} />
-//     <stop offset=33% stop-color=${fillPalette[1]} />
-//     <stop offset=66% stop-color=${fillPalette[1]} />
-//     <stop offset=66% stop-color=${fillPalette[2]} />
-//     <stop offset=100% stop-color=${fillPalette[2]} />
-// </linearGradient>`
-
-// let svg = document.getElementsByTagName('svg')[0];
-// let svgDefs = document.createElementNS("http://www.w3.org/2000/svg", 'defs');
-// svgDefs.insertAdjacentHTML('afterbegin', gradientString);
-// svg.appendChild(svgDefs);
+rebuildLayers();
