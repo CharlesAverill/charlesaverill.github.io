@@ -47,20 +47,20 @@ const visitedStates = {
     'Colorado': {reasons: ['Cabin Building', 'Camping Trips'], links: [], categories: ['vacation', 'hiking']},
     'Wyoming': {reasons: ['Gannett Peak'], links: [], categories: ['vacation', 'hiking']},
     'Virginia': {reasons: ['Family'], links: [], categories: ['vacation']},
-    'West Virginia': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
-    'Alabama': {reasons: ['Dartmouth 2024', 'Huntsville 2025'], links: [], categories: ['work', 'vacation']},
+    'West Virginia': {reasons: ['Dartmouth 2024', 'Dartmouth 2025'], links: [], categories: ['work']},
+    'Alabama': {reasons: ['Dartmouth 2024', 'Dartmouth 2025', 'Huntsville 2025'], links: [], categories: ['work', 'vacation']},
     'Connecticut': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
     'Maryland': {reasons: ['Family'], links: [], categories: ['vacation']},
     'Indiana': {reasons: ['Purdue 2023'], links: [], categories: ['vacation']},
     'Illinois': {reasons: ['Chicago 2024'], links: [], categories: ['vacation', 'work']},
-	'Tennessee': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
-	'Kentucky': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
+	'Tennessee': {reasons: ['Dartmouth 2024', 'Dartmouth 2025'], links: [], categories: ['work']},
+	'Kentucky': {reasons: ['Dartmouth 2024', 'Dartmouth 2025'], links: [], categories: ['work']},
 	'Ohio': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
-	'Pennsylvania': {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
-	'New York': {reasons: ['Dartmouth 2024', 'NYC 2025'], links: [], categories: ['work', 'vacation']},
-	'Vermont':  {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
-	'New Hampshire':  {reasons: ['Dartmouth 2024'], links: [], categories: ['work']},
-	'Massachusetts':  {reasons: ['Dartmouth 2024'], links: [], categories: ['work']}
+	'Pennsylvania': {reasons: ['Dartmouth 2024', 'Dartmouth 2025'], links: [], categories: ['work']},
+	'New York': {reasons: ['Dartmouth 2024', 'Dartmouth 2025', 'NYC 2025'], links: [], categories: ['work', 'vacation']},
+	'Vermont':  {reasons: ['Dartmouth 2024', 'Dartmouth 2025'], links: [], categories: ['work']},
+	'New Hampshire':  {reasons: ['Dartmouth 2024', 'Dartmouth 2025'], links: [], categories: ['work']},
+	'Massachusetts':  {reasons: ['Dartmouth 2024', 'Boston 2025'], links: [], categories: ['work']}
     // 'California': { reasons: ['Vacation', 'Beach', 'Hiking'], links: ['https://example.com/california-vacation', 'https://example.com/california-beach', 'https://example.com/california-hiking'], category: 'vacation' },
     // 'New York': { reasons: ['Business trip', 'Meetings'], links: ['https://example.com/new-york-business', 'https://example.com/new-york-meetings'], category: 'business' },
     // Add more states as needed
@@ -97,6 +97,14 @@ const europeCountries = {
 	'Sweden': {reasons: ['PLDI 2024'], links: [], categories: ['vacation']}
 };
 
+const asiaCountries = {
+    'South Korea': {reasons: ['PLDI 2025'], links: [['PLDI Submission', 'https://www.charles.systems/publications/PTM_SRC.pdf']], categories: ['academia']}
+};
+
+const canadaProvinces = {
+    'Quebec': {reasons: ['Montreal 2024', 'Montreal 2025'], links: [], categories: ['vacation']}
+}
+
 // Define different colors for each category
 const colors = {
     'home': 'red',
@@ -125,11 +133,13 @@ function createGradientString(colors) {
 
 // Add the GeoJSON layers
 const geoJsonStuff = [
-	['https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json', visitedStates, 'name'],
-	['https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_provinces.geojson', italyCities, 'prov_name'],
-	['hr.json', croatiaCities, 'name'],
-	['gr.geojson', greeceCities, 'name'],
-	['europe_countries.geojson', europeCountries, 'name']
+	['/travel/us-states.json', visitedStates, 'name'],
+	['/travel/limits_IT_provinces.geojson', italyCities, 'prov_name'],
+	['/travel/hr.json', croatiaCities, 'name'],
+	['/travel/gr.geojson', greeceCities, 'name'],
+	['/travel/europe_countries.geojson', europeCountries, 'name'],
+	['/travel/asia_countries.json', asiaCountries, 'name'],
+	['/travel/canada_provinces.geo.json', canadaProvinces, 'name'],
 ];
 
 var i = 0;
