@@ -86,7 +86,7 @@ const greeceCities = {
 	'Epirus': {reasons: ['Mediterranean 2024', 'Epirus Road Trip', 'Igoumenitsa', 'River Acheron', 'Mesopotamos', 'Necromanteion', 'Ioannina'], links: [], categories: ['vacation', 'hiking']},
 	'Peloponnese': {reasons: ['Mediterranean 2024', 'Corinth', 'Paris Olympic Torch Reception'], links: [], categories: ['vacation']},
 	'Attica': {reasons: ['Mediterranean 2024', 'Athens', 'Paris Olympic Torch Reception'], links: [], categories: ['vacation']},
-	'Crete': {reasons: ['Mediterranean 2024', 'Create Road Trip', 'Ida Hike', 'Heraklion', 'Chania', 'Palaiochora', 'Vai Beach'], links: [], categories: ['vacation', 'hiking']},
+	'Crete': {reasons: ['Mediterranean 2024', 'Crete Road Trip', 'Ida Hike', 'Heraklion', 'Chania', 'Palaiochora', 'Vai Beach'], links: [], categories: ['vacation', 'hiking']},
 	'Central Greece': {reasons: ['Mediterranean 2024', 'Levadeia', 'Delphi', 'Lethe Spring', 'Temple of Apollo'], links: [], categories: ['vacation', 'hiking']},
 	'Central Macedonia': {reasons: ['Mediterranean 2024', 'Thessaloniki'], links: [], categories: ['vacation']},
 	'Thessaly': {reasons: ['Mediterranean 2024', 'Olympos Hike', 'River Styx', 'Styx Road Trip', 'Litochoro', 'Prionia', 'Larissa', 'Elassona'], links: [], categories: ['vacation', 'hiking']}
