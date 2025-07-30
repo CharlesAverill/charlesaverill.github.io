@@ -99,7 +99,8 @@ const imageUrls = [
   "josleys_kleinian.gif",
   "times.gif",
   "reimann_sphere_hobold_multi.gif",
-  "demo.gif"
+  "demo.gif",
+  "button.gif"
 ];
 
 			function shuffleArray(array) {
@@ -116,14 +117,22 @@ const imageUrls = [
         shuffleArray(imageUrls).forEach(url => {
             const img = document.createElement('img');
             img.src = '/gifs/' + url;
-            img.alt = url; // Add descriptive alt text if needed
+            img.alt = url;
             img.loading = 'lazy';
-            //gallery.appendChild(img);
-			const li = document.createElement('li');
-			li.style = 'background-image:url(/gifs/' + url + ')';
-			li.appendChild(img);
-			gallery.appendChild(li);
+
+            const li = document.createElement('li');
+            li.style.backgroundImage = 'url(/gifs/' + url + ')';
+            li.style.opacity = '0';       // hide visually but allow loading
+            li.style.transition = 'opacity 0.3s ease-in';
+
+            img.onload = () => {
+                li.style.opacity = '1';   // fade in once loaded
+            };
+
+            li.appendChild(img);
+            gallery.appendChild(li);
         });
+
     </script>
 </body>
 </html>
