@@ -2,7 +2,8 @@ const commands = {
     "gravity": activateGravity,
     "scratchoff": activateScratchoff,
     "alert": function (args) { alert(args.join(" ")) },
-    "help": function () { alert("Figure it out!") }
+    "oneko": function (args) { onekoList(args) },
+    "help": function () { alert("help, alert, gravity, scratchoff, oneko") }
 }
 
 document.addEventListener('keydown', function(event) {
