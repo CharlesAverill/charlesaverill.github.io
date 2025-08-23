@@ -134,6 +134,14 @@
 }
 
 @font-face {
+  font-family: "Wingdings";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('/static/fonts/wingding.ttf') format('truetype');
+}
+
+@font-face {
   font-family: "Impact";
   font-size: normal;
   font-weight: bold;
@@ -241,6 +249,11 @@ body.courier {
 
 body.fraktur {
   font-family: 'Cloister Black', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.wingdings {
+  font-family: 'Wingdings', Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-size: 0.6rem;
 }
 
 body.impact {

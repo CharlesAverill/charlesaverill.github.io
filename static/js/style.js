@@ -22,6 +22,7 @@ const fonts = [
     { name: "Libertinus", className: "libertinus" },
     { name: "Courier Prime", className: "courier" },
     { name: "Cloister Black", className: "fraktur" },
+    { name: "Wingdings", className: "wingdings" }
     // { name: "Impact", className: "impact" }
   ];
 let font = localStorage.getItem("font") ?? fonts[0].name;
