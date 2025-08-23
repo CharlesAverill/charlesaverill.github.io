@@ -1,0 +1,126 @@
+Review #78A
+===========================================================================
+
+Overall merit
+-------------
+3. Weak accept
+
+Paper summary
+-------------
+The essay uses the conceit of writing retrospectively from the future to chart a path for the mainstream adoption of formal methods in software development.
+In a nutshell, the idea is to imagine what incremental, bottom-up, practical adoption of practical verification tools might look like---as a kind of alternative to a top-down, boil-the-ocean "reboot" that some might believe is the way forward.
+The essay looks back on three eras, called "acts," each of which corresponds to a piece of advice for readers in 2025:
+
+1. Focus on incrementally adoptable verification techniques: namely, fully verifying widely used libraries and applying lightweight formal methods tools that can practically run in CI.
+2. Deal with unverifiable components (ML models and external I/O) with run-time verification and shareable trusted specs.
+3. Keep working (incrementally) toward fundamental advances in verification techniques that will make it more efficient to deal with unbounded executions. Also, try to teach practical formal-methods-driven software development to CS majors so they can use it as part of everyday engineering.
+
+The moral of the story is that we should not insist on a "big bang" revolution that suddenly yields everything verified end-to-end in Rocq;
+steady, incremental, practically adoptable solutions are instead the more likely route to long-term success.
+
+Comments for authors
+--------------------
+I think this essay makes a generally good point---that formal-methods enlightenment will come from incremental progress instead of a sudden revolution.
+And I like its central conceit: i.e., looking back from the future to chronicle a possible trajectory for where we go from here.
+It's a great idea to envision a plausible succession of society-wide events that could lead to the outcome that we want:
+even if the reader doesn't agree that it's the most *likely* future,
+it provides a kind of prescription for something that *could* come to pass if we play our cards right.
+I also think there is a real debate to be had between whether (and when) to invest more in top-down or bottom-up approaches to verification (as defined in the essay).
+
+The point where this essay is most successful, in my view, is the audacious point in the timeline where a 2049 PhD student makes a breakthrough in efficient automated reasoning about "a broader class of common loops."
+This might look like a *deus ex machina* or just wishful thinking when taken out of context, but with the essay's setup, the idea is more compelling:
+it's the result of incremental progress over decades that we finally arrive at more and more practical techniques.
+(I just wish the essay made it a little more explicit that "Rowan Carter" is standing on the shoulders of giants here and not a lone-wolf genius.)
+
+My main worry about this essay is that it does not focus much on a theory for *how* or *why* these envisioned events will happen.
+It misses an opportunity to envision the technical/business/social/political forces that will be necessary to make each stage in the "plan" follow from the previous one.
+
+To put it another way, each of the phases outlined in the essay is something that your average PL/FM enthusiast would agree should happen now, in 2025!
+I hope we all mostly agree that we should invest more in verifying widely-used components; that junior software engineers should be more acquainted with formal methods tools; etc.
+The reason they don't immediately come to pass is on the other side of the equation:
+for-profit businesses have a hard time prioritizing long-term consequences (even when they are obvious);
+there is no single entity with a sufficient incentive to verify a libc despite all the potential beneficiaries;
+specs for I/O interfaces are very hard to make reusable across different application scenarios;
+etc.
+The essay doesn't present a theory for why or how these impediments will change in each decade.
+It would be more useful if it attempted to envision a sequence of societal changes that would shift the cost/benefit analyses that prevent this kind of progress from happening now.
+
+One critical place where I think we need more of a specific theory is in the transition from Act II to Act III.
+The essay says, "However, this progress proves insufficient. Continued a large scale, reducing yearly incidents to levels not seen in large-scale breaches of medical and financial systems [keep on keepin' on]."
+But why is it insufficient?
+Exactly what is missing from the landscape, and how do people know this is what is happening?
+I think we need a somewhat more vivid picture of what will happen that will spur the people in 2040 or whatever to make the specific change that they make in the next phase.
+
+---
+
+Here are some second-order suggestions:
+
+## Bottom-Up and Top-Down are Not Mutually Exclusive
+
+In Act I, the "history" suggests that top-down whole-system verification efforts (presumably like CompCert and SeL4) will fade from prominence as people focus on more incremental, bottom-up approaches.
+However, from first principles, I think it's far more likely that both kinds of verification will persist and will pay dividends in different parts of the software landscape.
+I think this prediction could use a little more nuance in order to be believable.
+
+Namely, the envisioned "modular verified components" (MVC) trend will use techniques that are indistinguishable from top-down verification. The point is that high-cost, high-assurance methods (in the CompCert vein) are justifiable for reusable components that impact lots of software.
+I agree with the author that this is likely to get more popular, but I think this *is* top-down verification as defined---and it's important to distinguish between that and the more bottom-up approaches that will be feasible for "long tail" software.
+
+Basically, don't predict that top-down verification will fade away.
+Instead predict that it will continue to make inroads into common infrastructure (compilers, kernels, standard libraries) but that other techniques will be necessary for "normal" code.
+
+## Low-Level Writing Suggestions
+
+* The first 3 paragraphs (under Prologue) all seem to repeat the same idea (FM is successful only in a small number of critical, well-endowed domains; it needs to spread to the "long tail" of lower-stakes applications). This could probably be collapsed into one paragraph.
+* Throughout, the essay switches back and forth between the present tense and the past tense. It would be best to pick one and stick to it. I recommend the past tense---it would enhance the impression that this essay is a historical account transported back in time.
+* Many of the ideas (especially in Act I) about incrementally adoptable, evolutionary approaches to formal methods are the same as what some people today call "lightweight formal methods." See [the 1996 short essay by Jackson and Wing](https://people.csail.mit.edu/dnj/publications/ieee96-roundtable.html) and especially [the definition in a recent AWS paper](https://dl.acm.org/doi/10.1145/3477132.3483540). Explicitly referencing this term would help connect the argument to present-day trends.
+* "These components use assembly, C, and Rust — not because verification demands it, but because historical momentum dictates it." I couldn't grok this point: how does language choice relate to verification methodology?
+
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+
+Review #78B
+===========================================================================
+
+Overall merit
+-------------
+2. Weak reject
+
+Paper summary
+-------------
+The essay is a "tale from the future" that describes in retrospect the (yet to come) widespread successful and sustainable adoption of formal methods in software development and outlines a bright future where software is secure and safe.
+
+Comments for authors
+--------------------
+Thank you for submitting your work and sharing your inspiring vision of the future of formal methods!
+I really enjoyed this "lofty fantasy", though some aspects of the presentation and content require a bit more work before being publishable.
+Overall, I have the impression that your story just scratches the surface. It remains a bit simplistic in places and surprisingly doesn't elaborate on the role of AI in Formal Methods for software development.
+
+### Details
+- I found the abstract very different and disconnected from the rest of the (rather short) paper. It switches inconsistently between a positive and a negative view on things and failed to prepare me what to expect in the next pages. I also found the figure confusing as the graph does not indicate whether it is totally made up, or a prediction, or some interpolation. Are the numbers up to 2025 actually correct?
+- Similarly for the main text, I would find your tale more convincing if it would be backed by facts and analyses of past and present events. Personally, I prefer if the "historical" analysis and the look into the future are clearly marked, but can understand that your goal is to achieve a blend. If so, I suggest adding some explicit hint in the abstract/introduction.
+- l. 258 ff. Why do formal methods need to get re-integrated? I actually experience a different trend that formal methods start to get more attention to verify the outcome of generative AI. This would be one of the examples where a reference might be useful to back up your story.
+
+
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+
+Review #78C
+===========================================================================
+
+Overall merit
+-------------
+3. Weak accept
+
+Paper summary
+-------------
+The essay presents itself in the year 2050 looking at the impact that formal methods has in the reduction on number of cyber attacks year-on-year.  The essay proposes the decline of top-down verification (which hasn't worked thus far for the most of real-world systems) through use of modular verified components.  These components then integrate themselves into production-level infrastructure allowing for "untrustworthy but useful" progress.  However, it is only when a quiet revolution unfolds in academia, where formal methods get integrated and taught in undergraduate curricula in the 2040s that leads to a new generation of developers who are FM-knowledgeable and create the transformation of the software vulnerability industry.
+
+Comments for authors
+--------------------
+This essay is thought provoking, leaves one thinking about the future and what is possible or not possible.  Clearly, many different paths may happen, and whether AI will keep on hallucinating or not in the large timeframe mentioned in the paper remains up for contention. 
+
+I like this future, however, I'd like to see more discussion on how FMs would become more generally accepted for modular verified components.  I.e., what in particular helps this transition?  Is it a new programming language that supports pre and post conditions in programmatic terms?  Is it an extension of a popular existing language to support FM concepts and verification?  What is it?
+
+Comment @A1 by Reviewer A
+---------------------------------------------------------------------------
+Beyond the specific suggestions in the individual reviews, the reviewers agreed that there is one central expansion that will be required during the revision period: to your existing description of _what_ will happen in the future, please add some specific ideas about _why_ and _how_ those things will happen. It is not necessary that these things are guaranteed to happen (or even likely to happen), but the essay needs some theories about the chain of events that could—hypothetically!—cause the landscape to shift in the future.
