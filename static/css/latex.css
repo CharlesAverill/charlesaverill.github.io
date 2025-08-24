@@ -134,6 +134,22 @@
 }
 
 @font-face {
+  font-family: "Comic Sans MS";
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('/static/fonts/Comic\ Sans\ MS.ttf');
+}
+
+@font-face {
+  font-family: "Papyrus";
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('/static/fonts/Papyrus.ttf');
+}
+
+@font-face {
   font-family: "Wingdings";
   font-style: normal;
   font-weight: normal;
@@ -249,6 +265,14 @@ body.courier {
 
 body.fraktur {
   font-family: 'Cloister Black', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.comicsans {
+  font-family: 'Comic Sans MS', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.papyrus {
+  font-family: 'Papyrus', Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 body.wingdings {

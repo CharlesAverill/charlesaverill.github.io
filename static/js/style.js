@@ -22,6 +22,8 @@ const fonts = [
     { name: "Libertinus", className: "libertinus" },
     { name: "Courier Prime", className: "courier" },
     { name: "Cloister Black", className: "fraktur" },
+    { name: "Comic Sans MS", className: "comicsans" },
+    { name: "Papyrus", className: "papyrus" },
     { name: "Wingdings", className: "wingdings" }
     // { name: "Impact", className: "impact" }
   ];
