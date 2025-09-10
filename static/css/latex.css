@@ -134,6 +134,30 @@
 }
 
 @font-face {
+  font-family: "Comic Sans MS";
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('/static/fonts/Comic\ Sans\ MS.ttf');
+}
+
+@font-face {
+  font-family: "Papyrus";
+  font-style: normal;
+  font-weight: bold;
+  font-display: swap;
+  src: url('/static/fonts/Papyrus.ttf');
+}
+
+@font-face {
+  font-family: "Wingdings";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('/static/fonts/wingding.ttf') format('truetype');
+}
+
+@font-face {
   font-family: "Impact";
   font-size: normal;
   font-weight: bold;
@@ -243,6 +267,18 @@ body.fraktur {
   font-family: 'Cloister Black', Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
+body.comicsans {
+  font-family: 'Comic Sans MS', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.papyrus {
+  font-family: 'Papyrus', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.wingdings {
+  font-family: 'Wingdings', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
 body.impact {
   font-family: 'Impact', Georgia, Cambria, 'Times New Roman', Times, serif;
 }
@@ -251,7 +287,7 @@ body {
   font-family: 'Latin Modern', Georgia, Cambria, 'Times New Roman', Times, serif;
   line-height: 1.8;
 
-  max-width: 100ch;
+  max-width: 50rem;
   min-height: 100vh;
   overflow-x: hidden;
   margin: 0 auto;
