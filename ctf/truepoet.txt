@@ -1,8 +1,0 @@
-True Poet
-
-Flavor Text: Two things you should know about me: 1. I love libraries 2. I love poems. Combine those two (as well as mischievous friends and some opinions about tables) and BAM! You have me entering a Haiku writing competition. Can you find out the last line of the Haiku for one of my entries?
-
-Flag Format = i_love_poems_a_lot
-
-Hint1: Search up UT Dallas Haiku Competition 
-Hint2: Find the entries for 2023 and search by my full name

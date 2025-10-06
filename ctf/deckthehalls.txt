@@ -1,7 +1,0 @@
-Deck The Halls!
-
-Flavor Text: One of my best friends studied abroad last year! He would send me pictures of every new place he visited and this is one of them. Isn't it gorgeous? There's an annual event that happens on this street every winter. Can you find out what the event is called in the local language as well as the ending date of that event this year?
-
-Flag Format = statefair_02_09_2003
-
-Hint: The date is in month_day_year format
