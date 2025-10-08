@@ -22,3 +22,6 @@
 	path = Asteroids
 	url = https://github.com/CharlesAverill/Asteroids.git
 	branch = gh-pages
+[submodule "rng"]
+	path = rng
+	url = https://github.com/CharlesAverill/rng.git
