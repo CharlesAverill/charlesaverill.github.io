@@ -1,118 +1,125 @@
 <!DOCTYPE html>
 <html lang="en-US">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width">
 
-		<meta name="description" content="All My Stuff">
-		<meta name="author" content="Charles Averill">
-		<meta property="og:url" content="https://www.charles.systems/">
-		<meta property="og:type" content="website">
-		<meta property="og:image" content="https://www.charles.systems/static/images/main.png">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
 
-		<title>Charles Averill</title>
+	<meta name="description" content="All My Stuff">
+	<meta name="author" content="Charles Averill">
+	<meta property="og:url" content="https://www.charles.systems/">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="https://www.charles.systems/static/images/main.png">
 
-		<link rel="stylesheet" href="/static/css/latex.css?v=4">
-		<link rel="icon" type="image/ico" href="/static/favicon.ico?v=1"/>
+	<title>Charles Averill</title>
 
-		<style>
-			table {
-				table-layout: auto;
-				width: 100% !important;
-				word-wrap: anywhere;
-			}
+	<link rel="stylesheet" href="/static/css/latex.css?v=4">
+	<link rel="icon" type="image/ico" href="/static/favicon.ico?v=1" />
 
-			.command-prompt {
-				display: none;
-				position: fixed;
-				top: 20%;
-				left: 50%;
-				transform: translateX(-50%);
-				background-color: #000;
-				color: #fff;
-				padding: 20px;
-				border-radius: 10px;
-				z-index: 1000;
-				width: 300px;
-				box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-			}
+	<style>
+		table {
+			table-layout: auto;
+			width: 100% !important;
+		}
 
-			#command-input {
-				width: 100%;
-				background: transparent;
-				border: none;
-				color: #fff;
-				font-size: 16px;
-				outline: none;
-			}
-		</style>
-	</head>
-	<body>
-		<header>
-			<h1 id="top">All My Stuff</h1>
-			<p class="author">Charles Averill</p>
-		</header>
-		<div class="abstract">
-			<h2 id="abstract">Abstract</h2>
-			<table>
-				<tr>
-					<td>
-						<img id="imageCarousel" width="1008" src="/static/images/main.png" onclick="imageCarousel()" loading="lazy" alt="Picture of me"></img>
-					</td>
-					<td>
-						<p style="hyphens: none;">
-							I'm Charles Averill, a Ph.D. student under <a href="https://personal.utdallas.edu/~hamlen/index.html">Kevin Hamlen</a> 
-							and <a href="https://kereoz.github.io/">Christophe Hauser</a> at UT Dallas.
-							
-							I study formal verification with interests in proof automation,
-							separation logic, and binary programs (among many other things).
-							
-							<!-- You can explore the majority of my projects on my 
+		.command-prompt {
+			display: none;
+			position: fixed;
+			top: 20%;
+			left: 50%;
+			transform: translateX(-50%);
+			background-color: #000;
+			color: #fff;
+			padding: 20px;
+			border-radius: 10px;
+			z-index: 1000;
+			width: 300px;
+			box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+		}
+
+		#command-input {
+			width: 100%;
+			background: transparent;
+			border: none;
+			color: #fff;
+			font-size: 16px;
+			outline: none;
+		}
+	</style>
+</head>
+
+<body>
+	<header>
+		<h1 id="top">All My Stuff</h1>
+		<p class="author">Charles Averill</p>
+	</header>
+	<div class="abstract">
+		<h2 id="abstract">Abstract</h2>
+		<table>
+			<tr>
+				<td>
+					<img id="imageCarousel" width="1008" src="/static/images/main.png" onclick="imageCarousel()"
+						loading="lazy" alt="Picture of me"></img>
+				</td>
+				<td>
+					<p style="hyphens: none;">
+						I'm Charles Averill, a Ph.D. student under <a
+							href="https://personal.utdallas.edu/~hamlen/index.html">Kevin Hamlen</a>
+						and <a href="https://kereoz.github.io/">Christophe Hauser</a> at UT Dallas.
+
+						I study formal verification with interests in proof automation,
+						separation logic, and binary programs (among many other things).
+
+						<!-- You can explore the majority of my projects on my 
 							<a href="https://github.com/CharlesAverill/">Github page</a>. -->
-						</p>
-						<br>
-						<p style="hyphens: none"><tt>charles at utdallas dot edu</tt></p>
-						<br>
-						<p>
-							<a href="https://www.overleaf.com/read/hxsjbbvcgwzb">Résumé</a> &nbsp;
-							<a href="https://www.overleaf.com/read/zykmjzrfqqwc#fc85c5">CV</a>
-						</p>
-					</td>
-				</tr>
-			</table>
+					</p>
+					<br>
+					<p style="hyphens: none"><tt>charles at utdallas dot edu</tt></p>
+					<br>
+					<p>
+						<a href="https://www.overleaf.com/read/hxsjbbvcgwzb">Résumé</a> &nbsp;
+						<a href="https://www.overleaf.com/read/zykmjzrfqqwc#fc85c5">CV</a>
+					</p>
+				</td>
+			</tr>
+		</table>
 
-			<p style="text-align: center; width:100%">
-				<a href="https://github.com/CharlesAverill">Github</a> &nbsp;
-				<a href="https://orcid.org/0000-0001-6614-1808" style="vertical-align: top">orcid.org/0000-0001-6614-1808</a> &nbsp;
-				<a href="https://arxiv.org/search/cs?query=Averill%2C+Charles&searchtype=author&abstracts=show">arXiv</a>
-			</p>
-		</div>
-		<main>
-			<article>
-				<h2 id="work">My Work</h2>
-				<h3 id="publications">Publications</h3>
-				<table>
-					<thead>
-					  <tr>
+		<p style="text-align: center; width:100%">
+			<a href="https://github.com/CharlesAverill">Github</a> &nbsp;
+			<a href="https://orcid.org/0000-0001-6614-1808"
+				style="vertical-align: top">orcid.org/0000-0001-6614-1808</a> &nbsp;
+			<a href="https://arxiv.org/search/cs?query=Averill%2C+Charles&searchtype=author&abstracts=show">arXiv</a>
+		</p>
+	</div>
+	<main>
+		<article>
+			<h2 id="work">My Work</h2>
+			<h3 id="publications">Publications</h3>
+			<table>
+				<thead>
+					<tr>
 						<th>Title</th>
 						<th>Venue</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  <tr>
-						<td><em>The Proof Must Go On: Formal Methods in the Theater of Secure Software Development of the Future</em>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><em>The Proof Must Go On: Formal Methods in the Theater of Secure Software Development of
+								the Future</em>
 							<br>
 							<a href="/publications/onward25essays-paper78.pdf">Draft</a> &nbsp;
 							<a href="/publications/onward25essays-reviews-78.txt">Reviews</a> &nbsp;
 							<a href="/publications/onward25essays-paper78-revised_paper.pdf">Revised Draft</a> &nbsp;
-							<a href="/publications/onward25essays-paper78-revision_cover_letter.pdf">Revision Cover Letter</a> &nbsp;
+							<a href="/publications/onward25essays-paper78-revision_cover_letter.pdf">Revision Cover
+								Letter</a> &nbsp;
 							<a href="https://dl.acm.org/doi/10.1145/3759429.3762634">Publication</a> &nbsp;
 							<a href="/publications/TheProofMustGoOn_Presentation.pdf">Presentation</a> &nbsp;
-							<a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/splashpresentation_clipped.mp4">Presentation Recording</a>
+							<a href="https://caseashell.sfo2.cdn.digitaloceanspaces.com/splashpresentation_clipped.mp4">Presentation
+								Recording</a>
 						</td>
 						<td>SPLASH Onward! Essays 2025</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td><em>Formally-Verified, Tight Timing Constraints for Machine Code</em>
 							<br>
 							<a href="/publications/src_gold_award.pdf" style="color:#FFD700">Gold Award Winner</a>
@@ -122,11 +129,12 @@
 							<a href="/publications/PTM_SRC.pdf">Extended Abstract</a> &nbsp;
 							<a href="/publications/PTM_SRC_Poster.pdf">Poster</a> &nbsp;
 							<a href="/publications/PTM_SRC_Finals.pdf">Finals Presentation</a> &nbsp;
-							<a href="https://m.youtube.com/live/BRhBv_aYNks?si=MQarpFIYobx_shU0&t=1h47m12s">Finals Presentation Recording</a>
+							<a href="https://m.youtube.com/live/BRhBv_aYNks?si=MQarpFIYobx_shU0&t=1h47m12s">Finals
+								Presentation Recording</a>
 						</td>
 						<td>PLDI SRC 2025</td>
-					  </tr> 
-					  <tr>
+					</tr>
+					<tr>
 						<td><em>VOLPIC: Verifying Lifted Pascal in Coq</em>
 							<br>
 							<a href="/publications/VOLPIC_SRC_Draft.pdf">Draft</a> &nbsp;
@@ -136,8 +144,8 @@
 
 						</td>
 						<td>PLDI SRC 2024</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td><em>Prettybird: A DSL for Programmatic Font Compilation</em>
 							<br>
 							<a href="/publications/Prettybird_SRC_Draft.pdf">Draft</a> &nbsp;
@@ -146,505 +154,549 @@
 							<a href="/publications/Prettybird_SRC_Poster.pdf">Poster</a>
 						</td>
 						<td>PLDI SRC 2023</td>
-					  </tr>
-					  <tr>
-						<td><a href="/publications/SSUOISLTRI.pdf"><em>Self-Supervised Unseen Object Instance Segmentation via Long-Term Robot Interaction</em></a>
+					</tr>
+					<tr>
+						<td><a href="/publications/SSUOISLTRI.pdf"><em>Self-Supervised Unseen Object Instance
+									Segmentation via Long-Term Robot Interaction</em></a>
 						</td>
 						<td>RSS 2023</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td>
-							<a href="/publications/CTBVVE_EGDaIBSVR.pdf"><em>Connecting the Brains via Virtual Eyes: Eye-Gaze Directions and Inter-brain Synchrony in VR</em></a>
+							<a href="/publications/CTBVVE_EGDaIBSVR.pdf"><em>Connecting the Brains via Virtual Eyes:
+									Eye-Gaze Directions and Inter-brain Synchrony in VR</em></a>
 						</td>
 						<td>CHI 2021</td>
-					  </tr>
-					  <tr>
-						<td><a href="/publications/JIPP_2_4_Technology_in_Policy.pdf"><em>NFTree: Art Without Emissions</em></a></td>
+					</tr>
+					<tr>
+						<td><a href="/publications/JIPP_2_4_Technology_in_Policy.pdf"><em>NFTree: Art Without
+									Emissions</em></a></td>
 						<td>JIPP Vol. 2.4</td>
-					  </tr>
-					</tbody>
-				</table>
+					</tr>
+				</tbody>
+			</table>
 
-				<h3 id="writing">Writing<label for="sn-1" class="sidenote-toggle sidenote-number"></label>
-					<input type="checkbox" id="sn-1" class="sidenote-toggle" />
-					<span class="sidenote"><a href="/writings/index.html">More</a></span></h3>
-				<ul>
-					<li>
-						<a href="https://charlesaverill.github.io/ctpe">Coq Tactics in Plain English</a>
-					</li>
-					<li>
-						<a href="/writings/bsfmc.pdf">A Brief Survey of Formal Models of Concurrency</a> - 
-						<a href="https://arxiv.org/abs/2412.16179#">arXiv Preprint</a>
-					</li>
-					<li>
-						<a href="/writings/The_Verification_of_ARMv7_memset.pdf">The Verification of ARMv7 <tt>memset</tt> - Progress Report</a>
-					</li>
-					<li>
-						<a href="https://www.overleaf.com/read/dyyfcncrnbbk">Theoretical Physics Notes</a>
-					</li>
-					<li>
-						<a href="/writings/relativity.pdf">Transcription of "Relativity: The Special and General Theory" by Albert Einstein</a> - <a href="https://www.overleaf.com/read/zqfsffnfmzqs">LaTeX source</a>
+			<h3 id="writing">Writing<label for="sn-1" class="sidenote-toggle sidenote-number"></label>
+				<input type="checkbox" id="sn-1" class="sidenote-toggle" />
+				<span class="sidenote"><a href="/writings/index.html">More</a></span>
+			</h3>
+			<ul>
+				<li>
+					<a href="https://charlesaverill.github.io/ctpe">Coq Tactics in Plain English</a>
+				</li>
+				<li>
+					<a href="/writings/bsfmc.pdf">A Brief Survey of Formal Models of Concurrency</a> -
+					<a href="https://arxiv.org/abs/2412.16179#">arXiv Preprint</a>
+				</li>
+				<li>
+					<a href="/writings/The_Verification_of_ARMv7_memset.pdf">The Verification of ARMv7 <tt>memset</tt> -
+						Progress Report</a>
+				</li>
+				<li>
+					<a href="https://www.overleaf.com/read/dyyfcncrnbbk">Theoretical Physics Notes</a>
+				</li>
+				<li>
+					<a href="/writings/relativity.pdf">Transcription of "Relativity: The Special and General Theory" by
+						Albert Einstein</a> - <a href="https://www.overleaf.com/read/zqfsffnfmzqs">LaTeX source</a>
 					<span class="sidenote">
-						A nice quote from this book that I enjoyed - 
-						"No fairer destiny could be allotted to any physical theory, 
-						than that it should of itself point out the way to the introduction 
-						of a more comprehensive theory, in which it lives on as a 
-						limiting case." 
+						A nice quote from this book that I enjoyed -
+						"No fairer destiny could be allotted to any physical theory,
+						than that it should of itself point out the way to the introduction
+						of a more comprehensive theory, in which it lives on as a
+						limiting case."
 						<!-- Incremental progress is what drives the human race. -->
 					</span>
-					</li>
-					<li>
-						<a href="/writings/ursa_proposal_dec21.pdf">Interactive Object Segmentation in Mobile Robots - URSA Proposal December 2021</a>
-					</li>
-					<li>
-						<a href="/writings/agc.pdf">A Brief Analysis of the Apollo Guidance Computer</a> - <a href="https://arxiv.org/abs/2201.08230">arXiv Preprint</a> - <a href="https://www.overleaf.com/read/mvztwcmwkmhq">LaTeX source</a>
-					</li>
-				</ul>
+				</li>
+				<li>
+					<a href="/writings/ursa_proposal_dec21.pdf">Interactive Object Segmentation in Mobile Robots - URSA
+						Proposal December 2021</a>
+				</li>
+				<li>
+					<a href="/writings/agc.pdf">A Brief Analysis of the Apollo Guidance Computer</a> - <a
+						href="https://arxiv.org/abs/2201.08230">arXiv Preprint</a> - <a
+						href="https://www.overleaf.com/read/mvztwcmwkmhq">LaTeX source</a>
+				</li>
+			</ul>
 
-				<h3 id="teaching">Teaching</h3>
-				<p>
-					As an undergraduate, I taught two semester-long compiler design 
-					workshops, <a href="/teaching/PCD/">Practical Compiler Design</a> in Spring 2023
-					and <a href="/teaching/ICD/">Introduction to Compiler Design</a> in Fall 2023.
-				</p>
-				<p>
-					Additionally, I've given a number of educational outreach talks
-					in fields such as formal verification and quantum computing
-					through the UTD Computer Security Group (of which I am an officer)
-					and the Dallas Hackers' Association.
-				</p>
-				<table>
-					<thead>
-					  <tr>
+			<h3 id="teaching">Teaching</h3>
+			<p>
+				As an undergraduate, I taught two semester-long compiler design
+				workshops, <a href="/teaching/PCD/">Practical Compiler Design</a> in Spring 2023
+				and <a href="/teaching/ICD/">Introduction to Compiler Design</a> in Fall 2023.
+			</p>
+			<p>
+				Additionally, I've given a number of educational outreach talks
+				in fields such as formal verification and quantum computing
+				through the UTD Computer Security Group (of which I am an officer)
+				and the Dallas Hackers' Association.
+			</p>
+			<table>
+				<thead>
+					<tr>
 						<th style="width: 50%">Title</th>
 						<th style="min-width: 30%">Venues</th>
 						<th style="min-width: 30%">Dates</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  <tr>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a href="/teaching/PKC.pdf">Public-Key Cryptography</a></td>
+						<td>CSG</td>
+						<td>Oct 2025</td>
+					</tr>
+					<tr>
 						<td class='hover-container'>
-						  <a href="/publications/TheProofMustGoOn_Presentation.pdf">The Proof Must Go On: Charles Predicts The Future</a>
-						  <br>
-						  <a href="https://youtu.be/pYnxmEB8INk?si=QYaVLiWfZbI0uxpA">Recording</a>
-						  <img class="hover-image" src="/static/images/tpmgo_presentation.png" loading="lazy" alt="Poster for my The Proof Must Go On talk">
+							<a href="/publications/TheProofMustGoOn_Presentation.pdf">The Proof Must Go On: Charles
+								Predicts The Future</a>
+							<br>
+							<a href="https://youtu.be/pYnxmEB8INk?si=QYaVLiWfZbI0uxpA">Recording</a>
+							<img class="hover-image" src="/static/images/tpmgo_presentation.png" loading="lazy"
+								alt="Poster for my The Proof Must Go On talk">
 						</td>
 						<td>CSG</td>
 						<td>Oct 2025</td>
-					  </tr>
-					  <tr>
-					    <td>The Timing Proof Project - An Update</td>
-					    <td>Dartmouth TrustLab, DHA</td>
-					    <td>Aug, Sep 2025</td>
-					  </tr>
-					  <tr>
-					    <td class='hover-container'><a href="/teaching/tales_from_the_cryptanalysis.pdf">Tales from the Crypt(analysis): A Survey of Side-Channel Attacks</a>
-						<br>
-						<a href="https://youtube.com/live/19eE3MqArP0">Recording</a>
-						<img src="/static/images/talesfromthecryptanalysis.png" class="hover-image" loading="lazy" alt="Poster for my Tales from the Crypt(analysis) talk">
+					</tr>
+					<tr>
+						<td>The Timing Proof Project - An Update</td>
+						<td>Dartmouth TrustLab, DHA</td>
+						<td>Aug, Sep 2025</td>
+					</tr>
+					<tr>
+						<td class='hover-container'><a href="/teaching/tales_from_the_cryptanalysis.pdf">Tales from the
+								Crypt(analysis): A Survey of Side-Channel Attacks</a>
+							<br>
+							<a href="https://youtube.com/live/19eE3MqArP0">Recording</a>
+							<img src="/static/images/talesfromthecryptanalysis.png" class="hover-image" loading="lazy"
+								alt="Poster for my Tales from the Crypt(analysis) talk">
 						</td>
 						<td>CSG</td>
 						<td>April 2025</td>
-					  </tr>
-					  <tr>
-						<td><a href="/teaching/HackingTheMan.pdf">Hacking the Man - A Guide to Filing Small Claims Cases in Dallas County</a></td>
+					</tr>
+					<tr>
+						<td><a href="/teaching/HackingTheMan.pdf">Hacking the Man - A Guide to Filing Small Claims Cases
+								in Dallas County</a></td>
 						<td>DHA</td>
 						<td>March 2025</td>
-					  </tr>
-					  <tr>
-						<td class="hover-container"><a href="/teaching/sotu_v2.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk (v2)</a>
+					</tr>
+					<tr>
+						<td class="hover-container"><a href="/teaching/sotu_v2.pdf">Secrets of the Universe: The
+								Ultimate Formal Verification Talk (v2)</a>
 							<br>
 							<a href="/teaching/sotu_demo.v">Demo</a>
-							<img src="/static/images/secretsoftheuniverse.png" class="hover-image" loading="lazy" alt="Poster for my Secrets of the Universe talk">
+							<img src="/static/images/secretsoftheuniverse.png" class="hover-image" loading="lazy"
+								alt="Poster for my Secrets of the Universe talk">
 						</td>
 						<td>CSG</td>
 						<td>Nov 2024</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td><a href="/teaching/Qubit_Recycling__Revisited.pdf">Qubit Recycling Revisited</a>
 							<br>
 							<a href="/teaching/Qubit_Recycling__Revisited_handout.pdf">Handout</a>
 						</td>
 						<td>UTD Quantum Information Seminar</td>
 						<td>Oct 2024</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td class="hover-container">
-							<a href="/teaching/30_Cycles_or_It_s_Free___Formal_Timing_of_Binary_Code.pdf">30 Cycles or It's Free - Formal Timing of Binary Code</a>
-							<img src="/static/images/30cyclesfree.png" class="hover-image" loading="lazy" alt="Poster for my 30 Cycles or It's Free talk">
+							<a href="/teaching/30_Cycles_or_It_s_Free___Formal_Timing_of_Binary_Code.pdf">30 Cycles or
+								It's Free - Formal Timing of Binary Code</a>
+							<img src="/static/images/30cyclesfree.png" class="hover-image" loading="lazy"
+								alt="Poster for my 30 Cycles or It's Free talk">
 						</td>
 						<td>DHA, CSG</td>
 						<td>Sept, Oct 2024</td>
-					  </tr>
-					  <tr>
-						<td><a href="/teaching/langsec_review_1.pdf">Quarterly LangSec Review #1 - Dancing, Type Systems, and Quantum Computers</a></td>
+					</tr>
+					<tr>
+						<td><a href="/teaching/langsec_review_1.pdf">Quarterly LangSec Review #1 - Dancing, Type
+								Systems, and Quantum Computers</a></td>
 						<td>DHA</td>
 						<td>Sept 2024</td>
-					  </tr>
-					  <tr>
-						<td><a href="/teaching/Formal_Timing_and_Correctness_of_Binary_Code.pdf">The Good, The Bad, and The Binary: Formal Timing and Correctness of Binary Code</a></td>
+					</tr>
+					<tr>
+						<td><a href="/teaching/Formal_Timing_and_Correctness_of_Binary_Code.pdf">The Good, The Bad, and
+								The Binary: Formal Timing and Correctness of Binary Code</a></td>
 						<td>Dartmouth TrustLab</td>
 						<td>Aug 2024</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td><a href="/teaching/volpic.pdf">Verifier of Lifted Pascal in Coq</a></td>
 						<td>DHA</td>
 						<td>Feb 2024</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td>Type Inhabitation</td>
 						<td>DHA</td>
 						<td>Nov 2023</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td class="hover-container">
-							<a href="/teaching/sotu.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk (v1)</a>
-							<img src="/static/images/secretsoftheuniverse.png" class="hover-image" loading="lazy" alt="Poster for my Secrets of the Universe talk">
+							<a href="/teaching/sotu.pdf">Secrets of the Universe: The Ultimate Formal Verification Talk
+								(v1)</a>
+							<img src="/static/images/secretsoftheuniverse.png" class="hover-image" loading="lazy"
+								alt="Poster for my Secrets of the Universe talk">
 						</td>
 						<td>CSG</td>
 						<td>Oct 2023</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td>Formal Program Verification (v1, v2)</td>
 						<td>DHA</td>
 						<td>May, Oct 2023</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td><a href="/Combinators/BCKW_Combinator_Calculus.pdf">BCKW Combinator Calculus</a>
 							<br>
 							<a href="https://www.overleaf.com/read/rdycdgjftmkz">LaTeX Source</a>
 						</td>
 						<td>CSG</td>
 						<td>Apr 2023</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td><a href="/teaching/fpv_cyberfest23.pdf">Formal Program Verification</a>
-							<br>	
+							<br>
 							<a href="https://www.overleaf.com/project/641b8856e361708a2e342052">LaTeX Source</a> &nbsp;
 							<a href="https://www.youtube.com/watch?v=LC65vQSaC8g">Video</a>
 						</td>
 						<td>Dallas Cyberfest</td>
 						<td>Mar 2023</td>
-					  </tr>
-					  <!-- <tr>
+					</tr>
+					<!-- <tr>
 						<td><a href="/teaching/brickmachine.pdf">Dr. BrickMachine, or: How I Learned to Stop Worrying and <strike>Love</strike>Hate The Apache HTTP Server Project</a></td>
 						<td></td>
 						<td></td>
 					  </tr> -->
-					  <tr>
-						<td><a href="/teaching/Secure_Quantum_Information_Transfer_Tech_Talk.pdf">Secure Quantum Information Transfer</a></td>
+					<tr>
+						<td><a href="/teaching/Secure_Quantum_Information_Transfer_Tech_Talk.pdf">Secure Quantum
+								Information Transfer</a></td>
 						<td>CSG</td>
 						<td>Nov 2022</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td class="hover-container">
 							<a href="/teaching/Decompilation_Shmecompilation.pdf">Decompilation Schmecompilation</a>
-							<img src="/static/images/decompilation_shmecompilation.png" class="hover-image" loading="lazy" alt="Poster for my Decompilation, Schmecompilation talk">
+							<img src="/static/images/decompilation_shmecompilation.png" class="hover-image"
+								loading="lazy" alt="Poster for my Decompilation, Schmecompilation talk">
 						</td>
 						<td>CSG</td>
 						<td>Oct 2022</td>
-					  </tr>
-					  <tr>
-						<td><a href="/writings/Pushing_Grasping_Synergy.pdf">Analysis of "Learning Synergies between Pushing and Grasping with Self-supervised Deep Reinforcement Learning"</a>
+					</tr>
+					<tr>
+						<td><a href="/writings/Pushing_Grasping_Synergy.pdf">Analysis of "Learning Synergies between
+								Pushing and Grasping with Self-supervised Deep Reinforcement Learning"</a>
 							<br>
-							<a href="https://www.overleaf.com/read/vdpdbrkvtvpk">LaTeX source</a> &nbsp; 
+							<a href="https://www.overleaf.com/read/vdpdbrkvtvpk">LaTeX source</a> &nbsp;
 							<a href="https://arxiv.org/abs/1803.09956">Original Paper</a>
 						</td>
 						<td>UTD Interactive Robotics and Vision Lab</td>
 						<td>Apr 2022</td>
-					  </tr>
-					  <tr>
+					</tr>
+					<tr>
 						<td class="hover-container">
 							<a href="/teaching/PyJail_talk.pdf">Prison Snake</a>
 							<br>
 							<a href="https://www.youtube.com/watch?v=7i3qgtMq3NQ">Recording</a>
-							<img src="/static/images/prisonsnake.jpg" class="hover-image" loading="lazy" alt="Poster for my Prison Snake talk">
+							<img src="/static/images/prisonsnake.jpg" class="hover-image" loading="lazy"
+								alt="Poster for my Prison Snake talk">
 						</td>
 						<td>CSG</td>
 						<td>Feb 2022</td>
-					  </tr>
-					</tbody>
-				</table>
+					</tr>
+				</tbody>
+			</table>
 
-				<h2 id="projects">Projects</h2>
-				<div id="volpiccard" class="gh-card card" data-repo="CharlesAverill/VOLPIC" 
-					data-image="https://github.com/CharlesAverill/VOLPIC/raw/main/media/logo_black.png">
-				</div>
-				<div class="gh-card card" data-repo="CharlesAverill/ZENITH" data-image="https://github.com/CharlesAverill/ZENITH/raw/main/media/logo.gif" object-fit="fill"></div>
-				<div class="gh-card card" data-repo="CharlesAverill/proofchat" data-image="https://raw.githubusercontent.com/CharlesAverill/proofchat/refs/heads/main/media/proofchat.png"></div>
-				<div class="gh-card card" data-repo="CharlesAverill/MIPSelbrot" data-image="https://raw.githubusercontent.com/CharlesAverill/MIPSelbrot/refs/heads/main/media/screenshot1.png"></div>
-				<div class="gh-card card" data-repo="CharlesAverill/yarr" data-image="https://raw.githubusercontent.com/CharlesAverill/yarr/refs/heads/main/media/10_Rotation.gif"></div>
-				<div class="gh-card card" url-override="/Purple/" data-image="/Purple/logo/logo_gradient.png" name="Purple" description="Language specification for a C-like toy language" object-fit="contain"></div>
-				<ul>
-					<li>
-						<a href="Projects/EFS.pdf">Encrypted File System - CS 6324</a>
-					</li>
-					<li>
-						<a href="https://www.overleaf.com/read/gcrnnzfsmrvq">Graph Shepherding Algorithms</a>
-					</li>
-					<li>
-						<a href="Projects/DEFFS/">DEFFS</a>
-					</li>
-					<li>
-						<a href="Projects/turing/">Turing</a>
-					</li>
-				</ul>
+			<h2 id="projects">Projects</h2>
+			<div id="volpiccard" class="gh-card card" data-repo="CharlesAverill/VOLPIC"
+				data-image="https://github.com/CharlesAverill/VOLPIC/raw/main/media/logo_black.png">
+			</div>
+			<div class="gh-card card" data-repo="CharlesAverill/ZENITH"
+				data-image="https://github.com/CharlesAverill/ZENITH/raw/main/media/logo.gif" object-fit="fill"></div>
+			<div class="gh-card card" data-repo="CharlesAverill/proofchat"
+				data-image="https://raw.githubusercontent.com/CharlesAverill/proofchat/refs/heads/main/media/proofchat.png">
+			</div>
+			<div class="gh-card card" data-repo="CharlesAverill/MIPSelbrot"
+				data-image="https://raw.githubusercontent.com/CharlesAverill/MIPSelbrot/refs/heads/main/media/screenshot1.png">
+			</div>
+			<div class="gh-card card" data-repo="CharlesAverill/yarr"
+				data-image="https://raw.githubusercontent.com/CharlesAverill/yarr/refs/heads/main/media/10_Rotation.gif">
+			</div>
+			<div class="gh-card card" url-override="/Purple/" data-image="/Purple/logo/logo_gradient.png" name="Purple"
+				description="Language specification for a C-like toy language" object-fit="contain"></div>
+			<ul>
+				<li>
+					<a href="Projects/EFS.pdf">Encrypted File System - CS 6324</a>
+				</li>
+				<li>
+					<a href="https://www.overleaf.com/read/gcrnnzfsmrvq">Graph Shepherding Algorithms</a>
+				</li>
+				<li>
+					<a href="Projects/DEFFS/">DEFFS</a>
+				</li>
+				<li>
+					<a href="Projects/turing/">Turing</a>
+				</li>
+			</ul>
 
-				<h2 id="webring"><a href="https://en.wikipedia.org/wiki/Webring" target="_blank">Web Ring</a>
-					<label for="sn-2" class="sidenote-toggle sidenote-number"></label>
-					<input type="checkbox" id="sn-2" class="sidenote-toggle" />
-					<span class="sidenote">Is it really a web ring yet? Not sure, gotta wait til it catches on...</span></h2>
-				<table>
-					<thead>
-						<tr>
-							<th style="text-align: center">Name</th>
-							<th style="text-align: center">Link</th>
-							<th style="text-align: center; min-width: 30%">Notes</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th colspan="3" class="webring-header">
-								<a href="https://personal.utdallas.edu/~hamlen/research.html" target="_blank">Software Languages Security Lab</a>
-							</th>
-						</tr>
-						<tr>
-							<td>Dr. Kevin Hamlen</td>
-							<td><a href="https://personal.utdallas.edu/~hamlen/" target="_blank">https://personal.utdallas.edu/~hamlen</a></td>
-							<td>Principal Investigator</td>
-						</tr>
-						<tr>
-							<td>Ilan Buzzetti</td>
-							<td><a href="https://ilanb.xyz/" target="_blank">https://ilanb.xyz</a></td>
-							<td>Graduate Student</td>
-						</tr>
-						<tr>
-							<td>Saquib Irtiza</td>
-							<td><a href="https://www.linkedin.com/in/saquib-irtiza/" target="_blank">https://www.linkedin.com/in/saquib-irtiza</a></td>
-							<td>Graduate Student</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr><th colspan="3" class="webring-header">
+			<h2 id="webring"><a href="https://en.wikipedia.org/wiki/Webring" target="_blank">Web Ring</a>
+				<!-- <label for="sn-2" class="sidenote-toggle sidenote-number"></label> -->
+				<!-- <input type="checkbox" id="sn-2" class="sidenote-toggle" /> -->
+				<!-- <span class="sidenote">Is it really a web ring yet? Not sure, gotta wait til it catches on...</span> -->
+			</h2>
+			<table>
+				<thead>
+					<tr>
+						<th style="text-align: center">Site</th>
+						<th style="text-align: center; min-width: 30%">Notes</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<th colspan="3" class="webring-header">
+							<a href="https://personal.utdallas.edu/~hamlen/research.html" target="_blank">Software
+								Languages Security Lab</a>
+						</th>
+					</tr>
+					<tr>
+						<td><a href="https://personal.utdallas.edu/~hamlen/"
+								target="_blank">Dr. Kevin Hamlen</a></td>
+						<td>Principal Investigator</td>
+					</tr>
+					<tr>
+						<td><a href="https://ilanb.xyz/" target="_blank">Ilan Buzzetti</a></td>
+						<td>Graduate Student</td>
+					</tr>
+					<tr>
+						<td><a href="https://www.linkedin.com/in/saquib-irtiza/"
+								target="_blank">Saquib Irtiza</a></td>
+						<td>Graduate Student</td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th colspan="3" class="webring-header">
 							<a href="https://www.cs.dartmouth.edu/~sws/advising/" target="_blank">TrustLab</a>
-						</th></tr>
-						<tr>
-							<td>Christophe Hauser</td>
-							<td><a href="https://kereoz.github.io/" target="_blank">https://kereoz.github.io/</a></td>
-							<td>Principal Investigator</td>
-						</tr>
-						<tr>
-							<td>Sergey Bratus</td>
-							<td><a href="https://web.cs.dartmouth.edu/people/sergey-bratus" target="_blank">https://web.cs.dartmouth.edu/people/sergey-bratus</a></td>
-							<td>Principal Investigator</td>
-						</tr>
-						<tr>
-							<td>Sean Smith</td>
-							<td><a href="https://www.cs.dartmouth.edu/~sws/" target="_blank">https://www.cs.dartmouth.edu/~sws/</a></td>
-							<td>Principal Investigator</td>
-						</tr>
-						<tr>
-							<td>Ben Kallus</td>
-							<td><a href="https://kallus.org/" target="_blank">https://kallus.org/</a></td>
-							<td>Graduate Student</td>
-						</tr>
-						<tr>
-							<td>Wei-Cheng Wu</td>
-							<td><a href="https://www.linkedin.com/in/wei-cheng-wu-spencer/" target="_blank">https://www.linkedin.com/in/wei-cheng-wu-spencer/</a></td>
-							<td>Graduate Student</td>
-						</tr>
-						<tr>
-							<td>Kyungtae Kim</td>
-							<td><a href="https://kt0755.github.io/" target="_blank">https://kt0755.github.io/</a></td>
-							<td>Assistant Professor</td>
-						</tr>
-						<tr>
-							<td>Jonah Weinbaum</td>
-							<td><a href="https://jonahweinbaum.github.io/" target="_blank">https://jonahweinbaum.github.io/</a></td>
-							<td>Graduate Student</td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr>
-							<th colspan="3" class="webring-header">
-								UTD
-							</th>
-						</tr>
-						<tr>
-							<td>Elliot Tarbet</td>
-							<td><a href="https://tar.bet/" target="_blank">https://tar.bet</a></td>
-							<td>CSG Officer</td>
-						</tr>
-						<tr>
-							<td>Payton Harmon</td>
-							<td><a href="http://www.walmartdeli.com/" target="_blank">http://www.walmartdeli.com</a></td>
-							<td>Former CSG President</td>
-						</tr>
-						<tr>
-							<td>Jerry Teng</td>
-							<td><a href="https://www.linkedin.com/in/jerryteng01" target="_blank">https://www.linkedin.com/in/jerryteng01</a></td>
-							<td>Former CSG Officer</td>
-						</tr>
-						<tr>
-							<td>Willie Chalmers III</td>
-							<td><a href="https://www.williecubed.me" target="_blank">https://www.williecubed.me</a></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr><th colspan="3" class="webring-header">Dent</th></tr>
-						<tr>
-							<td>Sidh Suchdev</td>
-							<td><a href="https://sidhsuchdev.com/" target="_blank">https://sidhsuchdev.com</a></td>
-						</tr>
-						<tr>
-							<td>Alex Bellon</td>
-							<td><a href="https://alex-bellon.com/" target="_blank">https://alex-bellon.com</a></td>
-						</tr>
-						<tr>
-							<td>Sasha Huang</td>
-							<td><a href="https://umbresp.cat/" target="_blank">https://umbresp.cat/</a></td>
-						</tr>
-						<tr>
-							<td>Garrett Gu</td>
-							<td><a href="https://garrettgu.com/" target="_blank">https://garrettgu.com/</a></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr><th colspan="3" class="webring-header">
+						</th>
+					</tr>
+					<tr>
+						<td><a href="https://kereoz.github.io/" target="_blank">Christophe Hauser</a></td>
+						<td>Principal Investigator</td>
+					</tr>
+					<tr>
+						<td><a href="https://web.cs.dartmouth.edu/people/sergey-bratus"
+								target="_blank">Sergey Bratus</a></td>
+						<td>Principal Investigator</td>
+					</tr>
+					<tr>
+						<td><a href="https://www.cs.dartmouth.edu/~sws/"
+								target="_blank">Sean Smith</a></td>
+						<td>Principal Investigator</td>
+					</tr>
+					<tr>
+						<td><a href="https://kallus.org/" target="_blank">Ben Kallus</a></td>
+						<td>Graduate Student</td>
+					</tr>
+					<tr>
+						<td><a href="https://www.linkedin.com/in/wei-cheng-wu-spencer/"
+								target="_blank">Wei-Cheng Wu</a></td>
+						<td>Graduate Student</td>
+					</tr>
+					<tr>
+						<td><a href="https://kt0755.github.io/" target="_blank">Kyungtae Kim</a></td>
+						<td>Assistant Professor</td>
+					</tr>
+					<tr>
+						<td><a href="https://jonahweinbaum.github.io/"
+								target="_blank">Jonah Weinbaum</a></td>
+						<td>Graduate Student</td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th colspan="3" class="webring-header">
+							UTD
+						</th>
+					</tr>
+					<tr>
+						<td><a href="https://tar.bet/" target="_blank">Elliot Tarbet</a></td>
+						<td>CSG Officer</td>
+					</tr>
+					<tr>
+						<td><a href="http://www.walmartdeli.com/" target="_blank">Payton Harmon</a></td>
+						<td>Former CSG President</td>
+					</tr>
+					<tr>
+						<td><a href="https://www.linkedin.com/in/jerryteng01"
+								target="_blank">Jerry Teng</a></td>
+						<td>Former CSG Officer</td>
+					</tr>
+					<tr>
+						<td><a href="https://www.williecubed.me" target="_blank">Willie Chalmers III</a></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th colspan="3" class="webring-header">Dent</th>
+					</tr>
+					<tr>
+						<td><a href="https://sidhsuchdev.com/" target="_blank">Sidh Suchdev</a></td>
+					</tr>
+					<tr>
+						<td><a href="https://alex-bellon.com/" target="_blank">Alex Bellon</a></td>
+					</tr>
+					<tr>
+						<td><a href="https://umbresp.cat/" target="_blank">Sasha Huang</a></td>
+					</tr>
+					<tr>
+						<td><a href="https://garrettgu.com/" target="_blank">Garrett Gu</a></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th colspan="3" class="webring-header">
 							<a href="https://rocq-prover.zulipchat.com/" target="_blank">Rocq</a>
-						</th></tr>
-						<tr>
-							<td>Benjamin Pierce</td>
-							<td><a href="https://www.cis.upenn.edu/~bcpierce/" target="_blank">https://www.cis.upenn.edu/~bcpierce/</a></td>
-						</tr>
-						<tr>
-							<td>Andrew Appel</td>
-							<td><a href="https://www.cs.princeton.edu/~appel/" target="_blank">https://www.cs.princeton.edu/~appel/</a></td>
-						</tr>
-						<tr>
-							<td>Adam Chlipala</td>
-							<td><a href="http://adam.chlipala.net/" target="_blank">http://adam.chlipala.net/</a></td>
-						</tr>
-						<tr>
-							<td>Li-yao Xia</td>
-							<td><a href="https://poisson.chat/" target="_blank">https://poisson.chat/</a></td>
-						</tr>
-						<tr>
-							<td>Pierre-Marie Pédrot</td>
-							<td><a href="https://www.pédrot.fr/" target="_blank">https://www.pédrot.fr/</a></td>
-						</tr>
-						<tr>
-							<td>Joomy Korkut</td>
-							<td><a href="https://joomy.korkutblech.com/" target="_blank">https://joomy.korkutblech.com/</a></td>
-						</tr>
-						<tr>
-							<td>Yves Bertot</td>
-							<td><a href="https://www.inria.fr/en/yves-bertot" target="_blank">https://www.inria.fr/en/yves-bertot</a></td>
-						</tr>
-					</tbody>
-					<tbody>
-						<tr><th colspan="3" class="webring-header">Miscellaneous</th></tr>
-						<tr>
-							<td>nocoffei</td>
-							<td><a href="https://nocoffei.com/" target="_blank">https://nocoffei.com/</a></td>
-						</tr>
-					</tbody>
-				</table>
+						</th>
+					</tr>
+					<tr>
+						<td><a href="https://www.cis.upenn.edu/~bcpierce/"
+								target="_blank">Benjamin Pierce</a></td>
+					</tr>
+					<tr>
+						<td><a href="https://www.cs.princeton.edu/~appel/"
+								target="_blank">Andrew Appel</a></td>
+					</tr>
+					<tr>
+						<td><a href="http://adam.chlipala.net/" target="_blank">Adam Chlipala</a></td>
+					</tr>
+					<tr>
+						<td><a href="https://poisson.chat/" target="_blank">Li-yao Xia</a></td>
+					</tr>
+					<tr>
+						<td><a href="https://www.pédrot.fr/" target="_blank">Pierre-Marie Pédrot</a></td>
+					</tr>
+					<tr>
+						<td><a href="https://joomy.korkutblech.com/" target="_blank">Joomy Korkut</a>
+						</td>
+					</tr>
+					<tr>
+						<td><a href="https://www.inria.fr/en/yves-bertot"
+								target="_blank">Yves Bertot</a></td>
+					</tr>
+				</tbody>
+				<tbody>
+					<tr>
+						<th colspan="3" class="webring-header">Miscellaneous</th>
+					</tr>
+					<tr>
+						<td><a href="https://nocoffei.com/" target="_blank">nocoffei</a></td>
+					</tr>
+				</tbody>
+			</table>
 
-				<h2 id="games">Games</h2>
-				<div class="gh-card card" data-image="/static/images/birdandbeans.png" url-override="/BirdAndBeans/docs/"
-					name="Bird And Beans" description="Catch the falling beans!" object-fit="scale-down" playinbrowser="true"></div>
-				<div class="gh-card card" data-image="https://raw.githubusercontent.com/CharlesAverill/aftn.ml/refs/heads/main/game_data/materials/box_art.png"
-					data-repo="CharlesAverill/aftn.ml"></div>
-				<div class="gh-card card" data-image="/Projects/DinosaurIsland/images/title_image.png" url-override="/Projects/DinosaurIsland"
-					name="Dinosaur Island" description="Dinosaur-Themed 3D Platformer" object-fit="fill"></div>
-				<div class="gh-card card" data-image="https://raw.githubusercontent.com/CharlesAverill/pokefirered/refs/heads/main/graphics/title_screen/custom/logotext.png"
-					data-repo="CharlesAverill/pokefirered"></div>
-				<div class="gh-card card" data-image="https://caseashell.sfo2.digitaloceanspaces.com/AT_CWD/TemplateData/logo.png" url-override="/AT_CWD/"
-					name="Adventure Time: Card Wars" description="Re-implementing a defunct mobile card game" playinbrowser="true"></div>
-				<div class='gh-card card' data-image="/static/images/asteroid.jpg" url-override="/Asteroids" name="Asteroids"
-										  description="Late-night Asteroids clone for a databases class. All asteroids are from our solar system!" playinbrowser="true"></div>
+			<h2 id="games">Games</h2>
+			<div class="gh-card card" data-image="/static/images/birdandbeans.png" url-override="/BirdAndBeans/docs/"
+				name="Bird And Beans" description="Catch the falling beans!" object-fit="scale-down"
+				playinbrowser="true"></div>
+			<div class="gh-card card"
+				data-image="https://raw.githubusercontent.com/CharlesAverill/aftn.ml/refs/heads/main/game_data/materials/box_art.png"
+				data-repo="CharlesAverill/aftn.ml"></div>
+			<div class="gh-card card" data-image="/Projects/DinosaurIsland/images/title_image.png"
+				url-override="/Projects/DinosaurIsland" name="Dinosaur Island"
+				description="Dinosaur-Themed 3D Platformer" object-fit="fill"></div>
+			<div class="gh-card card"
+				data-image="https://raw.githubusercontent.com/CharlesAverill/pokefirered/refs/heads/main/graphics/title_screen/custom/logotext.png"
+				data-repo="CharlesAverill/pokefirered"></div>
+			<div class="gh-card card"
+				data-image="https://caseashell.sfo2.digitaloceanspaces.com/AT_CWD/TemplateData/logo.png"
+				url-override="/AT_CWD/" name="Adventure Time: Card Wars"
+				description="Re-implementing a defunct mobile card game" playinbrowser="true"></div>
+			<div class='gh-card card' data-image="/static/images/asteroid.jpg" url-override="/Asteroids"
+				name="Asteroids"
+				description="Late-night Asteroids clone for a databases class. All asteroids are from our solar system!"
+				playinbrowser="true"></div>
 
-				<h2 id="misc">Miscellaneous</h2>
-				<div class="gh-card card" data-image="https://radio.charles.systems/static/icon.png" url-override="https://radio.charles.systems/"
-					name="Radio Charles" description="What am I listening to?"></div>
-				<div class="gh-card card" data-image="/gifs/band.gif" url-override="/gifs"
-					name="My GIFs" description="All the gifs on my computer" object-fit="none"></div>
-				<ul>
-					<li>
-						<a href="/publickeys">My public keys</a>
-					</li>
-					<li><a href="bookshelf">My Bookshelf</a></li>
-					<li><a href="https://www.discogs.com/user/caverill/collection">My Record Collection</a></li>
-					<li><a href="travel/">Where Have I Been?</a></li>
-					<li>
-						<a href="PDMusic/">Transcriptions of "The International Library of Music" Public Domain Sheet Music</a>
-					</li>
-					<li><a href="/static/images/button.gif">88x31 Button</a></li>
-					<li><a href="/static/documents/stickers-8-17.pdf">Laptop Stickers 8-17-2025</a></li>
-					<!-- <li>
+			<h2 id="misc">Miscellaneous</h2>
+			<div class="gh-card card" data-image="https://radio.charles.systems/static/icon.png"
+				url-override="https://radio.charles.systems/" name="Radio Charles"
+				description="What am I listening to?"></div>
+			<div class="gh-card card" data-image="/gifs/band.gif" url-override="/gifs" name="My GIFs"
+				description="All the gifs on my computer" object-fit="none"></div>
+			<ul>
+				<li>
+					<a href="/publickeys">My public keys</a>
+				</li>
+				<li><a href="bookshelf">My Bookshelf</a></li>
+				<li><a href="https://www.discogs.com/user/caverill/collection">My Record Collection</a></li>
+				<li><a href="travel/">Where Have I Been?</a></li>
+				<li>
+					<a href="PDMusic/">Transcriptions of "The International Library of Music" Public Domain Sheet
+						Music</a>
+				</li>
+				<li><a href="/static/images/button.gif">88x31 Button</a></li>
+				<li><a href="/static/documents/stickers-8-17.pdf">Laptop Stickers 8-17-2025</a></li>
+				<!-- <li>
 						<a href="https://profile-counter.glitch.me/CharlesAverill/count.svg">Visitor Count</a>
 
 						<img style="display: none;" src="https://profile-counter.glitch.me/CharlesAverill/count.svg"></img>
 					</li> -->
-				</ul>
-	
-				<h2 id="scripts">Scripts</h2>
-				<ul>
-					<li>
-						<a href="CScripts">C Scripts</a>
-					</li>
-					<li>
-						<a href="BashScripts/">Bash Scripts</a>
-					</li>
-					<li>
-						<a href="UnityScripts/">Unity Scripts</a>
-					</li>
-					<li>
-						<a href="TIBasicScripts">TI-BASIC Scripts</a>
-					</li>
-				</ul>
-			</article>
-		</main>
+			</ul>
 
-		<form style="text-align: center;" id="settings">
-			<fieldset>
-				<legend>Settings</legend>
-				<label class="switch">
-					<input type="button" onclick="toggleDarkMode()" value="Toggle Dark Mode">
-				</label>
-				<br>
-				<label for="typeface">Swap Font: </label>
-				<select id="typeface" onchange="changeFont()"></select>
-			</fieldset>
-		</form>
+			<h2 id="scripts">Scripts</h2>
+			<ul>
+				<li>
+					<a href="CScripts">C Scripts</a>
+				</li>
+				<li>
+					<a href="BashScripts/">Bash Scripts</a>
+				</li>
+				<li>
+					<a href="UnityScripts/">Unity Scripts</a>
+				</li>
+				<li>
+					<a href="TIBasicScripts">TI-BASIC Scripts</a>
+				</li>
+			</ul>
+		</article>
+	</main>
 
-		<h1 class="hide" onclick="document.getElementById('slidewhist').play()">Click here!</h1>
+	<form style="text-align: center;" id="settings">
+		<fieldset>
+			<legend>Settings</legend>
+			<label class="switch">
+				<input type="button" onclick="toggleDarkMode()" value="Toggle Dark Mode">
+			</label>
+			<br>
+			<label for="typeface">Swap Font: </label>
+			<select id="typeface" onchange="changeFont()"></select>
+		</fieldset>
+	</form>
 
-		<audio id="slidewhist" class="hide">
-			<source src="/static/audio/snd-slidewhist.mp3" type="audio/mpeg">
-		</audio>
-	</body>
+	<h1 class="hide" onclick="document.getElementById('slidewhist').play()">Click here!</h1>
 
-	<div class="command-prompt" id="command-prompt">
-        <input type="text" id="command-input" placeholder="Type command here...">
-    </div>
+	<audio id="slidewhist" class="hide">
+		<source src="/static/audio/snd-slidewhist.mp3" type="audio/mpeg">
+	</audio>
+</body>
 
-	<script src="/static/js/style.js?v=2"></script>
-    <script src="/static/js/scroll.js"></script>
+<div class="command-prompt" id="command-prompt">
+	<input type="text" id="command-input" placeholder="Type command here...">
+</div>
 
-	<script src="/static/js/Box2d.min.js"></script>
-	<script src="/static/js/gravity.js"></script>
-	<script src="/static/js/oneko.js"></script>
-	<script src="/static/js/scratchoff.js"></script>
-	<script src="/static/js/cmd.js?v=1"></script>
-	<script>
-		// Load JS after page render
-		var tag = document.createElement("script");
-		tag.src = "/static/js/github-cards-master/gh-cards.js?v=6";
-		document.getElementsByTagName("head")[0].appendChild(tag);
-		tag = document.createElement("script");
-		tag.src = "/static/js/extracontent.js";
-		document.getElementsByTagName("head")[0].appendChild(tag);
-	</script>
+<script src="/static/js/style.js?v=2"></script>
+<script src="/static/js/scroll.js"></script>
+
+<script src="/static/js/Box2d.min.js"></script>
+<script src="/static/js/gravity.js"></script>
+<script src="/static/js/oneko.js"></script>
+<script src="/static/js/scratchoff.js"></script>
+<script src="/static/js/cmd.js?v=1"></script>
+<script>
+	// Load JS after page render
+	var tag = document.createElement("script");
+	tag.src = "/static/js/github-cards-master/gh-cards.js?v=6";
+	document.getElementsByTagName("head")[0].appendChild(tag);
+	tag = document.createElement("script");
+	tag.src = "/static/js/extracontent.js";
+	document.getElementsByTagName("head")[0].appendChild(tag);
+</script>
+
 </html>
