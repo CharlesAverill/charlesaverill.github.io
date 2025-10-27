@@ -25,3 +25,6 @@
 [submodule "rng"]
 	path = rng
 	url = https://github.com/CharlesAverill/rng.git
+[submodule "dex"]
+	path = dex
+	url = https://github.com/CharlesAverill/dex.git
