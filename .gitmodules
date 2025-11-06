@@ -28,3 +28,6 @@
 [submodule "dex"]
 	path = dex
 	url = https://github.com/CharlesAverill/dex.git
+[submodule "porygon"]
+	path = porygon
+	url = https://github.com/CharlesAverill/porygon.git
