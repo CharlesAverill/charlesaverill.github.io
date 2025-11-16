@@ -30,4 +30,4 @@
 	url = https://github.com/CharlesAverill/dex.git
 [submodule "porygon"]
 	path = porygon
-	url = https://github.com/CharlesAverill/porygon.git
+	url = https://github.com/CharlesAverill/porygon
