@@ -879,3 +879,17 @@ h6 {
   text-align: center; 
   background-color: var(--tr-color);
 }
+
+.award {
+  color: #FFD700;
+  background-color: hsl(0, 0%, 50%);
+  border-radius: 5px;
+  height: 1.4em;
+  display: inline-block;
+  border: 1.5px solid black;
+  text-decoration: none;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
