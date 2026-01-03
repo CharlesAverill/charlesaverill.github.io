@@ -881,7 +881,7 @@ h6 {
 }
 
 .award {
-  color: #FFD700;
+  color: #FFD700 !important;
   background-color: hsl(0, 0%, 50%);
   border-radius: 5px;
   height: 1.4em;
