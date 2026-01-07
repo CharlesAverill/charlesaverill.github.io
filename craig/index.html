@@ -1,0 +1,211 @@
+<!doctype HTML>
+<html>
+
+<head>
+	<title>Corporate Craig's HQ</title>
+
+	<script type="text/javascript" src="https://unpkg.com/jsnes/dist/jsnes.min.js"></script>
+	<script type="text/javascript" src="emulator.js"></script>
+	<script>
+		window.onload = function () {
+			nes_load_url("nes-canvas", "/craig/files/Craig1.3.nes");
+		};
+	</script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<style>
+		html,
+		body {
+			height: 100%;
+			margin: 0;
+		}
+
+		body {
+			display: flex;
+			background-color: black;
+			color: #10a0f8;
+			font-family: sans-serif;
+		}
+
+		p {
+			text-align: justify;
+		}
+
+		h1,
+		h2 {
+			text-align: center;
+		}
+
+		.sidebar {
+			width: 35%;
+			min-width: 280px;
+			padding: 1.5em;
+			box-sizing: border-box;
+			border-right: 2px solid #5048f8;
+			overflow-y: auto;
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+		}
+
+		.main {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		#nes-canvas {
+			width: 100%;
+			image-rendering: pixelated;
+			border: 2px solid #10a0f8;
+			outline: 2px solid #5048f8;
+		}
+
+		.nes-wrapper {
+			width: 70%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.75em;
+		}
+
+		#mobile {
+			display: none;
+		}
+
+
+		a {
+			color: #10a0f8;
+		}
+
+		.footer {
+			margin-top: auto;
+			margin-bottom: 0px;
+			text-align: center;
+		}
+
+		.icon {
+			height: 4rem;
+			aspect-ratio: 1 / 1;
+			border-radius: 25%;
+		}
+
+		.sidebar>table {
+			width: 40%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		td {
+			text-align: center;
+		}
+
+		@media (max-width: 768px) {
+			body {
+				flex-direction: column;
+			}
+
+			.main,
+			table,
+			#controls-header,
+			.footer {
+				display: none;
+			}
+
+			.sidebar {
+				width: 100%;
+				min-width: 0;
+				border-right: none;
+				height: auto;
+			}
+
+			#mobile {
+				display: block;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="sidebar">
+		<h1>Corporate Craig's HQ</h1>
+
+		<div id="mobile">
+			<h2>Sorry!</h2>
+			<p>This page cannot fully function on mobile devices.</p>
+		</div>
+
+		<h2 id="controls-header">Controls</h2>
+		<table>
+			<tr>
+				<td>
+					<img src="/craig/icons/hjb.webp" class="icon">
+				</td>
+				<td>
+					P
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="/craig/icons/cannon.webp" class="icon">
+				</td>
+				<td>
+					O
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="/craig/icons/dpad.webp" class="icon">
+				</td>
+				<td>
+					WASD
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img src="/craig/icons/selectstart.webp" class="icon">
+				</td>
+				<td>
+					Space - Shift
+				</td>
+			</tr>
+		</table>
+
+		<h2>Info</h2>
+		<p>
+			This is a hack of Metroid for the NES I made when I was in
+			high school. It's very buggy, sorry!
+		</p>
+		<p>
+			Your boss, Craig, hasn't given you the promotion he promised you over 8 months ago!
+			After the divorce, losing visitation rights, and that jerk Chris that always messes up your Starbucks order,
+			you've been driven to rage and have decided to take the one who caused it all (and all of his disgusting
+			children)
+			out, Office-Space style. Watch out for Time-Slowing and Invisible Kraids!
+		</p>
+		<p>
+			This hack blocks off access to all areas except for Kraid's Hideout.
+			All enemies have been replaced with Mini-Kraid except for the original Mini-Kraid and Kraid.
+			All main powerups are available early on to help with the killing spree.
+			Game is complete after you kill Kraid and leave through the nearby elevator.
+		</p>
+
+		<p class="footer">
+			Emulator courtesy of
+			<a href="https://github.com/bfirsh/jsnes/tree/master">jsnes</a>. &vert;
+
+			Download <a href="/craig/files/Craig1.3.ips">the latest patch</a>.
+		</p>
+	</div>
+
+	<div class="main">
+		<div class="nes-wrapper">
+			<canvas id="nes-canvas" width="256" height="240"></canvas>
+			<button id="audio" style="display: none;">Click to enable audio</button>
+		</div>
+	</div>
+</body>
+
+</html>
