@@ -73,3 +73,26 @@ In the second paragraph of section IV, I don't get the meaning of the sentence "
 Some minor issues:
 1. At quite some places, the writing refers to figures in the appendix, without making it clear that those figures are in the appendix. Figures in appendix should not be critical for understanding the paper. And the figure IDs are unordered if appendix figures were not stated explicitly.
 2. On page 8, the simulation subsection refers to FC and FT, while the definitions of them were in page 4, which makes the abbreviations a bit surprising. It would be better to use their full names on page 4 again to remind the readers what they are.
+
+
+
+Review #46C
+===========================================================================
+
+Overall merit
+-------------
+4. Accept
+
+Reviewer expertise
+------------------
+1. No familiarity
+
+Paper summary
+-------------
+This paper presents the first framework, Lapse, able to prove the correctness of native code in the presence of many single-instruction skip faults. It performs fault-aware symbolic execution by wrapping a program’s intermediate representation in a non-deterministic construct that may skip an instruction. This non-determinisim forces the user to reason about instruction skips at each
+potential skip site, ensuring that any invariant or postcondition respects all fault possibilities. The
+results show that developing fault-tolerant correctness proofs is feasible.
+
+Comments for authors
+--------------------
+The proposed solution is able to prove native code, supports more use case scenarions than formal verification solutions that target source code. It can systematically extend fault-free proofs to fault-aware ones with few manual efforts, and proves that native code could satisfy correctness in the case of at most one instruction is skipped.
