@@ -1,0 +1,98 @@
+BAR'26 Paper #46 Reviews and Comments
+===========================================================================
+Paper #46 LAPSE: Automatic, Formal Fault-Tolerant Correctness Proofs for
+Native Code
+
+
+Review #46A
+===========================================================================
+
+Overall merit
+-------------
+3. Weak accept
+
+Reviewer expertise
+------------------
+2. Some familiarity
+
+Paper summary
+-------------
+This paper performs symbolic execution on RISC-V programs (though it translated to an IR, so it may not be limited to RISC-V). The goal is to evaluate / create proofs that the target code is fault tolerant. There are a few fault models, including faults that cause instruction skips, repetitions, mutated instruction bits, or mutated register bits. To combat these fault models, there are some ways in which practitioners have structured the binary. One such structuring mechanism involves introducing redundant copies of idempotent instructions. For example, you might have two or more copies of an instruction, and so even if a copy is skipped, you'll land on another unskipped copy. Depending on the target architecture, real-world fault attacks can sometimes skip many instructions. Some faults cause repeats, so repeating idempotent instructions seems fine. Anyway, this work focuses on binaries containing these redundant instructions. This is sort of cool, because they can leverage this structure to improve the scalability of their proof techniques and avoid what one would normally expect is a crazy path explosion problem from trying to model the fact that modelling skips is sort of like putting branches in front of every instruction.
+
+Comments for authors
+--------------------
+I found Figure 5 and its introduction confusing. I have zero background experience with proof assistants, so my confusion likely stems from there. What I found most confusing about it was connecting it to what I had read up to that point, and trying to understand where symbolic execution was fitting in. I suppose if there were a bolded line or "function call" if that's even the right phrasing to say "here is where this thing connects with the exploration done by the symbolic execution". I think what I'm asking to be bolded and maybe assigned a bit of prose is that `k_equal_step` or maybe `repeat step` is this invocation of the symbolic execution of part of the program, and the `prove_invs` is both a proof of `memcpy` and also a driver for a symbolic execution. Clearly I'm muddling my way through understanding this, so if the authors can find some time to explain a bit more about how things connect then that would be helpful I think.
+
+What are the colourful/dashes/dotted lines for? The colours/different things suggest some kind of meaning that isn't explained, other than you're trying to show that these two proofs are nearly identical. Would a word-level diff look better or be too messy? Or maybe highlighting just line numbers where there is a difference.
+
+---
+
+Why do the DMR functions as a whole actually need to be symbolically executed? It seems that one should be able to focus every unique instruction I, and ask: do `I I`, `<skip I> I` and `I <skip I>`, i.e. do `I I` and `I` always produce identical results, or more concretely, is every instruction provably idempotent. It seems like proving idempotence of all instructions, and then showing that all instructions are duplicated, is basically sufficient?
+
+I mean, I'm probably trivializing this in some way, where like, maybe you would buy this argument, but the value is in having this function-granularity proof itself rather than this slightly hand-wavy argument of i) proving the original meets pre/post conditions, ii) proving all instructions are idempotent is sufficient to say this is resilient to a single fault. 
+
+Skips in an ISA with variable-width instructions would be much harder to deal with, though. So that could be a good motivation for all of this. I'm not sure if variable-width ISAs are relevant to the domain, though. 
+
+The non-uniformly applied DMR case definitely would need a whole-function proof.
+
+---
+
+I think the verification of the TMR case is much more compelling but the example is harder to understand/reason about. The other aspect about the TMR `CRYPTO_memcmp` that is unclear that the prover actually satisfied is: what if the `ret` of one of the calls instruction is skipped? Is there protection "following" functions, e.g. fault-inducing function sleds? If there wasn't, it seems plausible (but beyond the scope) that basically anything could happen (e.g. arbitrary memory corruption), and the voting could recover, but the program would still be compromised. I think TMR seems slightly questionable in this regard.
+
+
+
+Review #46B
+===========================================================================
+
+Overall merit
+-------------
+3. Weak accept
+
+Reviewer expertise
+------------------
+2. Some familiarity
+
+Paper summary
+-------------
+The paper proposes a new framework, named LAPSE, for developing fault-tolerant correctness proofs for binary code. The work is deeply integrated into the Picinae platform that uses Rocq theorem prover. The fault considered in this work limits to instruction skips only. By three case studies, the authors aim to demonstrate the usability of LAPSE and the effectiveness of the system design.
+
+Comments for authors
+--------------------
+The paper tackles a very interesting aspect of theorem proving. There seems to be lots of follow-up research opportunities. Here are some suggestions to improve the paper.
+
+First, in the Introduction, the first few paragraphs make me expect that LAPSE would handle a variety of fault types. However, after talking about the challenges and background, the writing directly states that LAPSE supports instruction skip faults only, without providing any reasons or validations about why instruction skip faults are selected as the first kind of faults to be handled. Thus, the title and intro is a bit over-claiming the contributions. I understand that there could be lots of follow-up research to support more fault types; but for this version, the paper would be more scientific to focus on instruction skip fault only.
+
+Secondly, in the subsection B. Fault-Free Symbolic Analysis of the Overview section, it would be better to explain how the control flow edges were recovered from the binaries, especially when the work targets "any arbitrary native code". Does the symbolic interpretation tracks the path conditions and the indirect branch targets?
+
+In Figure 4, the first two diagrams (a) and (b) are never referenced or explained. It is unclear what the differences between the two diagrams really represent. It would be better to provide some explanations or remove unnecessary pictures.
+
+In subsection D. Model Assumptions of the Overview section, it is unclear what the difference is for multi-instruction skips and multiple single-instruction skips, which is not straightforward or intuitive to every reader. The discussion section also does not distinguish them.
+
+In the second paragraph of section IV, I don't get the meaning of the sentence "Any program resistant to instruction skips can potentially be verified by our framework." Before verification, how could people know if a program is resistant to instruction skip faults?
+
+Some minor issues:
+1. At quite some places, the writing refers to figures in the appendix, without making it clear that those figures are in the appendix. Figures in appendix should not be critical for understanding the paper. And the figure IDs are unordered if appendix figures were not stated explicitly.
+2. On page 8, the simulation subsection refers to FC and FT, while the definitions of them were in page 4, which makes the abbreviations a bit surprising. It would be better to use their full names on page 4 again to remind the readers what they are.
+
+
+
+Review #46C
+===========================================================================
+
+Overall merit
+-------------
+4. Accept
+
+Reviewer expertise
+------------------
+1. No familiarity
+
+Paper summary
+-------------
+This paper presents the first framework, Lapse, able to prove the correctness of native code in the presence of many single-instruction skip faults. It performs fault-aware symbolic execution by wrapping a program’s intermediate representation in a non-deterministic construct that may skip an instruction. This non-determinisim forces the user to reason about instruction skips at each
+potential skip site, ensuring that any invariant or postcondition respects all fault possibilities. The
+results show that developing fault-tolerant correctness proofs is feasible.
+
+Comments for authors
+--------------------
+The proposed solution is able to prove native code, supports more use case scenarions than formal verification solutions that target source code. It can systematically extend fault-free proofs to fault-aware ones with few manual efforts, and proves that native code could satisfy correctness in the case of at most one instruction is skipped.

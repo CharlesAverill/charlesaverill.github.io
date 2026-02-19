@@ -65,7 +65,7 @@ function applyFont(fontName) {
 
 // Rotate headshot carousel
 const imagePath = "/static/images/";
-const images = ["csg.png", "hackutd.png", "main.png", "main2.png", "mountain.png"];
+const images = ["csg.png", "hackutd.png", "main.png", "main2.png", "mountain.png", "ti99.png"];
 const carousel = document.getElementById("imageCarousel");
 let clicks = 0;
 function imageCarousel() {
