@@ -31,3 +31,6 @@
 [submodule "porygon"]
 	path = porygon
 	url = https://github.com/CharlesAverill/porygon
+[submodule "qe"]
+	path = qe
+	url = https://github.com/CharlesAverill/qe.git
