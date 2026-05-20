@@ -1,0 +1,532 @@
+<!doctype HTML>
+<html>
+<head>
+  <title>RedShift</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript" src="https://unpkg.com/jsnes/dist/jsnes.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red: #e8341c;
+      --red-dim: #8b1a0a;
+      --red-glow: rgba(232, 52, 28, 0.4);
+      --orange: #f07030;
+      --bg: #040407;
+      --text: #d4c5b0;
+      --text-dim: #6e6358;
+      --border: rgba(232, 52, 28, 0.25);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Share Tech Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    #starfield {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      height: 100vh;
+      min-height: 600px;
+    }
+
+    .sidebar {
+      width: 35%;
+      min-width: 300px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.75rem;
+      border-right: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(10,10,18,0.97) 0%, rgba(4,4,7,0.97) 100%);
+      overflow-y: auto;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .sidebar::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--red), var(--orange), transparent);
+    }
+
+    .logo-area { text-align: center; }
+
+    .logo-area img.title-img {
+      width: 100%;
+      max-width: 280px;
+      image-rendering: pixelated;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 30px var(--red-glow), 0 0 60px rgba(232,52,28,0.15);
+      display: block;
+      margin: 0 auto 1rem;
+    }
+
+    .tagline {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    .section-label {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      color: var(--red);
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem 1rem;
+      align-items: center;
+    }
+
+    .ctrl-icon {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 4px;
+    }
+
+    .ctrl-key {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.75rem;
+      color: var(--orange);
+      letter-spacing: 0.05em;
+    }
+
+    .info-text {
+      font-size: 0.75rem;
+      line-height: 1.8;
+      color: var(--text);
+      opacity: 0.85;
+      text-align: justify;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      padding: 2px 8px;
+      border: 1px solid var(--red-dim);
+      color: var(--red);
+      border-radius: 2px;
+      margin-right: 4px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    a { color: var(--red); text-decoration: none; }
+    a:hover { color: var(--orange); }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      gap: 1rem;
+      background: radial-gradient(ellipse at center, rgba(80,10,10,0.08) 0%, transparent 70%);
+    }
+
+    .nes-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      width: 70%;
+    }
+
+    .screen-frame {
+      position: relative;
+      width: 100%;
+      border: 2px solid var(--red-dim);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.8),
+        0 0 20px var(--red-glow),
+        0 0 60px rgba(232,52,28,0.1),
+        inset 0 0 20px rgba(0,0,0,0.5);
+      background: black;
+    }
+
+    .screen-frame::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      background: linear-gradient(135deg, rgba(232,52,28,0.06) 0%, transparent 50%, rgba(232,52,28,0.06) 100%);
+      pointer-events: none;
+    }
+
+    #nes-canvas {
+      display: block;
+      width: 100%;
+      image-rendering: pixelated;
+    }
+
+    .scanlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg, transparent, transparent 2px,
+        rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px
+      );
+      pointer-events: none;
+    }
+
+    #audio {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      background: transparent;
+      border: 1px solid var(--red);
+      color: var(--red);
+      padding: 0.5rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+    }
+    #audio:hover { background: var(--red); color: black; }
+
+    .hint {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+    }
+
+    #mobile { display: none; }
+
+    @media (max-width: 768px) {
+      .page { flex-direction: column; height: auto; }
+      .sidebar { width: 100%; min-width: 0; border-right: none; border-bottom: 1px solid var(--border); }
+      .main, #controls-section, .sidebar-footer { display: none; }
+      #mobile { display: block; }
+    }
+
+    @keyframes scanIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .sidebar > * { animation: scanIn 0.4s ease both; }
+    .sidebar > *:nth-child(1) { animation-delay: 0.05s; }
+    .sidebar > *:nth-child(2) { animation-delay: 0.10s; }
+    .sidebar > *:nth-child(3) { animation-delay: 0.15s; }
+    .sidebar > *:nth-child(4) { animation-delay: 0.20s; }
+    .sidebar > *:nth-child(5) { animation-delay: 0.25s; }
+    .sidebar > *:nth-child(6) { animation-delay: 0.30s; }
+  </style>
+</head>
+<body>
+
+<canvas id="starfield"></canvas>
+
+<div class="page">
+  <div class="sidebar">
+
+    <div class="logo-area">
+      <img class="title-img" src="/RedShift/Title Screen.png" alt="RedShift Title Screen">
+    </div>
+
+    <div id="mobile">
+      <div class="section-label">Sorry!</div>
+      <p class="info-text">This page cannot fully function on mobile devices.</p>
+    </div>
+
+    <div id="controls-section">
+      <div class="section-label">Controls</div>
+      <div class="controls-grid">
+        <img src="/RedShift/icons/proton_torpedo.webp" class="ctrl-icon" style="object-fit:cover" alt="Fire">
+        <div class="ctrl-key">P</div>
+
+        <img src="/RedShift/icons/dpad.webp" class="ctrl-icon" alt="D-Pad">
+        <div class="ctrl-key">WASD</div>
+
+        <img src="/RedShift/icons/selectstart.webp" class="ctrl-icon" alt="Start/Select">
+        <div class="ctrl-key">Shift &nbsp;/&nbsp; Space</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label">Info</div>
+      <p class="info-text">
+        RedShift is a small Asteroids-inspired homebrew game for the NES, written in C using
+        <a href="https://github.com/bfirsh/jsnes">neslib</a> and famitone5.
+        Built with the cc65 toolchain. Running in-browser via <a href="https://github.com/bfirsh/jsnes/tree/master">jsnes</a>.
+      </p>
+      <p class="info-text" style="margin-top:0.75rem">
+        Pilot your ship through asteroid fields and survive as long as you can!
+      </p>
+    </div>
+
+    <div class="sidebar-footer">
+      <a href="https://github.com/CharlesAverill/RedShift/">Source</a>
+      &nbsp;&bull;&nbsp;
+      <a href="https://github.com/CharlesAverill/RedShift/raw/refs/heads/main/RedShift.nes">Download ROM</a>
+      <br>
+      Emulator: <a href="https://github.com/bfirsh/jsnes/tree/master">jsnes</a>
+    </div>
+
+  </div>
+
+  <div class="main">
+    <div class="nes-wrapper">
+      <div class="screen-frame">
+        <canvas id="nes-canvas" width="256" height="240"></canvas>
+        <div class="scanlines"></div>
+      </div>
+      <button id="audio" style="display:none">Enable Audio</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  function initStars() {
+    stars = [];
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+        r: Math.random() * 1.2 + 0.2, a: Math.random() * 0.8 + 0.1,
+        twinkle: Math.random() * Math.PI * 2, speed: Math.random() * 0.02 + 0.005
+      });
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    stars.forEach(s => {
+      s.twinkle += s.speed;
+      const alpha = s.a * (0.6 + 0.4 * Math.sin(s.twinkle));
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 220, 180, ${alpha})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  resize(); initStars(); draw();
+  window.addEventListener('resize', () => { resize(); initStars(); });
+})();
+</script>
+
+<script>
+var SCREEN_WIDTH = 256;
+var SCREEN_HEIGHT = 240;
+var FRAMEBUFFER_SIZE = SCREEN_WIDTH*SCREEN_HEIGHT;
+
+var canvas_ctx, image;
+var framebuffer_u8, framebuffer_u32;
+
+var AUDIO_BUFFERING = 512;
+var SAMPLE_COUNT = 4*1024;
+var SAMPLE_MASK = SAMPLE_COUNT - 1;
+var audio_samples_L = new Float32Array(SAMPLE_COUNT);
+var audio_samples_R = new Float32Array(SAMPLE_COUNT);
+var audio_write_cursor = 0, audio_read_cursor = 0;
+var audio_started = false;
+
+var nes = new jsnes.NES({
+	onFrame: function(framebuffer_24){
+		for(var i = 0; i < FRAMEBUFFER_SIZE; i++) framebuffer_u32[i] = 0xFF000000 | framebuffer_24[i];
+	},
+	onAudioSample: function(l, r){
+		audio_samples_L[audio_write_cursor] = l;
+		audio_samples_R[audio_write_cursor] = r;
+		audio_write_cursor = (audio_write_cursor + 1) & SAMPLE_MASK;
+	},
+});
+
+function onAnimationFrame(){
+	window.requestAnimationFrame(onAnimationFrame);
+	if (!audio_started) {
+		nes.frame();
+	}	
+
+	image.data.set(framebuffer_u8);
+	canvas_ctx.putImageData(image, 0, 0);
+}
+
+function audio_remain(){
+	return (audio_write_cursor - audio_read_cursor) & SAMPLE_MASK;
+}
+
+function audio_callback(event){
+	var dst = event.outputBuffer;
+	var len = dst.length;
+	
+	// Attempt to avoid buffer underruns.
+	if(audio_remain() < AUDIO_BUFFERING) nes.frame();
+	
+	var dst_l = dst.getChannelData(0);
+	var dst_r = dst.getChannelData(1);
+	for(var i = 0; i < len; i++){
+		var src_idx = (audio_read_cursor + i) & SAMPLE_MASK;
+		dst_l[i] = audio_samples_L[src_idx];
+		dst_r[i] = audio_samples_R[src_idx];
+	}
+	
+	audio_read_cursor = (audio_read_cursor + len) & SAMPLE_MASK;
+}
+
+function keyboard(callback, event){
+    var key = true;
+	var pressed;
+
+    switch (event.key) {
+        case 'w':
+            pressed = jsnes.Controller.BUTTON_UP;
+            break;
+        case 'a':
+            pressed = jsnes.Controller.BUTTON_LEFT;
+            break;
+        case 's':
+            pressed = jsnes.Controller.BUTTON_DOWN;
+            break;
+        case 'd':
+            pressed = jsnes.Controller.BUTTON_RIGHT;
+            break;
+
+        case 'p':
+            pressed = jsnes.Controller.BUTTON_A;
+            break;
+        case 'o':
+            pressed = jsnes.Controller.BUTTON_B;
+            break;
+
+        case ' ':
+            pressed = jsnes.Controller.BUTTON_START;
+            break;
+        case 'Shift':
+            pressed = jsnes.Controller.BUTTON_SELECT;
+            break;
+
+        default:
+            key = false;
+
+    }
+
+    console.log(pressed);
+
+    if (key) {
+        event.preventDefault();
+        callback(1, pressed);
+    }
+}
+
+var audio_ctx;
+function nes_init(canvas_id){
+	var canvas = document.getElementById(canvas_id);
+	canvas_ctx = canvas.getContext("2d");
+	image = canvas_ctx.getImageData(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	
+	canvas_ctx.fillStyle = "black";
+	canvas_ctx.fillRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	
+	// Allocate framebuffer array.
+	var buffer = new ArrayBuffer(image.data.length);
+	framebuffer_u8 = new Uint8ClampedArray(buffer);
+	framebuffer_u32 = new Uint32Array(buffer);
+	
+	// Setup audio.
+	audio_ctx = new window.AudioContext();
+	var script_processor = audio_ctx.createScriptProcessor(AUDIO_BUFFERING, 0, 2);
+	script_processor.onaudioprocess = audio_callback;
+	script_processor.connect(audio_ctx.destination);
+	if (audio_ctx.state === 'suspended') {
+		var audioButton = document.getElementById('audio');
+		audioButton.style.display = 'block';
+	} else {
+		audio_started = true;
+	}
+}
+
+function nes_boot(rom_data){
+	nes.loadROM(rom_data);
+	window.requestAnimationFrame(onAnimationFrame);
+}
+
+function nes_load_data(canvas_id, rom_data){
+	nes_init(canvas_id);
+	nes_boot(rom_data);
+}
+
+function nes_load_url(canvas_id, path){
+	nes_init(canvas_id);
+	
+	var req = new XMLHttpRequest();
+	req.open("GET", path);
+	req.overrideMimeType("text/plain; charset=x-user-defined");
+	req.onerror = () => console.log(`Error loading ${path}: ${req.statusText}`);
+	
+	req.onload = function() {
+		if (this.status === 200) {
+		nes_boot(this.responseText);
+		} else if (this.status === 0) {
+			// Aborted, so ignore error
+		} else {
+			req.onerror();
+		}
+	};
+	
+	req.send();
+}
+
+document.addEventListener('keydown', (event) => {keyboard(nes.buttonDown, event)});
+document.addEventListener('keyup', (event) => {keyboard(nes.buttonUp, event)});
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    var audioButton = document.getElementById('audio');
+    audioButton.addEventListener('click', () => {
+        audio_ctx.resume().then(() => {
+			audio_started = true;
+		});
+        audioButton.style.display = 'none';
+    });
+});
+
+window.onload = function () {
+  nes_load_url("nes-canvas", "/RedShift/RedShift.nes");
+};
+</script>
+
+</body>
+</html>
