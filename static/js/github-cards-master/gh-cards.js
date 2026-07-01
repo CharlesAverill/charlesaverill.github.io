@@ -123,6 +123,7 @@ for(let card of cards) {
     fetch(url, {method: 'GET'}).then(resp => {
       return resp.json();
     }).then(json => {
+      let stars = json.stargazers_count != 1 ? "stars" : "star";
       
       // <a class="gh" href="${json.html_url}/network">${json.forks_count} forks</a> - 
       card.innerHTML = `
@@ -135,7 +136,7 @@ for(let card of cards) {
             </a>
           </p>
           <p class="gh">${json.description || 'If this is showing, the site got rate-limited!'}</p>
-          <a class="gh" href="${json.html_url}/stargazers">${json.stargazers_count} stars</a>
+          <a class="gh" href="${json.html_url}/stargazers">${json.stargazers_count} ${stars}</a>
         </div>
       `;
 
