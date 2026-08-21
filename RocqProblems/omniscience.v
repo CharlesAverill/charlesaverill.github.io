@@ -1,50 +1,46 @@
-(* Abstract definition of a set of propositions *)
-Module Type PropSet.
-    (* a set of propositions *)
-    Parameter pset : Type.
+Section Omniscience.
 
-    (* a function determining if a pset contains a prop *)
-    Parameter in_set : Prop -> pset -> bool.
-    Notation "P ∈ S" := (in_set P S) (at level 50).
-End PropSet.
+(* Set of propositions *)
+Parameter pset : Type.
+Parameter in_set : Prop -> pset -> bool.
+Notation "P ∈ S" := (in_set P S) (at level 50).
 
-Module Omniscience (PS : PropSet).
-Include PS.
+(* Undecidability *)
+Parameter undecidable : Prop -> Prop.
+(* An undecidable prop admits neither a proof nor a refutation. *)
+Hypothesis undec_not_provable   : forall P, undecidable P -> ~ P.
+Hypothesis undec_not_refutable  : forall P, undecidable P -> ~ ~ P.
 
-(* S is the set containing only all the true statements *)
+(* S is the set containing only all the true statements. *)
 Definition sSpec (S : pset) : Prop :=
     forall (P : Prop), P <-> P ∈ S = true.
 
-(* proposition P is undecidable *)
-Definition undecidable (P : Prop) : Prop :=
-    ~ (P \/ ~ P).
-
-(* if there exist undecidable statements,
+(* If there exists an undecidable statement,
    then the set containing only all the 
-   true statements cannot exist *)
-Theorem contradiction : 
-    (exists P, undecidable P) -> 
+   true statements cannot exist. *)
+Theorem contradiction :
+    (exists P, undecidable P) ->
     ~ (exists (S : pset), sSpec S).
 Proof.
-    intros (PC & Und) (S & Contra).
-    specialize (Contra PC).
-    destruct (PC ∈ S), Contra.
-    specialize (H0 eq_refl).
-        apply Und. now left.
-    apply Und. right.
-    intro PCT. specialize (H PCT). inversion H.
+    intros (P & Und) (S & HS).
+    destruct (HS P) as [Hf Hb].
+    destruct (P ∈ S) eqn:E.
+    - eapply undec_not_provable. eassumption. now apply Hb.
+    - eapply undec_not_refutable. eassumption.
+      intro Contra. now specialize (Hf Contra).
 Qed.
 
+Print Assumptions contradiction.
+(*
+Section Variables:
+  undec_not_refutable
+    : forall P : Prop, undecidable P -> ~ ~ P
+  undec_not_provable
+    : forall P : Prop, undecidable P -> ~ P
+Axioms:
+  undecidable : Prop -> Prop
+  pset : Type
+  in_set : Prop -> pset -> bool
+*)
+
 End Omniscience.
-
-(* An implementation of PropSet using boolean functions *)
-Module PropSetBoolFunc : PropSet.
-    Definition pset : Type := Prop -> bool.
-    Definition in_set (P : Prop) (S : pset) : bool :=
-        S P.
-End PropSetBoolFunc.
-
-(* Omniscience can be disproven with PropSets defined with
-   boolean functions *)
-Module Impl := Omniscience (PropSetBoolFunc).
-Check Impl.contradiction.
