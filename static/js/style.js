@@ -19,12 +19,14 @@ function toggleDarkMode() {
 // Toggle font
 const fonts = [
     { name: "Latin Modern", className: "latin-modern" },
-    { name: "Libertinus", className: "libertinus" },
+    { name: "Computer Modern", className: "computer-modern" },
+	{ name: "Libertinus", className: "libertinus" },
     { name: "Courier Prime", className: "courier" },
     { name: "Cloister Black", className: "fraktur" },
     { name: "Comic Sans MS", className: "comicsans" },
     { name: "Papyrus", className: "papyrus" },
-    { name: "Wingdings", className: "wingdings" }
+    { name: "Wingdings", className: "wingdings"}
+	
     // { name: "Impact", className: "impact" }
   ];
 let font = localStorage.getItem("font") ?? fonts[0].name;

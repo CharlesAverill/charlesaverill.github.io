@@ -165,6 +165,14 @@
   src: url('/static/fonts/impact.ttf');
 }
 
+@font-face {
+  font-family: "Computer Modern";
+  font-size: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url('/static/fonts/computermodern.ttf') format('truetype');
+}
+
 /* Box sizing rules */
 *,
 *::before,
@@ -257,6 +265,10 @@ body.libertinus {
 
 body.latin-modern {
   font-family: 'Latin Modern', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+body.computer-modern {
+  font-family: 'Computer Modern', Georgia, Cambria, 'Times New Roman', Times, serif;
 }
 
 body.courier {
